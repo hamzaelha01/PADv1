@@ -1,0 +1,175 @@
+
+		- Client :  [DONE]
+			+ Commandes en Cours :
+				+ Controller : dynamicTableCtrl.js 
+				+ Functions :
+					+  Obtenir les commandes en cours :  $scope.getCommandesEncours(); 
+				+ Php File : getCommandes.Php
+			+ Historique des Commandes : 
+				+ Controller : dynamicTableCtrl.js
+				+ Functions : 
+					+ Obtenir l'historique des commandes finis :  + $scope.getHistorique();
+				+ Php File : getHistorique.php 
+			+ Reservation ( Par client ):
+				+ Controller : dynamicTableCtrl.js
+				+ Functions : 
+					 + Reservation  :  $scope.reserver(); 
+					 +  Recuperation de l'adresse ( Geo-Localisation) $scope.getadresse();
+				+ Php File : 
+					+ //selection du dernier ID_DATE: GetDate.php ( Test )
+					+ Inserer et Recevoir la derniere insertion Date : InsertGetDate.php 
+					+ Insertion d'une nouvelle Commande : InsertCommande.php 
+			+ Recu pour Client : 
+				+ Controller : MyCtrl.js
+				+ Functions : 
+					+ Obtenir un reçu pour une commande précise.
+						-> Si la commande est "Collecté" => Afficher button Recu 
+						-> Si la commande est "EN Attente" => Ne Pas Afficher le button
+				+ Php File : MyAllBascketsX.php
+				
+		- Service Clients : [DONE]
+			+ Commandes En Attentes : (DONE)
+				+ Controller : dynamicTableCtrl.js
+				+ Functions : 
+					+ Les Commandes avec une status 'EN ATTENTE ' : $scope.getCmdWait(); 
+				+ Php File : getCmdWait.php;
+			+ Changement de date : ( DONE )
+				+ Controller : dynamicTableCtrl.js 
+				+ Functions : 
+					+ Changement de la date pour un client Avant confirmation : $scope.dtclick();
+				+ Php file : UpdarteHrCommandes.php 
+			+ Reservation pour un Client : ( DONE  id en commentaire)
+				+ Controller : dynamicTableCtrl.js 
+				+ Functions : 
+					+ Pour selectionner la derniere Date ( ID_DATE ) : $scope.selectdate();
+					+ Reservation pour un client : $scope.ResPourClient();
+					 +  Recuperation de l'adresse ( Geo-Localisation) $scope.getadresse();
+				+ Php File : 
+					+ //selection du dernier ID_DATE: GetDate.php ( Test )
+					+ Inserer et Recevoir la derniere insertion Date : InsertGetDate.php 
+					+ Insertion d'une nouvelle Commande : InsertCommande.php;
+			+ Liste des clients : ( DONE )
+				+ Controller : dynamicTableCtrl.js 
+				+ Functions : 
+					+ Fetch tous les clients : $scope.getClient();
+					+ Redirection pour la reservation : $scope.Redirect($index);
+				+ Php File : getClients.php
+			+ Commandes a livré : 
+				+ Controller : dynamicTableCtrl.js  
+				+ Functions : 
+					+ collecter tous les commandes avec un status "PRETE" : $scope.getCmdDone(); (done)
+					+ Changements de date pour le client avant la confirmation : $scope.ChangeDateExp();
+					+ La confirmation de la commande " Changement de status to deliver" : $scope.postCommandesSC();
+				+ Php File : 
+					+ Pour le changement de la date : UpdateDtCommande.Php
+					+ Pour selectionner les commandes : getCmdDone.php ( done)
+					+ Pour la confiramtion des commandes : PostCommandesSC.php
+		
+		- Service Livraison  : [DONE]
+		 	+ COLLECTE : 
+				+ Commandes Confirmés : ( DONE)
+					+ Controller : LivreurCtrl.js 
+					+ Functions : 
+						+ Recuperation de tous les commandes confirmés : $scope.getCommandesConfirme();
+					+ Php File : 	getIndexL.php();
+				+ Choix de livreur : ( DONE )
+					+ Controller : LivreurCtrl.js 
+					+ Functions : 
+						+ 	Choisir le livreur de collecte : 
+							* Pour Choisir un livreur on doit d'abord recuperer tous les livreurs : $scope.getNomLivreur();
+					+ Php File : getNomLivreur.php
+				+ Confiramtion de livreur choisis : ( DONE )
+					+ Controller : LivreurCtrl.js 
+					+ Functions : 
+						 + ETAPES ( $scope.postLivreurCollecte(); ) : 
+						 	1 - Recuperation de la commande avec INDEX ( ID COMMANDE )
+						 	2 - Modification  du livreur Collecte 
+					+ Php File : postLivreurCollecte.php
+			+ LIVRAISON : 
+				+ Commandes Confirmés a livrer : (DONE )
+					+ Controller : LivreurCtrl.js 
+					+ Functions : 
+						+ Recuperation de tous les commandes confirmés par le service production : $scope.getCommandesConfirmeSP();
+					+ Php File : getIndexLSP.php
+				+ Choix du livreur : (DONE)
+					+ Controller : LivreurCtrl.js 
+					+ Functions : 
+						+ 	Choisir le livreur de collecte : 
+							* Pour Choisir un livreur on doit d'abord recuperer tous les livreurs : $scope.getNomLivreur();
+					+ Php File : getNomLivreur.php
+				+ Confirmation De livreur Chosisir : (DONE) 
+					+ Controller : LivreurCtrl.js 
+					+ Functions : 
+						 + ETAPES ( $scope.postLivreurLivraison(); ) : 
+						 	1 - Recuperation de la commande avec INDEX ( ID COMMANDE )
+						 	2 - Modification  du livreur Livraison 
+					+ Php File : postLivreurLivraison.php
+
+
+		- Service Production : [DONE]
+			+ Commandes a livrer : 
+				+ Controller : MyCtrl.js 
+				+ Functions : 
+					+ Recuperation de tous les commandes status (En cours de preparation) : $scope.show_cmdalivr();
+					+ Confirmation de la prepartion de la commande : $scope.fini(); + Confirmation : $scope.ok();
+				+ Php file : 
+					+ Recuperation :  voircmdalivr.php
+					+ Confirmation : confirmeralivr.php
+			+ Commandes a preparer  : (DONE)
+				+ Controller : MyCtrl.js
+				+ Functions :
+					+ Recuperation de tous les commandes status ( COLLECTED ) : $scope.show_cmdaprep();							
+					+ Confirmation de la recepetion de la commande : $scope.preparation();  + Confirmation : $scope.ok();
+
+				+ Php file : 
+					+ Recuperation : voircmdaprep.php
+					+ Confirmation : confirmer.php;
+			
+			
+		+ Livreur : [DONE]
+			+ Commandes a Collecter : (DONE)
+				+ Controller : LivreurCtrl.js 
+				+ Functions : 
+					+ Recuperation de tous les commandes a Collecter : $scope.toCollecte();
+					+ Redirection ver le panier  : $scope.RedirectL();	
+				+ Php file : 
+					+ Recupertion :  getCollecte.php
+			+ Commandes a livrer: ( DONE )
+				+ Controller : LivreurCtrl.js 
+				+ Functions : 
+					+ Recuperation de tous les commandes a Livrer : 
+					+ Confirmation de la livraison : $scope.ConfirmationD($INDEX);
+				+ Php File : 
+					+ Recuperation : getDeliver.php
+					+ Confirmation : UpdateFinal.php
+			+ Panier  ( DONE )
+				+ Controller : MyCtrl.js 
+				+ Functions : 
+					+ Recuperation de tous les produits : 
+					+ L'ajout des produits a un ARRAY ( Carte ) : $scope.addToCart();
+					+ Mon panier :  $scope.myallproducts('lg');
+					+ Suppression des items de la carte : $scope.removeItemCart(c);s
+					+ Ajout au panier  : $scope.ok($event);
+				+ Php File : 
+					+ Recuperation des produits : getAllProducts.php
+					+ Ajouter au panier : ajouterpanier.php
+
+		+ Calendrier : [DONE]
+				+ Controller : CalendarCtrl;
+				+ Functions : 
+					+ recuperation de tous les evenements : $scope.tester();
+				+ Php file : f
+					+ recuperation : alllcmdevent.php
+
+		+ Reçu : 
+				+ Controller : MyCtrl.js
+				+ Functions : 
+					+ 
+					+ 
+				+ Php File : MyAllBascketsX.php
+				+ Folder : pdfjs
+
+		+ PROCESS DU STATUS : 
+
+			- ( Client ) EN ATTENDE -> ( Service Clients ) CONFIRMER -> ( Service livraison )TO COLLECT -> (Livreur) COLLECTED ->( Service Production ) EN PREPARATION -> ( Service Production) PRETE ->  (Serivce client) CONFIRMER TIME ->(Service Livraison ) TO DELIVER -> (Livreur ) LIVRE
+

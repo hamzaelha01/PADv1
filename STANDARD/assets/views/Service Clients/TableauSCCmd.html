@@ -1,0 +1,157 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle">Livraisons en attentes</h1>
+            <!-- <span class="mainDescription">Use this page to start from scratch and put your custom content</span> -->
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: YOUR CONTENT HERE -->
+<div class="container">
+    <!-- <div ng-controller="DatepickerDemoCtrl" class="row"> -->
+    <div ng-controller="dynamicTableCtrl" class="row">
+        <div class="col-md-12">
+           <!--  <h5 class="over-title margin-bottom-15">Responsive <span class="text-bold">Table</span></h5>
+            <p>
+                Create responsive tables by wrapping any <code>.table</code> in <code>.table-responsive</code> to make them scroll horizontally on small devices (under 768px). When viewing on anything larger than 768px wide, you will not see any difference
+                in these tables.
+            </p>
+            <div class="alert alert-info">
+                Please try to re-size your browser window in order to see the tables in responsive mode.
+            </div> -->
+            <div ng-init="getCmdDone()" class="table-responsive">
+                <div class=" table-responsive">
+                    <table class="table table-bordered table-hover" id="sample-table-1">
+                        <thead>
+                            <tr>
+                                <!-- <th>#</th>
+                                    <th>Nom Client</th>
+                                    <th>Prenom Client</th>
+                                    <th>Date Fin Commande</th> 
+                                    <th>Telephone Client</th>
+                                    <th>Email </th>
+                                    <th>Rermarques</th>
+                                    <th>Type Client</th> -->
+                                <th>#</th>
+                                <th>Nombre Articles</th>
+                                <th>Date Debut Commande</th>
+                                <!-- <th>Date Fin Commande</th> -->
+                                <th>Montant</th>
+                                <th>Quantité</th>
+
+                                <th><i class="fa fa-time"></i> Update </th>
+                                <th><i class="fa fa-trush"></i> Reserver </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+
+                            <tr ng-repeat="x in CmdWait track by $index">
+
+                                <td> <a href="#">{{x.ID_COMMANDE}} </a></td>
+                                <td>{{x.NBR_ARTICLES}}</td>
+                                <td>{{x.DD_COMMANDE}}</td>
+                                <td>{{x.QUANITE}}</td>
+                                <!-- <td>{{x.STATUS}}</td> -->
+                                <td>{{x.MONTANT}}</td>
+                                <td>
+                                    <!-- Script du Modal -->
+                                     <script type="text/ng-template" id="asideContent.html">
+                                        <div class="modal-header">
+                                            <h3 class="modal-title">Modification du temps</h3>
+                                        </div>
+                                        <!-- invite du controller DatePickerDemoCtrl pour ajouter le fonctionnement de la date et l'heure -->
+
+                                        <div ng-controller="dynamicTableCtrl">
+                                            <div class="modal-body">
+
+                                                <input type="text" id="dit1" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dated" is-open="inputopened" ng-init="inputopened = false" ng-click="inputopened = !inputopened" datepicker-options="datepickerOptions" ng-required="true" close-text="Close"
+                                                />
+                                                <uib-timepicker ng-model="houred" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+
+                                           <!--  
+                                                 <h3> Modification de l'adresse livraison </h3>
+                                                    <legend>Adresse de livraison</legend>
+                                                        <div class="form-group">
+                                                            <label>Adresse</label>
+                                                            <input type="text" ng-model="adreliv" class="form-control" placeholder="Adresse Complete">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="input-group">
+                                                                <!-- -->
+                                                          <!--       <input  id="google_canvas"  type="text" class="form-control"  name="prenom" value="{{myadress}}" placeholder="Localisez Moi">
+                                                                <span class="input-group-btn">
+                                                                    <button type="button" class="btn btn-primary" ng-click="getadresse()">
+                                                                        <i class="fa fa-map-marker" ></i>
+                                                                    </button>
+                                                                 </span>
+                                                            </div>
+                                                        </div>  -->                                              
+                                            </div>
+                                        </div>
+                                            <!-- invite du controller dynamictabctrl pour confirmer la modification grace a la fonction UpdateDate() -> OK   -->
+                                        <div class="modal-footer">
+                                                <button class="btn btn-primary" ng-click="ChangeDateExp($index)">OK</button>
+                                                <button class="btn btn-primary" ng-click="cancel($event)">Cancel</button>
+                                        </div>
+                                            
+                                    </script>
+
+                                    <button type="button" class="btn btn-primary btn-block btn-scroll btn-scroll-top ti-arrow-left" ng-click="OpenModif('left',$index)">
+                                    <span>Modifier</span>
+                                </button>
+                                    <!-- </div> -->
+                                </td>
+                                <!-- Button confirmer pour modifier le statut de la commande à confirmé -->
+                                <td>
+                                    <div class="center">
+                                        <button type="button" ng-click="ConfDone($index)" class="btn btn-wide btn-success">
+                                        Confirmer
+                                    </button>
+                                        <!-- button confirmé avec le script  -->
+                                        <!-- <button type="button" class="btn btn-primary btn-block btn-scroll btn-scroll-top ti-arrow-right" ng-click="demo5($index)">Confirmer</button> -->
+                                    </div>
+
+                                </td>
+
+
+                                <!-- <script type="text/ng-template" id="asideContent.html">
+                                        <div class="modal-header">
+                                            <h3 class="modal-title">Confirmation de Commande</h3>
+                                        </div>
+                                        <div class="modal-body">
+                                            <!-- Id   : <input type="text" value="{{xxx.ID_COMMANDE}}"  ng-model="xxx.ID_COMMANDE" /><br>
+                                        Date : <input type="text" value="{{xxx.DD_COMMANDE}}" ng-model="xxx.DD_COMMANDE" /><br>
+                                        Nb Articles : <input type="text" value="{{xxx.NBR_ARTICLES}}" ng-model="xxx.NBR_ARTICLES" /><br> -->
+                                <!-- Voulez Vous Vraiment Confirmer Cette Commande?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <!-- <button class="btn btn-primary" ng-click="ok($event)">Oui</button> -->
+                                <!-- <button class="btn btn-primary" ng-click="ok($event)">Oui</button>
+                                            <button class="btn btn-primary" ng-click="cancel($event)">Annuler</button>
+                                        </div>
+                                    </script> -->
+
+
+
+                                <!-- <td><span class="label label-sm label-success">Registered</span></td>
+                            <td><span class="label label-sm label-danger">Expired</span></td>
+                            <td><span class="label label-sm label-inverse">Flagged</span></td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <!-- </div> -->
+
+        </div>
+
+
+        <!-- end: YOUR CONTENT HERE -->-

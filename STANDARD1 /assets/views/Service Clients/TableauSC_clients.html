@@ -1,0 +1,64 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle">Nos Client</h1>
+            <span class="mainDescription">Use this page to start from scratch and put your custom content</span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: YOUR CONTENT HERE -->
+<div class="container">
+    <div ng-controller="dynamicTableCtrl" class="row">
+        <div class="col-md-12">
+            <h5 class="over-title margin-bottom-15">Responsive <span class="text-bold">Table</span></h5>
+            <p>
+                Create responsive tables by wrapping any <code>.table</code> in <code>.table-responsive</code> to make them scroll horizontally on small devices (under 768px). When viewing on anything larger than 768px wide, you will not see any difference
+                in these tables.
+            </p>
+            <div class="alert alert-info">
+                Please try to re-size your browser window in order to see the tables in responsive mode.
+            </div>
+            <div ng-init="getClient()" class="table-responsive">
+                <table class="table table-bordered table-hover" id="sample-table-1">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>NOM CLIENT</th>
+                            <th>TELEPHONE CLIENT</th>
+                            <th>Email Client</th>
+                            <th>Type Client </th>
+
+                            <th>Reserver</th>
+                            <!-- <th><i class="fa fa-time"></i> Update </th> -->
+                            <!-- <th><i class="fa fa-trush"></i> Reserver </th> -->
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="y in clientsc track by $index">
+
+                            <td>{{y.ID_CLIENT}}</td>
+                            <td>{{y.NOM_CLIENT}}</td>
+                            <td>{{y.TELEPHONE_CLIENT}}</td>
+                            <td>{{y.Email}}</td>
+                            <td>{{y.TYPE_CLIENT}}</td>
+
+                            <td>
+                                <button type="button" class="btn btn-primary btn-wide btn-scroll btn-scroll-top ti-shopping-cart" ng-click="Redirect($index)">
+								<span>Reserver</span>
+                            </button>
+                            </td>
+                            <!-- <td><span class="label label-sm label-success">Registered</span></td>
+                            <td><span class="label label-sm label-danger">Expired</span></td>
+                            <td><span class="label label-sm label-inverse">Flagged</span></td> -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end: YOUR CONTENT HERE -->

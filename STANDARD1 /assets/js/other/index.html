@@ -1,0 +1,10 @@
+<body ng-controller="ApplicationController">
+    <!-- If Normal user -->
+    <div ng-if="currentUser"> Hello Norma </div>
+    <!-- If admin User  -->
+    <div ng-if="isAuthorized(userRoles.admin)"> Hello Admin </div>
+
+
+</body>
+
+<script src="authentification/login.js"></script>

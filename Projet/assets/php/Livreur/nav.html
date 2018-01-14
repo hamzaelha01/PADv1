@@ -1,0 +1,270 @@
+<!-- start: SEARCH FORM -->
+<div class="search-form">
+    <a class="s-open" href="#">
+        <i class="ti-search"></i>
+    </a>
+    <form class="navbar-form" role="search">
+        <a class="s-remove" href="#" ng-toggle-class="search-open" target=".navbar-form">
+            <i class="ti-close"></i>
+        </a>
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="{{ 'sidebar.search.PLACEHOLDER' | translate }}">
+            <button class="btn search-button" type="submit">
+				<i class="ti-search"></i>
+			</button>
+        </div>
+    </form>
+</div>
+<!-- end: SEARCH FORM -->
+<!-- start: MAIN NAVIGATION MENU -->
+<div class="navbar-title">
+    <span translate="sidebar.heading.NAVIGATION">Main Navigation</span>
+</div>
+<ul class="main-navigation-menu">
+    <li ui-sref-active="active">
+        <a ui-sref="app.dashboard">
+            <div class="item-content">
+                <div class="item-media">
+                    <i class="ti-home"></i>
+                </div>
+                <div class="item-inner">
+                    <span class="title"> Dashboard </span>
+                </div>
+            </div>
+        </a>
+    </li>
+    <!-- Client -->
+    <li ui-sref-active="active">
+        <a ui-sref="app.Client">
+            <div class="item-content">
+                <div class="item-media">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                </div>
+                <div class="item-inner">
+                    <span class="title"> Client </span>
+                </div>
+            </div>
+        </a>
+    </li>
+    <!-- Fin : Client -->
+    <!-- Liste des Clients -->
+    <li ui-sref-active="active">
+        <a ui-sref="app.BdClients">
+            <div class="item-content">
+                <div class="item-media">
+                    <i class="fa fa-male" aria-hidden="true"></i>
+                </div>
+                <div class="item-inner">
+                    <span class="title"> Service Clients :  Liste des Clients </span>
+                </div>
+            </div>
+        </a>
+    </li>
+    <!-- Fin : Liste des Clients -->
+    <!-- Commandes En Attente -->
+    <li ui-sref-active="active">
+        <a ui-sref="app.BdCommandes">
+            <div class="item-content">
+                <div class="item-media">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                </div>
+                <div class="item-inner">
+                    <span class="title"> Service CLients :Commandes En Attente </span>
+                </div>
+            </div>
+        </a>
+    </li>
+    <!-- Fin : Commandes En Attente -->
+    <!-- Commandes confirmé -->
+    <li ui-sref-active="active">
+        <a ui-sref="app.BdLSC">
+            <div class="item-content">
+                <div class="item-media">
+                    <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                </div>
+                <div class="item-inner">
+                    <span class="title"> Service Livraison :  Commandes Confirmé </span>
+                </div>
+            </div>
+        </a>
+    </li>
+    <!-- Fin : Commandes confirmé -->
+    <!-- Calendrier  -->
+    <li ui-sref-active="active">
+        <a ui-sref="app.calendrier">
+            <div class="item-content">
+                <div class="item-media">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                </div>
+                <div class="item-inner">
+                    <span class="title"> ALL :  Calendrier </span>
+                </div>
+            </div>
+        </a>
+    </li>
+    <!-- Fin : Calendrier  -->
+    <!-- Commandes a preparer  -->
+    <li ui-sref-active="active">
+        <a ui-sref="app.cmdp">
+            <div class="item-content">
+                <div class="item-media">
+                    <i class="fa fa-code-fork" aria-hidden="true"></i>
+                </div>
+                <div class="item-inner">
+                    <span class="title">  Production : Commandes a preparer </span>
+                </div>
+            </div>
+        </a>
+    </li>
+    <!-- Fin : Commande a preparer  -->
+    <!-- Commandes a preparer  -->
+    <li ui-sref-active="active">
+        <a ui-sref="app.cmdl">
+            <div class="item-content">
+                <div class="item-media">
+                    <i class="fa fa-check-square" aria-hidden="true"></i>
+                </div>
+                <div class="item-inner">
+                    <span class="title"> Production :  Commandes a livrer  </span>
+                </div>
+            </div>
+        </a>
+    </li>
+    <!-- Fin : Commande a preparer  -->
+    <!-- Commandes a collecter  -->
+    <li ui-sref-active="active">
+        <a ui-sref="app.ToCollecte">
+            <div class="item-content">
+                <div class="item-media">
+                    <i class="fa fa-reply" aria-hidden="true"></i>
+                </div>
+                <div class="item-inner">
+                    <span class="title"> Livreur :  Commandes a collecter  </span>
+                </div>
+            </div>
+        </a>
+    </li>
+    <!-- Fin : Commande a collecter  -->
+    <!-- Commandes a collecter  -->
+    <li ui-sref-active="active">
+        <a ui-sref="app.ToDeliver">
+            <div class="item-content">
+                <div class="item-media">
+                    <i class="fa fa-reply" aria-hidden="true"></i>
+                </div>
+                <div class="item-inner">
+                    <span class="title"> Livreur :  Commandes a livrer  </span>
+                </div>
+            </div>
+        </a>
+    </li>
+    <!-- Fin : Commande a collecter  -->
+
+    <!-- <li ui-sref-active="active">
+        <a ui-sref="app.Examples">
+            <div class="item-content">
+                <div class="item-media">
+                    <i class="ti-home"></i>
+                </div>
+                <div class="item-inner">
+                    <span class="title"> Example </span>
+                </div>
+            </div>
+        </a>
+    </li> -->
+    <!-- Commandes En Cours -->
+    <!-- <li ui-sref-active="active">
+        <a ui-sref="app.CEC">
+            <div class="item-content">
+                <div class="item-media">
+                    <i class="ti-home"></i>
+                </div>
+                <div class="item-inner">
+                    <span class="title"> Commandes En Cours  </span>
+                </div>
+            </div>
+        </a>
+    </li> -->
+    <!-- Fin Commandes En Cours -->
+    <!-- Reserver -->
+    <!-- <li ui-sref-active="active">
+        <a ui-sref="app.Reserver">
+            <div class="item-content">
+                <div class="item-media">
+                    <i class="ti-home"></i>
+                </div>
+                <div class="item-inner">
+                    <span class="title"> Reserver </span>
+                </div>
+            </div>
+        </a>
+    </li> -->
+    <!-- Reserver -->
+    <!-- Date -->
+    <!-- <li ui-sref-active="active">
+        <a ui-sref="app.Date">
+            <div class="item-content">
+                <div class="item-media">
+                    <i class="ti-home"></i>
+                </div>
+                <div class="item-inner">
+                    <span class="title"> Date </span>
+                </div>
+            </div>
+        </a>
+    </li> -->
+    <!-- Fin : Date -->
+
+    <!-- TableauC -->
+    <!-- <li ui-sref-active="active">
+        <a ui-sref="app.TableauC">
+            <div class="item-content">
+                <div class="item-media">
+                    <i class="ti-home"></i>
+                </div>
+                <div class="item-inner">
+                    <span class="title"> TableauC </span>
+                </div>
+            </div>
+        </a>
+    </li> -->
+    <!-- Fin : TableauC -->
+    <!-- Reservation -->
+    <!-- 
+    <li ui-sref-active="active">
+        <a ui-sref="app.Reservation">
+            <div class="item-content">
+                <div class="item-media">
+                    <i class="fa fa-bookmark-o" aria-hidden="true"></i>
+                </div>
+                <div class="item-inner">
+                    <span class="title"> Reservation </span>
+                </div>
+            </div>
+        </a>
+    </li> -->
+    <!-- Fin : Reservation -->
+    <!-- MesCommandes -->
+
+    <!-- <li ui-sref-active="active">
+        <a ui-sref="app.mescommandes">
+            <div class="item-content">
+                <div class="item-media">
+                    <i class="fa fa-sort" aria-hidden="true"></i>
+                </div>
+                <div class="item-inner">
+                    <span class="title"> Mes Commandes </span>
+                </div>
+            </div>
+        </a>
+    </li> -->
+    <!-- Fin : MesCommandes -->
+
+</ul>
+<!-- end: MAIN NAVIGATION MENU -->
+<!-- start: CORE FEATURES -->
+
+<!-- end: CORE FEATURES -->
+<!-- start: DOCUMENTATION BUTTON -->
+
+<!-- end: DOCUMENTATION BUTTON -->

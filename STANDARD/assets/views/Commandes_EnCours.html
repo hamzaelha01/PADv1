@@ -1,0 +1,392 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+    <div class="row">
+        <div class="col-sm-8">
+            <h1 class="mainTitle">COMMANDES EN COURS</h1>
+            <span class="mainDescription">Use this page to start from scratch and put your custom content</span>
+        </div>
+        <div ncy-breadcrumb></div>
+    </div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: YOUR CONTENT HERE -->
+
+<div class="col-md-12">
+    <div ng-controller="dynamicTableCtrl" ng-init="show_data()">
+        <!-- <div class="col-md-6">
+            <label>Name</label>
+            <input type="text" name="name" ng-model="name" class="form-control">
+            <br/>
+            <label>Email</label>
+            <input type="text" name="email" ng-model="email" class="form-control">
+            <br/>
+            <label>Age</label>
+            <input type="text" name="age" ng-model="age" class="form-control">
+            <br/>
+            <input type="hidden" ng-model="id">
+            <input type="submit" name="insert" class="btn btn-primary" ng-click="insert()" value="{{btnName}}">
+        </div> -->
+        <!-- start: DYNAMIC TABLE -->
+        <!--<div class="container-fluid container-fullw bg-white">
+            <div class="row">
+                <div class="col-md-12">
+                    <h5 class="over-title margin-bottom-15">Dynamic <span class="text-bold">Table</span></h5>
+                    <p>
+                        Delete the row by pressing the delete button. Alternatively, play around by adding and deleting/removing the rows.
+                    </p>
+                    <!-- /// controller:  'ngTableCtrl' -  localtion: assets/js/controllers/ngTableCtrl.js /// -->
+
+        <!--<div class="col-md-6">
+                        <div class="padding-bottom-20">
+                            <h3>Add a Company</h3>
+                        </div>
+                        <form class="form-horizontal padding-bottom-20" role="form" ng-submit="addRow()">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Name</label>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" name="name" ng-model="name" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Employees</label>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" name="employees" ng-model="employees" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Headoffice</label>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" name="headoffice" ng-model="headoffice" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-4">
+                                    <input type="submit" value="Submit" class="btn btn-primary btn-wide pull-right" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Name </th>
+                                    <th>Employees </th>
+                                    <th>Head Office </th>
+                                    <th>Action </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="company in companies">
+                                    <td>{{company.name}} </td>
+                                    <td>{{company.employees}} </td>
+                                    <td>{{company.headoffice}} </td>
+                                    <td>
+                                        <button type="button" class="btn btn-red btn-wide btn-scroll btn-scroll-top ti-trash" ng-click="removeRow(company.name)">
+									<span>Remove</span>
+								</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid container-fullw bg-white">
+	<div class="row">
+		<div class="col-md-12">
+			<h5 class="over-title margin-bottom-15">Responsive <span class="text-bold">Table</span></h5>
+			<p>
+				Create responsive tables by wrapping any <code>.table</code> in <code>.table-responsive</code> to make them scroll horizontally on small devices (under 768px). When viewing on anything larger than 768px wide, you will not see any difference in these tables.
+			</p>
+			<div class="alert alert-info">
+				Please try to re-size your browser window in order to see the tables in responsive mode.
+			</div>
+			<div class="table-responsive">
+				<table class="table table-bordered table-hover" id="sample-table-1">
+					<thead>
+						<tr>
+							<th>Domain</th>
+							<th>Price</th>
+							<th>Clicks</th>
+							<th><i class="fa fa-time"></i> Update </th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+							<a href="#">
+								alpha.com
+							</a></td>
+							<td>$45</td>
+							<td>3,330</td>
+							<td>February 13</td>
+							<td><span class="label label-sm label-warning">Expiring</span></td>
+						</tr>
+						<tr>
+							<td>
+							<a href="#">
+								beta.com
+							</a></td>
+							<td>$70</td>
+							<td>3,330</td>
+							<td>January 15</td>
+							<td><span class="label label-sm label-success">Registered</span></td>
+						</tr>
+						<tr>
+							<td>
+							<a href="#">
+								gamma.com
+							</a></td>
+							<td>$25</td>
+							<td>3,330</td>
+							<td>March 09</td>
+							<td><span class="label label-sm label-danger">Expired</span></td>
+						</tr>
+						<tr>
+							<td>
+							<a href="#">
+								delta.com
+							</a></td>
+							<td>$50</td>
+							<td>3,330</td>
+							<td>February 10</td>
+							<td><span class="label label-sm label-inverse">Flagged</span></td>
+						</tr>
+						<tr>
+							<td>
+							<a href="#">
+								epsilon.com
+							</a></td>
+							<td>$35</td>
+							<td>3,330</td>
+							<td>February 18</td>
+							<td><span class="label label-sm label-success">Registered</span></td>
+						</tr>
+						<tr>
+							<td>
+							<a href="#">
+								zeta.com
+							</a></td>
+							<td>$45</td>
+							<td>3,330</td>
+							<td>February 13</td>
+							<td><span class="label label-sm label-warning">Expiring</span></td>
+						</tr>
+						<tr>
+							<td>
+							<a href="#">
+								eta.com
+							</a></td>
+							<td>$70</td>
+							<td>3,330</td>
+							<td>January 15</td>
+							<td><span class="label label-sm label-success">Registered</span></td>
+						</tr>
+						<tr>
+							<td>
+							<a href="#">
+								theta.com
+							</a></td>
+							<td>$25</td>
+							<td>3,330</td>
+							<td>March 09</td>
+							<td><span class="label label-sm label-danger">Expired</span></td>
+						</tr>
+						<tr>
+							<td>
+							<a href="#">
+								iota.com
+							</a></td>
+							<td>$50</td>
+							<td>3,330</td>
+							<td>February 10</td>
+							<td><span class="label label-sm label-inverse">Flagged</span></td>
+						</tr>
+						<tr>
+							<td>
+							<a href="#">
+								kappa.com
+							</a></td>
+							<td>$35</td>
+							<td>3,330</td>
+							<td>February 18</td>
+							<td><span class="label label-sm label-success">Registered</span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end: RESPONSIVE TABLE -->
+        <!-- end: DYNAMIC TABLE -->
+        <div class="container-fluid container-fullw bg-white">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="padding-bottom-20">
+                        <h3></h3>
+                    </div>
+
+                </div>
+            </div>
+
+            <table class="table table-bordered">
+                <tr>
+                    <th>#</th>
+                    <th>Date Commande</th>
+                    <th>Statut</th>
+                    <!--<th>Edit</th>
+                    <th>Delete</th>-->
+                </tr>
+                <tr ng-repeat="x in names track by $index">
+                    <td>{{x.ID_COMMANDE}}</td>
+                    <td>{{x.DD_COMMANDE}}</td>
+                    <td>{{x.STATUS}}</td>
+                    <!--<td>
+                        <button class="btn btn-success btn-xs" ng-click="update_data(x.id, x.name, x.email, x.age)">
+                <span class="glyphicon glyphicon-edit"></span> Edit
+                </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger btn-xs" ng-click="delete_data(x.id )">
+                <span class="glyphicon glyphicon-trash"></span> Delete
+                </button>
+                    </td>-->
+                </tr>
+            </table>
+            <!-- end: YOUR CONTENT HERE -->
+
+            <!-- start: FORM VALIDATION -->
+            <!-- <div class="container-fluid container-fullw bg-white">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class="over-title margin-bottom-15">AngularJS directives for <span class="text-bold">form validation</span></h5>
+                        <p>
+                            AngularJS has many directives to run form validation. Some of these (like required, pattern, etc.) repeat the behaviour of the new HTML5 attributes. The advantage of using AngularJS directives instead of classic HTML5 attributes, is that AngularJS way
+                            allows to mantain the two way data binding between model and view.
+                        </p> -->
+            <!-- /// controller:  'ValidationCtrl' -  localtion: assets/js/controllers/validationCtrl.js /// -->
+            <!-- <div ng-controller="ValidationCtrl"> -->
+            <!-- <form name="Form" id="form1" novalidate ng-submit="form.submit(Form)">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <fieldset>
+                                        <legend>
+                                            Success and Error Message
+                                        </legend>
+                                        <div class="form-group">
+                                            <label class="control-label">
+										Nom <span class="symbol required"></span>
+									</label>
+                                            <input type="text" placeholder="Enter your First Name" class="form-control" name="Nom" ng-model="nom" required />
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">
+										Prenom <span class="symbol required"></span>
+									</label>
+                                            <input type="text" placeholder="Enter your Last Name" class="form-control" name="prenom" ng-model="prenom" required />
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">
+										Email <span class="symbol required"></span>
+									</label>
+                                            <input type="email" placeholder="Enter a valid E-mail" class="form-control" name="email" ng-model="email" required>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">
+										Telephone <span class="symbol required"></span>
+									</label>
+                                            <input type="text" placeholder="Enter a valid telephone" class="form-control" name="tel" ng-model="tel" required>
+
+                                        </div> -->
+            <!-- <div class="form-group">
+                                                <label class="control-label block">
+										Sexe <span class="symbol required"></span>
+									</label>
+                                                <div class="clip-radio radio-primary">
+                                                    <input type="radio" id="wd-female" name="gender" value="female" ng-model="myModel.gender" required>
+                                                    <label for="wd-female">
+											Female
+										</label>
+                                                    <input type="radio" id="wd-male" name="gender" value="male" ng-model="femme" required>
+                                                    <label for="wd-male">
+											Male
+										</label>
+                                                </div>
+                                                <span class="error text-small block" ng-if="Form.gender.$dirty && Form.gender.$error.required">Gender is required.</span>
+
+                                            </div> -->
+            <!-- <div class="form-group">
+                                            <label class="control-label">
+										Mot de passe <span class="symbol required"></span>
+									</label>
+                                            <input type="password" placeholder="Enter a Password" class="form-control" name="mdp" ng-model="mdp" required/>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">
+										Confirmation Mot de passe  <span class="symbol required"></span>
+									</label>
+                                            <input type="password" placeholder="Repeat Password" class="form-control" name="confirmation" ng-model="confirmation" compare-to="mdp" required/>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="form-field-select-1">
+										Ville <span class="symbol required"></span>
+									</label>
+                                            <select class="form-control" name="Ville" ng-model="ville" required>
+										<option value="">&nbsp;</option>
+										<option value="AL">Rabat</option>
+										
+									</select>
+                                            <span class="error text-small block" ng-if="Form.country.$dirty && Form.country.$error.required">Country is required.</span>
+                                            <span class="success text-small block" ng-if="Form.country.$valid">Lovely place!</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">
+										Consent and Acknowledgement <span class="symbol required"></span>
+									</label>
+                                            <div class="checkbox">
+                                                <label class="clip-check">
+											<input type="checkbox" value="" name="acceptTerms" ng-model="myModel.acceptTerms" required="">
+											<i></i>
+											I read and accept the terms and conditions
+										</label>
+                                            </div>
+                                            <span class="error text-small block" ng-if="Form.acceptTerms.$dirty && Form.acceptTerms.$error.required">You must accept terms and conditions!</span>
+                                            <span class="success text-small block" ng-if="Form.acceptTerms.$valid">Thank You!</span>
+                                        </div>
+                                    </fieldset>
+
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pull-right">
+                                        <button type="submit" class="btn btn-primary" ng-click="insert()">
+									Submit
+								</button>
+                                        <button type="reset" class="btn btn-primary btn-o" ng-click="form.reset(Form)">
+									Reset
+								</button>
+                                        <button class="btn btn-default">
+									checkValid = {{ Form.$valid }}
+								</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <pre class="margin-top-20">{{ myModel | json }}</pre>
+                        </form>
+                    </div>
+                </div>
+            </div> -->
+            <!-- </div> -->
+            <!-- end: FORM VALIDATION -->

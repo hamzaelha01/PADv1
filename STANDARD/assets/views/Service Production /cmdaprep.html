@@ -1,0 +1,87 @@
+<!-- start: PAGE TITLE --> 
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle" >Commandes À Preparer</h1>
+			<!-- <span class="mainDescription">Use this page to start from scratch and put your custom content</span> -->
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: YOUR CONTENT HERE -->
+<!-- start: YOUR CONTENT HERE -->
+<div class="container" ng-controller="MyCtrl" >
+        <div class="row">
+            <div class="col-md-12">
+               <!--  <h5 class="over-title margin-bottom-15">Responsive <span class="text-bold">Table</span></h5>
+                <p>
+                    Create responsive tables by wrapping any <code>.table</code> in <code>.table-responsive</code> to make them scroll horizontally on small devices (under 768px). When viewing on anything larger than 768px wide, you will not see any difference in these tables.
+                </p>
+                <div class="alert alert-info">
+                    Please try to re-size your browser window in order to see the tables in responsive mode.
+                </div> -->
+                <div class="table-responsive"  >
+                    <table class="table table-bordered table-hover" id="sample-table-1" ng-init="show_cmdaprep()" >
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>N° Articles</th>
+                                <th>Date Commande</th>
+                                <th>Livreur</th>
+                                <th>Confirmation</th>
+                                <!-- <th><i class="fa fa-time"></i> Update </th>
+                                <th><i class="fa fa-trush"></i> Delete </th> -->
+                                
+                            </tr>
+                        </thead>
+                        <tbody >
+                            <tr  ng-repeat="x in names track by $index">
+                                <td>{{x.ID_COMMANDE}}</td>
+                                <td>{{x.DD_COMMANDE}}</td>
+                                <td>{{x.NBR_ARTICLES}}</td>
+                                <td>{{x.LIVREUR_LIVRAISON}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-primary btn-block btn-scroll btn-scroll-top ti-arrow-right" ng-click="preparation('right',$index)">
+                                        <span>Confirmer</span>
+                                    </button>
+                                </td>
+                                
+                                
+                                <script type="text/ng-template" id="asideContent.html"  >
+                                    <div class="modal-header">
+                                    <h3 class="modal-title">Confirmation de Commande</h3>
+                                    </div>
+                                    <div   class="modal-body" >
+                                    <!-- Id   : <input type="text" value="{{xxx.ID_COMMANDE}}"  ng-model="xxx.ID_COMMANDE" /><br>
+                                    Date : <input type="text" value="{{xxx.DD_COMMANDE}}" ng-model="xxx.DD_COMMANDE" /><br>
+                                    Nb Articles : <input type="text" value="{{xxx.NBR_ARTICLES}}" ng-model="xxx.NBR_ARTICLES" /><br> -->
+                                    Voulez Vous Vraiment Confirmer Cette Commande?   
+                                    </div>
+                                    <div class="modal-footer">
+                                    <!-- <button class="btn btn-primary" ng-click="ok($event)">Oui</button> -->
+                                    <button class="btn btn-primary" ng-click="ok($event)">Oui</button>
+                                    <button class="btn btn-primary" ng-click="cancel($event)">Annuler</button>
+                                    </div>
+                                </script>
+                                
+                                <!--<td>
+                                    <a class="btn btn-wide btn-red" href="#"><i class="fa fa-edit"></i></a>
+                                </td>
+                                 <td>
+                                    <a class="btn btn-wide btn-purple" href="#"><i class="fa fa-check"></i></a>
+                                </td> -->
+                                <!--<td><span class="label label-sm label-warning">Expiring</span></td>
+                                <td><span class="label label-sm label-success">Registered</span></td>
+                                <td><span class="label label-sm label-danger">Expired</span></td>
+                                <td><span class="label label-sm label-inverse">Flagged</span></td> -->
+                                
+                            </tr>   
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end: YOUR CONTENT HERE
