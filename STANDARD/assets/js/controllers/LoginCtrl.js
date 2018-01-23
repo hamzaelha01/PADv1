@@ -6,11 +6,11 @@ app.controller('LoginCtrl', ["$scope", "$window", "$http", "user", function($sco
 
         var number = $scope.number;
         var pass = $scope.pass;
-
+        // var URL = "http://http://18.219.9.220:8080";
         // alert(number);
         // alert(pass);
         $http({
-            url: 'assets/php/Login/login.php',
+            url: 'http://18.219.9.220:8080/STANDARD/assets/php/Login/login.php',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
