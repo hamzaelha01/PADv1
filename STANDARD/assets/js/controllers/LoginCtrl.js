@@ -10,7 +10,7 @@ app.controller('LoginCtrl', ["$scope", "$window", "$http", "user", function($sco
         // alert(number);
         // alert(pass);
         $http({
-            url: 'http://18.221.242.75:3000/STANDARD/assets/php/Login/login.php',
+            url: 'http://18.221.242.75:8080/STANDARD/assets/php/Login/login.php',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
