@@ -1,129 +1,87 @@
-<section id="page-title">
+<!-- start: PAGE TITLE -->
+<section id="page-title" class="page-title-center">
     <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-8 col-sm-offset-2">
             <h1 class="mainTitle">Reservation</h1>
-            <span class="mainDescription">Use this page to start from scratch and put your custom content</span>
+            <div ncy-breadcrumb></div>
         </div>
-        <div ncy-breadcrumb></div>
     </div>
 </section>
-<!-- Debut Page -->
-<div class="container-fluid container-fullw bg-white">
-    <div ng-controller="DatepickerDemoCtrl" class="row">
-        <div class="col-md-12">
-
-            <h5 class="over-title">Nouvelle <span class="text-bold">Reservation</span></h5>
-            <p class="margin-bottom-30">
-            </p>
-            <div class="row">
-                <form ng-controller="dynamicTableCtrl" ng-init="selectdate()">
-                    <!-- Debut table -->
-                    <!-- <table class="table table-bordered visible">
-                        <tr>
-                            <th>ID </th>
-                        </tr>
-                        <tr ng-repeat="x in dates track by $index">
-                            <td>{{x.ID_DATE}}</td>
-                        </tr>
-                    </table> -->
-                    <!-- Fin table -->
+<!-- end: PAGE TITLE -->
+<div class="container">
+    <div ng-controller="TabsDemoCtrl">
+        <div class="container-fluid container-fullw bg-white">
+            <div ng-controller="dynamicTableCtrl" class="row">
+                 <div class="col-md-12">
+                    <h5 class="over-title">Nouvelle <span class="text-bold">Reservation</span></h5>
+                    <p class="margin-bottom-30">
+                    </p>
+                    <div class="row">
+                    <form ng-controller="dynamicTableCtrl" ng-init="selectdate()">
+                    
                     <div class="col-md-6">
                         <fieldset>
-                            <legend>
-                                Articles
-                            </legend>
+                            <legend>Articles</legend>
                             <div class="form-group">
-                                <label>
-							    Nombre d'articles <span class="symbol required"></span>
-							</label>
-                                <div class="form-group">
+                                <label>Nombre d'articles <span class="symbol required"></span></label>
+                                 <div class="form-group">
                                     <input type="text" value="0" ng-model="nbrd" name="nbr" touchspin data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down">
                                 </div>
-
                             </div>
                         </fieldset>
-                        <fieldset>
-                            <legend>
-                                Adresse de collecte
-                            </legend>
+                    <fieldset>
+                        <legend>Adresse de collecte</legend>
                             <div class="form-group">
-                                <label>
-								Adresse
-							</label>
-                                <input type="text" class="form-control" placeholder="Adresse Complete">
+                                <label>Adresse</label>
+                                <input type="text" class="form-control" ng-model="adr1"  placeholder="Adresse Complete">
                             </div>
-                            <div class="row">
-
-                                <!-- <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>
-                                        Quartier
-									</label>
-                                        <select name="country" class="form-control">
-										<option value="">&nbsp;</option>
-										<option value="AL">Alabama</option>
-										<option value="AK">Alaska</option>
-										<option value="AZ">Arizona</option>
-									</select>
-                                    </div>
-                                </div> -->
-                            </div>
-                        </fieldset>
-                        <fieldset>
-                            <legend>
-                                Adresse de Livraison
-                            </legend>
                             <div class="form-group">
-                                <label>
-								Adresse
-							</label>
-                                <input type="text" class="form-control" placeholder="Adresse Complete">
+                            <div class="input-group">
+                            <!-- id="google_canvas" -->
+                                <input  id="google_canvas"  type="text" class="form-control" name="prenom" value="{{myadress}}" placeholder="Localisez Moi">
+
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-primary" ng-click="getadresse()">
+                                    <i class="fa fa-map-marker" ></i>
+                                    </button>
+                                </span>
                             </div>
-                            <div class="row">
-
-                                <!-- <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>
-                                        Quartier
-									</label>
-                                        <select name="country" class="form-control">
-										<option value="">&nbsp;</option>
-										<option value="AL">Alabama</option>
-										<option value="AK">Alaska</option>
-										<option value="AZ">Arizona</option>
-									</select>
-                                    </div>
-                                </div> -->
                             </div>
-                        </fieldset>
-
-
+                    </fieldset>
                     </div>
                     <div class="col-md-6">
-                        <fieldset>
-                            <legend>
-                                Date Collecte
-                            </legend>
-                            <div class="form-group">
-                                <label> Jour </label>
-                                <input type="text" id="dit1" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="inputopened" ng-init="inputopened = false" ng-click="inputopened = !inputopened" datepicker-options="datepickerOptions" ng-required="true" close-text="Close"
-                                />
+                    <fieldset>
+                    <legend>
+                    Date Collecte
+                    </legend>
+                    <div class="form-group">
+                    <label> Jour </label>
+                    <input type="text" id="dit1" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="inputopened" ng-init="inputopened = false" ng-click="inputopened = !inputopened" datepicker-options="datepickerOptions" ng-required="true" close-text="Close"
+                    />
 
-                                <!-- <button ng-click="dtclick()" class="btn btn-o btn-primary">date</button> -->
-                            </div>
-                            <div class="form-group">
-                                <label>Heure</label>
-                                <uib-timepicker ng-model="timecmd" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
-                            </div>
-
-                        </fieldset>
-                        <div align="right">
-                            <button type="submit" ng-click="reserver()" class="btn btn-o btn-primary">Reserver</button>
-
-                        </div>
+                    <!-- <button ng-click="dtclick()" class="btn btn-o btn-primary">date</button> -->
                     </div>
-                </form>
+                    <div class="form-group">
+                    <label>Heure</label>
+                    <uib-timepicker ng-model="timecmd" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></uib-timepicker>
+                    </div>
+
+                    </fieldset>
+                    <div align="right">
+                    <button type="submit" ng-click="ReserConfirm()" class="btn btn-o btn-primary">Reserver</button>
+
+                    </div>
+
+                    </div>
+                    </form>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
             </div>
         </div>
     </div>
 </div>
+
+
+

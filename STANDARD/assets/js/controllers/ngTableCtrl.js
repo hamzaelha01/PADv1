@@ -122,23 +122,30 @@ app.controller('ngTableCtrl2', ["$scope", "$filter", "ngTableParams", function (
         }
     });
 }]);
-app.controller('ngTableCtrl3', ["$scope", "$filter", "ngTableParams", function ($scope, $filter, ngTableParams) {
-    $scope.tableParams = new ngTableParams({
-        page: 1, // show first page
-        count: 5, // count per page
-        filter: {
-            name: 'M' // initial filter
-        }
-    }, {
-        total: data.length, // length of data
-        getData: function ($defer, params) {
-            // use build-in angular filter
-            var orderedData = params.filter() ? $filter('filter')(data, params.filter()) : data;
-            $scope.users = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
-            params.total(orderedData.length);
-            // set total for recalc pagination
-            $defer.resolve($scope.users);
-        }
+app.controller('ngTableCtrl3', ["$scope", "$filter", "ngTableParams","$http", function ($scope, $filter, ngTableParams,$http) {
+    
+    $http.get("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Clients/getClients.php")
+            .success(function(data) {
+                $scope.clientsc = data;
+            
+
+        $scope.tableParams = new ngTableParams({
+            page: 1, // show first page
+            count: 5, // count per page
+            filter: {
+                name: 'M' // initial filter
+            }
+        }, {
+            total: data.length, // length of data
+            getData: function ($defer, params) {
+                // use build-in angular filter
+                var orderedData = params.filter() ? $filter('filter')(data, params.filter()) : data;
+                $scope.users = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+                params.total(orderedData.length);
+                // set total for recalc pagination
+                $defer.resolve($scope.users);
+            }
+        });
     });
 }]);
 app.controller('ngTableCtrl4', ["$scope", "$filter", "ngTableParams", function ($scope, $filter, ngTableParams) {

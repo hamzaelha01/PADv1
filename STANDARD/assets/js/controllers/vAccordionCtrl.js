@@ -4,7 +4,7 @@
   * AngularJS multi-level accordion component.
 */
 (function (angular) {
-    app.controller('vAccordionCtrl', ["$scope", function ($scope) {
+    app.controller('vAccordionCtrl', ["$scope","$http", function ($scope,$http) {
         $scope.firstAccordionControl = {
             onExpand: function (expandedPaneIndex) {
                 console.log('expanded:', expandedPaneIndex);
@@ -31,5 +31,28 @@
                 content: 'Curabitur et ligula. Ut molestie a, ultricies porta urna. Quisque lorem tortor fringilla sed, vestibulum id.'
             }]
         }];
+
+
+        $http.get(
+            "http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Livreur/getAllCat.php"
+        ).success(function(data) {
+
+            $scope.allcat = data;
+            // alert($scope.cmdacollects[1].NOM_CLIENT);
+            // alert(data);
+            $http.post("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Livreur/getAllProducts.php", {
+            'idCat': allcat,
+        }).success(function(data) {
+           
+            $scope.allProduct = data;
+        });
+        
+
+
+
+        
+        }).error(function(data) { alert(data); })
+
+       
     }]);
 })(angular);

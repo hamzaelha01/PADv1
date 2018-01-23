@@ -11,7 +11,8 @@ $IdUser   = mysqli_real_escape_string($conn, $info->IdUser);
 $query  ="SELECT SUM(PANIER.QUANITE) as QUANTITE , SUM(PANIER.MONTANT) as MONTANT , COMMANDE.ID_COMMANDE , COMMANDE.DD_COMMANDE , COMMANDE.DF_COMMANDE  
 FROM PANIER , COMMANDE
  WHERE PANIER.ID_COMMANDE = COMMANDE.ID_COMMANDE and COMMANDE.ID_CLIENT = '$IdUser'
-AND  COMMANDE.STATUS like '%LIVRE%' GROUP by COMMANDE.ID_COMMANDE";
+AND  COMMANDE.STATUS like '%LIVRE%'
+GROUP BY COMMANDE.ID_COMMANDE";
 $result = mysqli_query($conn, $query);
 if (mysqli_num_rows($result) > 0) {
 while ($row = mysqli_fetch_array($result)) {

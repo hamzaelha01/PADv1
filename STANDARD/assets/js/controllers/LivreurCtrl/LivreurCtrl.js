@@ -1,6 +1,6 @@
 'use strict'
 
-app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window", function($scope, $http, SweetAlert,user,$window) {
+app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window","$cookies", function($scope, $http, SweetAlert,user,$window,$cookies) {
 
     // Get Selected Option from Select
     $scope.changed = function(item) {
@@ -18,7 +18,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
     // $scope.getIndexL = function(index) {
 
     //     $http.get(
-    //         "http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Livraison/getIndexL.php").success(function(data) {
+    //         "assets/php/Service Livraison/getIndexL.php").success(function(data) {
     //         $scope.cmdl = data;
     //         $scope.cmdidl = data[index].ID_COMMANDE;
 
@@ -33,7 +33,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
     $scope.getCommandesConfirme = function(index) {
 
         $http.get(
-            "http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Livraison/getIndexL.php").success(function(data) {
+            "assets/php/Service Livraison/getIndexL.php").success(function(data) {
             $scope.cmdcf = data;
 
         })
@@ -43,7 +43,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
     $scope.getCommandesConfirmeSP = function(index) {
 
         $http.get(
-            "http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Livraison/getIndexLSP.php").success(function(data) {
+            "assets/php/Service Livraison/getIndexLSP.php").success(function(data) {
             $scope.cmdcfSP = data;
 
         })
@@ -52,7 +52,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
 
     $scope.getNomLivreur = function() {
 
-        $http.get("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Livraison/getNomLivreur.php")
+        $http.get("assets/php/Service Livraison/getNomLivreur.php")
             .success(function(data) {
                 $scope.livreurs = data;
 
@@ -64,7 +64,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
     // $scope.postLivreurCollecte = function(index) {
 
     //     $http.get(
-    //         "http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Livraison/getIndexL.php").success(function(data) {
+    //         "assets/php/Service Livraison/getIndexL.php").success(function(data) {
     //         $scope.cmdl = data;
     //         $scope.cmdidl = data[index].ID_COMMANDE;
 
@@ -78,7 +78,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
 
     //     // $scope.getIndexL(index);
     //     // alert($scope.cmdidl);
-    //     $http.post("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Livraison/postLivreurCollecte.php", {
+    //     $http.post("assets/php/Service Livraison/postLivreurCollecte.php", {
     //             'ID': $scope.cmdidl,
     //             'LIVREUR_COLLECTE': $scope.liv,
 
@@ -95,25 +95,25 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
 
     $scope.postLivreurCollecte = function(index) {
         $http.get(
-            "http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Livraison/getIndexL.php").success(function(data) {
+            "assets/php/Service Livraison/getIndexL.php").success(function(data) {
             $scope.cmds = data;
             $scope.cmdid = data[index].ID_COMMANDE;
             // alert($scope.cmdid);
         })
         SweetAlert.swal({
 
-            title: "Voulez Vous Vraiment Confirmer La Commande ?",
-            text: "La commande sera prochainement confirmée!",
+            title: "La commande sera affectée à "+$scope.liv,
+            text: "Voulez-vous confirmer la commande ?",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Oui, Confirmez!",
-            cancelButtonText: "Non, Annulez!",
+            confirmButtonText: "Oui",
+            cancelButtonText: "Non!",
             closeOnConfirm: false,
             closeOnCancel: false
         }, function(isConfirm) {
             if (isConfirm) {
-                $http.post("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Livraison/postLivreurCollecte.php", {
+                $http.post("assets/php/Service Livraison/postLivreurCollecte.php", {
                         'id': $scope.cmdid,
                         'LIVREUR_COLLECTE': $scope.liv,
 
@@ -132,7 +132,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
             } else {
                 SweetAlert.swal({
                     title: "Annulée!",
-                    text: "Pas de Changement 🙂",
+                    text: "",
                     type: "error",
                     confirmButtonColor: "#007AFF"
                 });
@@ -146,7 +146,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
 
     $scope.postLivreurLivraison = function(index) {
         $http.get(
-            "http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Livraison/getIndexLSP.php").success(function(data) {
+            "assets/php/Service Livraison/getIndexLSP.php").success(function(data) {
             $scope.cmds = data;
             $scope.cmdid = data[index].ID_COMMANDE;
             // alert($scope.cmdid);
@@ -164,7 +164,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
             closeOnCancel: false
         }, function(isConfirm) {
             if (isConfirm) {
-                $http.post("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Livraison/postLivreurLivraison.php", {
+                $http.post("assets/php/Service Livraison/postLivreurLivraison.php", {
                         'id': $scope.cmdid,
                         'LIVREUR_LIVRAISON': $scope.liv,
 
@@ -198,7 +198,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
 
     // $scope.toCollecte = function(index) {
     //     $http.get(
-    //             "http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Livreur/getCollecte.php")
+    //             "assets/php/Livreur/getCollecte.php")
     //         .success(function(data) {
     //             $scope.toC = data;
     //             // $scope.toCmd = data[index].ID_COMMANDE;
@@ -212,7 +212,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
     $scope.toCollecte = function(index) {
         // alert(nomLivreur);
         $http.post(
-                "http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Livreur/getCollecte.php",{
+                "assets/php/Livreur/getCollecte.php",{
                 'NOM_LIVREUR' : nomLivreur
         }).success(function(data) {
                 $scope.toC = data;
@@ -228,7 +228,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
 
     $scope.toDeliver = function(index) {
         $http.post(
-                "http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Livreur/getDeliver.php",{
+                "assets/php/Livreur/getDeliver.php",{
                 'NOM_LIVREUR' : nomLivreur
         }).success(function(data) {
                 $scope.toD = data;
@@ -243,8 +243,11 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
      // DEBUT : REDIRECTION VERS LE PANIER 
        $scope.RedirectL = function(index) {
 
+                        $scope.cart=[];
+                        $cookies.putObject('cart', $scope.cart);
+
         $http.post(
-                "http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Livreur/getCollecte.php",{
+                "assets/php/Livreur/getCollecte.php",{
                 'NOM_LIVREUR' : nomLivreur
         }).success(function(data) {
                 $scope.toC = data;
@@ -270,7 +273,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
 
     $scope.ConfirmationD = function(index) {
         // $http.post(
-        //         "http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Livreur/getDeliver.php",{
+        //         "assets/php/Livreur/getDeliver.php",{
         //         'NOM_LIVREUR' : nomLivreur
         // }).success(function(data) {
         //         $scope.getD = data;
@@ -282,7 +285,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
         //     })
 
           $http.post(
-                "http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Livreur/getDeliver.php",{
+                "assets/php/Livreur/getDeliver.php",{
                 'NOM_LIVREUR' : nomLivreur
         }).success(function(data) {
                 $scope.getD = data;
@@ -311,7 +314,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
             closeOnCancel: false
         }, function(isConfirm) {
             if (isConfirm) {
-                $http.post("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Livreur/UpdateFinal.php", {
+                $http.post("assets/php/Livreur/UpdateFinal.php", {
                         'id': $scope.IDD
                     })
                     .success(function(data) {

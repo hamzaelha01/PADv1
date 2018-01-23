@@ -8,7 +8,7 @@
 //     $('#dit2').val = ($(this).val());
 // })
 
-app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope', '$aside', '$log', 'user', '$window', function($scope, SweetAlert, $http, $rootScope, $aside, $log, user,$window) {
+app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope', '$aside', '$log', 'user', '$window','$uibModal', function($scope, SweetAlert, $http, $rootScope, $aside, $log, user,$window,$uibModal) {
 
 
     // Declaration Vars  
@@ -26,11 +26,11 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
     $scope.reserver = function() {
         // ETAPE 1 : CREATION DE L'ID COMMANDE 
-    $rootScope.idc += 1;
+   $rootScope.idc += 1;
 
 
             // alert( $scope.adr1 +", "+ user.getLocalisation());
-
+ 
         $scope.idcommande = IDUSER + $scope.nbrd + prof[0] + nom[0] + $scope.idc;
         // alert($scope.IDClient);
         // alert($scope.idcommande);
@@ -45,7 +45,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
         // ETAPE 2: CREATION DE LA COMMANDE & ID DATE
         $http.post(
-            "http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Client /InsertGetDate.php", {
+            "assets/php/Client /InsertGetDate.php", {
 
             }
         ).success(function(response) {
@@ -55,7 +55,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
             if ($scope.dateID != null) {
                 // L'AJOUT DE LA COMMANDE
                 $http.post(
-                    "http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Client /InsertCommande.php", {
+                    "assets/php/Client /InsertCommande.php", {
                         'DD': $scope.dt,
                         'IDCMD': $scope.idcommande,
                         'HT': $scope.timecmd,
@@ -74,7 +74,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
             // Modification de l'adresse 
 
-      $http.post("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Client /UpdateAdresseCollecte.php", {
+      $http.post("assets/php/Client /UpdateAdresseCollecte.php", {
                  'idLocal' : user.getIdLocalTempclient(),
                  'AdresseCompleteCollect':$scope.adr1 +", "+ user.getLocalisation()
                 }
@@ -88,7 +88,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
     // DEBUT : REDIRECTION
        $scope.Redirect = function(index) {
-        $http.get("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Clients/getClients.php")
+        $http.get("assets/php/Service Clients/getClients.php")
             .success(function(data) {
                 $scope.getclc = data;
                 $scope.IDC = data[index].ID_CLIENT;
@@ -115,30 +115,35 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
     } 
     // FIN : REDIRECTION 
 
+    $scope.Ret = function(){
+        $window.location.href = '#/app/CommandesEnCours';
+    };
+
     //  DEBUT : REDIRECTION VERS RECU 
     // DEBUT : REDIRECTION
-       $scope.RedirectR = function(index) {
-         $http.post("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Client /getCommandesRecu.php", {
+       $scope.RedirectR = function(r) {
+        //  $http.post("assets/php/Client /getCommandesRecu.php", {
 
-            'IdUser': IDUSER
-        }).success(function(data) {
-                 $scope.recu = data;
-            // alert($scope.historique);
+        //     'IdUser': IDUSER
+        // }).success(function(response) {
+        //          $scope.recu = response;
+        //     // alert($scope.historique);
     
 
-                // $scope.IDCMD = data[index].ID_COMMANDE;
-                // alert(IDUSER);
-                // $scope.NOM = data[index].NOM_CLIENT;
-                // $scope.PRENOM = data[index].PRENOM_CLIENT;
-                alert(data[index].ID_COMMANDE);
-                
-                user.setTempRecu(data[index].ID_COMMANDE);
+        //         // $scope.IDCMD = data[index].ID_COMMANDE;
+        //         // alert(IDUSER);
+        //         // $scope.NOM = data[index].NOM_CLIENT;
+        //         // $scope.PRENOM = data[index].PRENOM_CLIENT;
+        //         
+                alert(r.ID_COMMANDE);
+                user.setTempRecu(r.ID_COMMANDE);
                 alert(" USER TEMP " + user.getID());
                 alert("CMD TEMP "+ user.getTempRecu());
                 // $location.path('/Client');
                 $window.location.href = '#/app/RecuClient';
                 // alert($window.location.names);
-            })
+        //     })
+        
 
 
 
@@ -178,7 +183,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
         // ETAPE 2: CREATION DE L 'ID DATE 
         $http.post(
-            "http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Client /InsertGetDate.php", {
+            "assets/php/Client /InsertGetDate.php", {
 
             }
         ).success(function(response) {
@@ -188,7 +193,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
             if ($scope.dateID != null) {
                 // Ajout de la commande 
                 $http.post(
-                    "http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Client /InsertCommande.php", {
+                    "assets/php/Client /InsertCommande.php", {
                         'DD': $scope.dt,
                         'IDCMD': $scope.IdCmdUser,
                         'HT': $scope.timecmd,
@@ -207,7 +212,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
                         // Modification de l'adresse 
 
-      $http.post("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Client /UpdateAdresseCollecte.php", {
+      $http.post("assets/php/Client /UpdateAdresseCollecte.php", {
                  'idLocal' : user.getIdLocalTempclient(),
                  'AdresseCompleteCollect':$scope.adrz1 +", "+ user.getLocalisation()
                 }
@@ -219,7 +224,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
        // Modification de l'adresse 
 
-      // $http.post("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Client /InsertCommande.php", {
+      // $http.post("assets/php/Client /InsertCommande.php", {
       //            'idLocal' : user.getIdLocalTempclient()
       //           }
       //           ).success(function(data) {
@@ -227,7 +232,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
       //           });
 
 
-    //     $http.post("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Client /",{}).success(function(resp){}) 
+    //     $http.post("assets/php/Client /",{}).success(function(resp){}) 
     };
     //  FIN : RESERVATION CLIENT APRES REDIRECTION *SERVICE CLIENT*
 
@@ -236,7 +241,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
     //selection du dernier ID_DATE
 
     $scope.selectdate = function() {
-        $http.get("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/getdate.php")
+        $http.get("assets/php/getdate.php")
             .success(function(data) {
                 $scope.dates = data;
             })
@@ -255,7 +260,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
             alert("Enter Your Age");
         } else {
             $http.post(
-                "http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/js/controllers/insert.php", {
+                "assets/js/controllers/insert.php", {
                     'nom': $scope.nom,
                     'prenom': $scope.prenom,
                     'tel': $scope.tel,
@@ -276,7 +281,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
     //selection 
 
     $scope.show_data = function() {
-        $http.get("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/js/controllers/display.php")
+        $http.get("assets/js/controllers/display.php")
             .success(function(data) {
                 $scope.names = data;
             });
@@ -286,7 +291,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
     // Valable aussi pour le SC 
 
     $scope.getCommandesEncours = function() {
-        $http.post("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Client /getCommandes.php", {
+        $http.post("assets/php/Client /getCommandes.php", {
 
             'IdUser': IDUSER
         }).success(function(data) {
@@ -297,20 +302,60 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
     };
      $scope.getCommandesRecu = function() {
-        $http.post("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Client /getCommandesRecu.php", {
 
-            'IdUser': IDUSER
-        }).success(function(data) {
-            $scope.recu = data;
-            // alert($scope.historique);
+
+
+        $http({
+            url: 'assets/php/Client /getCommandesRecu.php',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: 'Iduser=' + IDUSER
+        }).success(function(response) {
+            // alert(response.status);
+            // alert(response.STATUS);
+            $scope.recu=response;
+            
+
+
+            
         });
+        // $http.post("assets/php/Client /getCommandesRecu.php", {
+
+        //     'IdUser': IDUSER
+        // }).success(function(response) {
+        //     $scope.recu = response.data;
+
+        //     // alert(data[IDUSER].STATUS);
+        //     alert(response.data);
+            //declare an array for(var i = 0 ; i < data.length; i++)
+            // {
+            //      if(data[i].STATUS== "PRETE")
+            //      {
+            //         $scope.arr = 10;
+            //      }
+            //      else 
+            //      {
+            //         $scope.arr = 20;
+            //      }
+
+            // }
+            
+            // 
+            
+            // alert(data.STATUS);
+            // alert(data);
+            // alert(data.STATUS);
+            // alert($scope.historique);
+        
 
 
     };
 
 
      $scope.getCmdWait = function() {
-        $http.post("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Clients/getCmdWait.php", {
+        $http.post("assets/php/Service Clients/getCmdWait.php", {
 
             'IdUser': IDUSER
         }).success(function(data) {
@@ -324,7 +369,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
     //  Service Clients : Recuperer to les commandes finis 
 
       $scope.getCmdDone = function() {
-        $http.post("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Clients/getCmdDone.php", {
+        $http.post("assets/php/Service Clients/getCmdDone.php", {
 
             'IdUser': IDUSER
         }).success(function(data) {
@@ -337,15 +382,18 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
     // Selection Historique Des Commandes 
     $scope.getHistorique = function() {
-        $http.get("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Client /getHistorique.php")
-            .success(function(data) {
+        // $http.get("assets/php/Client /getHistorique.php")
+        $http.post("assets/php/Client /getHistorique.php", {
+
+            'IdUser': IDUSER
+            }).success(function(data) {
                 $scope.historique = data;
             });
     };
 
     // $scope.getHistorique = function() {
     //     // var IDUSER = user.getID();
-    //      $http.post("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Client /getHistorique.php", {
+    //      $http.post("assets/php/Client /getHistorique.php", {
 
     //         'IdUser': IDUSER
     //     }).success(function(data) {
@@ -356,12 +404,13 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
     // };
 
+
     // Service Client 
     // Selection Clients 
 
     $scope.getClient = function() {
 
-        $http.get("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Clients/getClients.php")
+        $http.get("assets/php/Service Clients/getClients.php")
             .success(function(data) {
                 $scope.clientsc = data;
             });
@@ -370,7 +419,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
     $scope.UpdateDate = function() {
 
-        $http.post("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Clients/UpdarteHrCommandes.php", {
+        $http.post("assets/php/Service Clients/UpdarteHrCommandes.php", {
             'ID': $scope.id_cmd,
             'DD': $scope.dt,
             'HR': $scope.ht
@@ -387,7 +436,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
 
     // $scope.UpdateStatut = function() {
-    //         $http.post("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Clients/UpdarteHrCommandes.php", {
+    //         $http.post("assets/php/Service Clients/UpdarteHrCommandes.php", {
     //             'ID': $scope.id_cmd,
     //             'STATUS': $scope.status
     //         }).success(function() {
@@ -474,7 +523,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
     //             //alert(index);
     //             //Get Record of this Index
     //             $http.get(
-    //                     "http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Production/voircmdalivr.php").success(function(data) {
+    //                     "assets/php/Service Production/voircmdalivr.php").success(function(data) {
     //                     $scope.cmds = data;
     //                     $scope.cmdid = data[index].ID_COMMANDE;
     //                     // alert($scope.cmdid);
@@ -483,7 +532,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
     //             $scope.ok = function(e) {
 
     //                 //alert( $scope.arra(index));
-    //                 $http.post("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Production/confirmeralivr.php", {
+    //                 $http.post("assets/php/Service Production/confirmeralivr.php", {
     //                         'id': $scope.cmdid
     //                     })
     //                     .success(function(data) {
@@ -505,7 +554,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
 
     $scope.demo5 = function(index) {
-        $http.get("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Clients/getCmdWait.php")
+        $http.get("assets/php/Service Clients/getCmdWait.php")
             .success(function(data) {
                 $scope.getcmdn = data;
                 $scope.IDn = data[index].ID_COMMANDE;
@@ -514,18 +563,18 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
             })
         SweetAlert.swal({
 
-            title: "Voulez Vous Vraiment Confirmer La Commande ?",
+            title: "Voulez-vous confirmer la commande ?",
             text: "La commande sera prochainement confirmée!",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Oui, Confirmez!",
-            cancelButtonText: "Non, Annulez!",
+            confirmButtonText: "Oui",
+            cancelButtonText: "Non!",
             closeOnConfirm: false,
             closeOnCancel: false
         }, function(isConfirm) {
             if (isConfirm) {
-                $http.post("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Clients/UpdateStatut.php", {
+                $http.post("assets/php/Service Clients/UpdateStatut.php", {
                         'id': $scope.IDn
                     })
                     .success(function(data) {
@@ -552,28 +601,28 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
 
     // COnfirmation de la commande SC : 
-    $scope.ConfDone = function(index) {
-        $http.get("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Clients/getCmdDone.php")
+    $scope.ConfDone = function(position,index) {
+        $http.get("assets/php/Service Clients/getCmdDone.php")
             .success(function(data) {
                 $scope.getcmdn = data;
                 $scope.IDn = data[index].ID_COMMANDE;
                 alert($scope.IDn);
 
-            })
+            
         SweetAlert.swal({
 
-            title: "Voulez Vous Vraiment Confirmer La Commande ?",
+            title: "Voulez-vous confirmer la commade de  "+data[index].NOM_CLIENT+"?",
             text: "La commande sera prochainement confirmée!",
             type: "warning",
             showCancelButton: true,
             confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Oui, Confirmez!",
-            cancelButtonText: "Non, Annulez!",
+            confirmButtonText: "Oui",
+            cancelButtonText: "Non!",
             closeOnConfirm: false,
             closeOnCancel: false
         }, function(isConfirm) {
             if (isConfirm) {
-                $http.post("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Clients/UpdateStatutDone.php", {
+                $http.post("assets/php/Service Clients/UpdateStatutDone.php", {
                         'id': $scope.IDn
                     })
                     .success(function(data) {
@@ -582,7 +631,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
                     });
                 SweetAlert.swal({
                     title: "Confirmée!",
-                    text: "Votre Commande a été confirmée.",
+                    text: "La commande de "+data[index].NOM_CLIENT+" a été confirmée",
                     type: "success",
                     confirmButtonColor: "#007AFF"
 
@@ -590,12 +639,13 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
             } else {
                 SweetAlert.swal({
                     title: "Annulée!",
-                    text: "Pas de Changement 🙂",
+                    text: "La commande de "+data[index].NOM_CLIENT+" a été annulée",
                     type: "error",
                     confirmButtonColor: "#007AFF"
                 });
             }
         });
+    });
     };
 
 
@@ -603,14 +653,14 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
     // $scope.demo5 = function(index) {
 
 
-    //     $http.get("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Client/getCommandes.php")
+    //     $http.get("assets/php/Client/getCommandes.php")
     //         .success(function(data) {
     //             $scope.getcmdn = data;
     //             $scope.IDn = data[index].ID_COMMANDE;
     //         })
 
     //     $http.get(
-    //         "http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Production/voircmdalivr.php"
+    //         "assets/php/Service Production/voircmdalivr.php"
     //     ).success(function(data) {
     //         $scope.cmds = data;
     //         $scope.cmdid = data[index].ID_COMMANDE;
@@ -629,7 +679,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
     //         closeOnCancel: false
     //     }, function(isConfirm) {
     //         if (isConfirm) {
-    //             $http.post("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Clients/UpdateStatut.php", {
+    //             $http.post("assets/php/Service Clients/UpdateStatut.php", {
     //                     'id': $scope.IDn
     //                 })
     //                 .success(function(data) {
@@ -780,7 +830,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
         mstep: [1, 5, 10, 15, 25, 30]
     };
 
-    $scope.ismeridian = true;
+    $scope.ismeridian = false;
     $scope.toggleMode = function() {
         $scope.ismeridian = !$scope.ismeridian;
     };
@@ -801,7 +851,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
     };
     // Modification de date collecte 
     $scope.dtclick = function() {
-        $http.post("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Clients/UpdarteHrCommandes.php", {
+        $http.post("assets/php/Service Clients/UpdarteHrCommandes.php", {
                 'ID': $scope.cmdid,
                 'DD': $scope.dtt,
                 'HT': $scope.hrr,
@@ -821,8 +871,10 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
     // Modification de date de livraison : 
 
-       $scope.ChangeDateExp = function() {
-        $http.post("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Clients/UpdateDtCommande.php", {
+       $scope.ChangeDateExp = function(e) {
+
+           
+        $http.post("assets/php/Service Clients/UpdateDtCommande.php", {
                 'ID': $scope.cmdid,
                 'DD': $scope.dated,
                 'HT': $scope.houred,
@@ -834,18 +886,158 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
         alert($scope.dated);
         alert($scope.houred);
         alert($scope.cmdid);
-
-        $http.post("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Client /UpdateAdresseCollecte.php", {
+        var d = document.getElementById("radio1");
+            if(d.checked)
+            {
+                $http.post("assets/php/Client /UpdateAdresseLivraison.php", {
                  'idLocal' : $scope.cmdid,
-                 'AdresseCompleteLivraison':$scope.adreliv +", "+ user.getLocalisation()
+                 'AdresseCompleteLivraison':$scope.idrliv
                 }
                 ).success(function(data) {
                     // alert(data.ID);
                     alert(data);
                 });
+            }
+            else
+                $http.post("assets/php/Client /UpdateAdresseLivraison.php", {
+                 'idLocal' : $scope.cmdid,
+                 'AdresseCompleteLivraison':$scope.adrz1 +", "+ user.getLocalisation()
+                }
+                ).success(function(data) {
+                    // alert(data.ID);
+                    alert(data);
+                });
+            
+    
+        SweetAlert.swal({
 
-        // $scope.dtime = $scope.dtt;
-        // $scope.dhour = $scope.hrr;
+            title: "Voulez Vous Vraiment Confirmer La Commande ?",
+            text: "La commande sera prochainement confirmée!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Oui, Confirmez!",
+            cancelButtonText: "Non, Annulez!",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function(isConfirm) {
+            if (isConfirm) {
+                $http.post("assets/php/Service Clients/UpdateStatutDone.php", {
+                        'id': $scope.cmdid
+                    })
+                    .success(function(data) {
+                        //$scope.reload();
+                        //$scope.show_cmdaprep();
+                    });
+                SweetAlert.swal({
+                    title: "Confirmée!",
+                    text: "Votre Commande a été confirmée.",
+                    type: "success",
+                    confirmButtonColor: "#007AFF"
+
+                });
+            } else {
+                SweetAlert.swal({
+                    title: "Annulée!",
+                    text: "Pas de Changement 🙂",
+                    type: "error",
+                    confirmButtonColor: "#007AFF"
+                });
+            }
+        });
+
+    };
+
+
+
+$scope.ChangeDateClt = function(e) {
+
+           
+        $http.post("assets/php/Service Clients/UpdateDtCommande.php", {
+                'ID': $scope.cmdid,
+                'DD': $scope.dated,
+                'HT': $scope.houred,
+            })
+            .success(function(data) {
+                // alert(data[index].DD_COMMANDE);
+                //$scope.show_cmdaprep();
+            });
+        alert($scope.dated);
+        alert($scope.houred);
+        alert($scope.cmdid);
+        var d = document.getElementById("radio1");
+            if(d.checked)
+            {
+                $http.post("assets/php/Client /UpdateAdresseLivraison.php", {
+                 'idLocal' : $scope.cmdid,
+                 'AdresseCompleteLivraison':$scope.idrliv
+                }
+                ).success(function(data) {
+                    // alert(data.ID);
+                    alert(data);
+                });
+            }
+            else
+                $http.post("assets/php/Client /UpdateAdresseLivraison.php", {
+                 'idLocal' : $scope.cmdid,
+                 'AdresseCompleteLivraison':$scope.adrz1 +", "+ user.getLocalisation()
+                }
+                ).success(function(data) {
+                    // alert(data.ID);
+                    alert(data);
+                });
+            
+    
+       
+
+    };
+
+    // $scope.items = ['item1', 'item2', 'item3'];
+
+    $scope.open = function (size, index) {
+
+        var modalInstance = $uibModal.open({
+            templateUrl: 'myModalContent.html',
+            controller: function($scope,$uibModalInstance){
+
+                         $http.post("assets/php/Client /getHistorique.php", {
+
+                            'IdUser': IDUSER
+                            }).success(function(data) {
+                                $scope.cmds = data;
+                                    $scope.cmdid = data[index].ID_COMMANDE;
+                                    // alert($scope.cmdid);
+                                    alert($scope.cmdid);
+                            });
+
+                 $scope.ok = function(e) {
+                    
+                    $http.post("assets/php/Client /Commentaire.php", {
+                         'idLocal' : $scope.cmdid,
+                         'Commentaire_Livreur':$scope.ComLiv,
+                         'Commentaire_Service':$scope.ComSer
+                        }
+                        ).success(function(data) {
+                            // alert(data.ID);
+                            // alert(data);
+                        });
+
+                    // alert($scope.ComLiv);
+                    // alert($scope.ComSer);
+        
+
+                    $uibModalInstance.close();
+                    e.stopPropagation();
+                };
+                $scope.cancel = function(e) {
+                    $uibModalInstance.dismiss();
+                    e.stopPropagation();
+                };
+            },
+            size: size
+        });
+
+        
     };
 
 
@@ -860,7 +1052,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
             controller: function($scope, $uibModalInstance) {
                 // recuperation de l'index du tableau au modal Aside
                 $http.get(
-                    "http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Clients/getCmdWait.php").success(function(data) {
+                    "assets/php/Service Clients/getCmdWait.php").success(function(data) {
                     $scope.cmds = data;
                     $scope.cmdid = data[index].ID_COMMANDE;
                     // alert($scope.cmdid);
@@ -884,7 +1076,8 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
     };
 
     // // SERVICE CLIENTS : Modifier la date pour la livraison 
-     $scope.OpenModif = function(position, index) {
+     $scope.OpenModif = function(position, r) {
+         
         $aside.open({
             templateUrl: 'asideContent.html',
             placement: position,
@@ -892,13 +1085,16 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
             backdrop: true,
             controller: function($scope, $uibModalInstance) {
                 // recuperation de l'index du tableau au modal Aside
-                $http.get(
-                    "http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Clients/getCmdDone.php").success(function(data) {
-                    $scope.cmds = data;
-                    $scope.cmdid = data[index].ID_COMMANDE;
+                // $http.get(
+                //     "assets/php/Service Clients/getCmdDone.php").success(function(data) {
+                //     $scope.cmds = data;
+                //     $scope.cmdid = data[index].ID_COMMANDE;
+                //     $scope.idrliv = data[index].Adresse_Complete_Collect;
                     // alert($scope.cmdid);
-                    alert($scope.cmdid);
-                })
+                   $scope.cmdid = r.ID_COMMANDE;
+                   $scope.idrliv = r.Adresse_Complete_Collect;
+         //        alert(r.ID_COMMANDE);
+         // alert(r.Adresse_Complete_Collect);
 
                 $scope.ok = function(e) {
                     // alert(index);
@@ -912,6 +1108,101 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
                     $uibModalInstance.dismiss();
                     e.stopPropagation();
                 };
+            }
+        });
+        // Confirmation 
+
+
+    };
+
+
+        $scope.ReserConfirm = function () {
+            $rootScope.idc += 1;
+
+
+            // alert( $scope.adr1 +", "+ user.getLocalisation());
+ 
+        $scope.idcommande = IDUSER + $scope.nbrd + prof[0] + nom[0] + $scope.idc;
+        // alert($scope.IDClient);
+        // alert($scope.idcommande);
+        // Affichage des infroamtions TEST
+        alert(" JOUR COMMANDE " + $scope.dt);
+        alert(" ID COMMANDE " + $scope.idcommande);
+        alert(" HEURE COMMANDE " + $scope.timecmd);
+        alert(" NBR ARTICLES  COMMANDE " + $scope.nbrd);
+        // alert(" DATE COMMANDE " + $scope.dateID);
+        alert("not null you can do command");
+        alert(" ID CLIENT " + IDUSER);
+
+
+        SweetAlert.swal({
+            title: "Voulez-vous passer une nouvelle commande?",
+            text: "",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete it!",
+            cancelButtonText: "No, cancel plx!",
+            closeOnConfirm: false,
+            closeOnCancel: false
+        }, function (isConfirm) {
+
+            
+            if (isConfirm) {
+
+                $http.post(
+            "assets/php/Client /InsertGetDate.php", {
+
+            }
+        ).success(function(response) {
+            // scope id data 
+            $scope.dateID = response.ID;
+            alert($scope.dateID);
+            if ($scope.dateID != null) {
+                // L'AJOUT DE LA COMMANDE
+                $http.post(
+                    "assets/php/Client /InsertCommande.php", {
+                        'DD': $scope.dt,
+                        'IDCMD': $scope.idcommande,
+                        'HT': $scope.timecmd,
+                        'nbrd': $scope.nbrd,
+                        'IDDATE': $scope.dateID,
+                        'IDCLIENT': IDUSER
+
+                    }
+                ).success(function(data) {
+                    // alert(data.ID);
+                });
+
+
+            }
+        })
+
+            // Modification de l'adresse 
+
+      $http.post("assets/php/Client /UpdateAdresseCollecte.php", {
+                 'idLocal' : user.getIdLocalTempclient(),
+                 'AdresseCompleteCollect':$scope.adr1 +", "+ user.getLocalisation()
+                }
+                ).success(function(data) {
+                    // alert(data.ID);
+                    alert(data);
+                });
+
+
+                SweetAlert.swal({
+                    title: "Confirmée!", 
+                    text: "Votre commande est bien passeé", 
+                    type: "success",
+                    confirmButtonColor: "#007AFF"
+                });
+            } else {
+                SweetAlert.swal({
+                    title: "Annulée", 
+                    text: "La commande est annulée!", 
+                    type: "error",
+                    confirmButtonColor: "#007AFF"
+                });
             }
         });
     };

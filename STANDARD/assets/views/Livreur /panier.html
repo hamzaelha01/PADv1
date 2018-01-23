@@ -1,39 +1,120 @@
-start: PAGE TITLE -->
-<!-- <section id="page-title">
-        <div class="row">
-            <div class="col-sm-8">
-                <h1 class="mainTitle" >Catalogue de Produits</h1>
-                <span class="mainDescription">Use this page to start from scratch and put your custom content</span>
-            </div>
-            <div ncy-breadcrumb></div>
-        </div>
-</section> -->
-<!-- end: PAGE TITLE -->
+
 <!-- start: PAGE TITLE -->
 <section id="page-title" class="page-title-center">
     <div class="row">
         <div class="col-sm-8 col-sm-offset-2">
             <h1 class="mainTitle">CATOLOGUE DE PRODUITS</h1>
-           <!--  <span class="mainDescription">Themify Icons is a complete set of icons for use in web design and apps, consisting of 320+ pixel-perfect, hand-crafted icons that draw inspiration from Apple iOS 7</span> -->
-            <input ng-model="search" class="form-control text-center margin-top-15" type="text" placeholder="Rechercher un produit">
+            <input ng-model="searchText" class="form-control text-center margin-top-15" type="text" placeholder="Rechercher un produit">
             <div ncy-breadcrumb></div>
         </div>
     </div>
 </section>
 <!-- start: YOUR CONTENT HERE -->
 <!-- start: TABLE WITH FILTERS -->
-<div class="container" ng-controller="MyCtrl">
-    <!-- start: YOUR CONTENT HERE -->
+<div class="container bg-white" ng-controller="MyCtrl">
     <div class="row">
         <div class="col-md-12">
-            <!-- <h5 class="over-title margin-bottom-15">Responsive <span class="text-bold">Table</span></h5>
-        <p>
-            Create responsive tables by wrapping any <code>.table</code> in <code>.table-responsive</code> to make them scroll horizontally on small devices (under 768px). When viewing on anything larger than 768px wide, you will not see any difference in these tables.
-        </p>
-        <div class="alert alert-info">
-            Please try to re-size your browser window in order to see the tables in responsive mode.
-        </div> -->
-            <div class="table-responsive">
+            <div  ng-controller="vAccordionCtrl" class="panel-body">
+                        <v-accordion  class="vAccordion--default" control="firstAccordionControl">
+                            <v-pane ng-repeat="pane in allcat" expanded="$last">
+                                <v-pane-header>
+                                    <h5>{{ pane.DESGINATION_CAT }}</h5>
+                                </v-pane-header>
+                                <v-pane-content>
+                                    <!-- <p>
+                                        {{ pane.DESGINATION_CAT }}
+                                    </p> -->
+                                   
+                                    <!-- <v-accordion ng-if="pane.subpanes">
+                                        <v-pane ng-repeat="subpane in pane.subpanes">
+                                            <v-pane-header>
+                                                <h5>{{ subpane.ID_CATEGORIE }}</h5>
+                                            </v-pane-header>
+                                            <v-pane-content>
+                                                <p>
+                                                    {{ subpane.PRIX }}
+                                                </p>
+                                            </v-pane-content>
+                                        </v-pane>
+                                    </v-accordion> -->
+
+                                    <table class="table table-striped table-hover" id="sample-table-2" ng-init="show_cmdacollecter('null')">
+                                    <thead>
+                                        <tr >
+                                            <th>#</th>
+                                            <th>Designation</th>
+                                            <th>Prix</th>
+                                            <!-- <th>Categorie</th> -->
+                                            <th class="center">Commander</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="p in allproducts | filter:searchText   ">
+                                            <td ng-if="pane.ID_CATEGORIE === p.ID_CATEGORIE" >
+                                                <a href="#">
+                                            {{p.ID_PRODUIT}}
+                                        </a></td>
+                                            <td ng-if="pane.ID_CATEGORIE === p.ID_CATEGORIE" >{{p.DESIGNATION}}</td>
+                                            <td ng-if="pane.ID_CATEGORIE === p.ID_CATEGORIE" >{{p.PRIX}}</td>
+                                            <!-- <td ng-if="pane.ID_CATEGORIE === p.ID_CATEGORIE">{{p.DESGINATION_CAT}}</td> -->
+                                            <td class="center" ng-if="pane.ID_CATEGORIE === p.ID_CATEGORIE"> 
+                                                <button type="button" class="btn btn-wide btn-o btn-primary" ng-click="addToCart(p)">
+                                                <span class="fa fa-plus">
+
+                                                </span>
+                                            </button>
+                                            </td>
+                                            
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <button type="button" class="btn btn-wide btn-success" ng-click="myallproducts('lg')">
+                                Mon Panier
+                            </button>
+                                <script type="text/ng-template" id="asideContent1.html" ng-controller="MyCtrl">
+                                    <div class="modal-header">
+                                        <h3 class="modal-title">Mon Panier</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table ng-table="tableParams" class="table">
+                                            <tr>
+                                                <td>#</td>
+                                                <td>Designation</td>
+                                                <td>Prix</td>
+                                                <td>Quantite</td>
+                                                <td>Total</td>
+                                                <td>Effacer</td>
+                                            </tr>
+                                            <tr ng-repeat="c in cart">
+                                                <td>{{c.ID_PRODUIT}}</td>
+                                                <td> {{c.DESIGNATION}} </td>
+                                                <td> {{c.PRIX}} </td>
+                                                <td>{{c.count}}</td>
+                                                <td>{{c.count*c.PRIX | currency}}</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-wide btn-o btn-danger" ng-click="removeItemCart(c)">
+                                                    <span class="fa fa-minus">
+
+                                                    </span>
+                                                </button>
+                                                </td>
+
+                                            </tr>
+                                            Total : {{total | currency}}
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-primary" ng-click="ok($event)">Ajouter Au Panier</button>
+                                        <button class="btn btn-primary" ng-click="cancel($event)">Annuler</button>
+                                    </div>
+                                </script>
+
+                                </v-pane-content>
+                            </v-pane>
+                        </v-accordion>
+                    </div>
+         
+           <!--  <div class="table-responsive">
                 <table class="table table-bordered table-hover" id="sample-table-1" ng-init="show_cmdacollecter('null')">
                     <thead>
                         <tr>
@@ -45,7 +126,7 @@ start: PAGE TITLE -->
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="p in allproducts track by $index">
+                        <tr ng-repeat="p in allproducts | filter:searchText    ">
                             <td>
                                 <a href="#">
                             {{p.ID_PRODUIT}}
@@ -54,31 +135,13 @@ start: PAGE TITLE -->
                             <td>{{p.PRIX}}</td>
                             <td>{{p.DESGINATION_CAT}}</td>
                             <td>
-                                <!-- <button class="btn btn-primary" ng-click="cmd($index)"><span class="fa fa-shopping-cart"></span></button> -->
-                                <!-- ng-click="addToCart('right',p,'myproduct')" -->
                                 <button type="button" class="btn btn-wide btn-o btn-primary" ng-click="addToCart(p)">
                                 <span class="fa fa-plus">
 
                                 </span>
                             </button>
                             </td>
-                            <!-- <script type="text/ng-template" id="asideContent.html">
-                            <div class="modal-header">
-                            <h3 class="modal-title" >Le Produit : #{{designation}}</h3>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label>
-                                        Nombre d'Articles
-                                    </label>
-                                    <input id="demo4" type="text" value="0"  name="quantite" ng-model="quantite" touchspin data-verticalbuttons="true" data-verticalupclass="ti-angle-up" data-verticaldownclass="ti-angle-down">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                            <button class="btn btn-primary" ng-click="ok($event)">Ajouter Au Panier</button>
-                            <button class="btn btn-primary" ng-click="cancel($event)">Annuler</button>
-                            </div>
-                        </script> -->
+                            
                         </tr>
                     </tbody>
                 </table>
@@ -122,30 +185,9 @@ start: PAGE TITLE -->
                         <button class="btn btn-primary" ng-click="cancel($event)">Annuler</button>
                     </div>
                 </script>
-            </div>
+
+               
+            </div> -->
         </div>
     </div>
 </div>
-<!-- end: YOUR CONTENT HERE -->
-<!-- <div class="container-fluid container-fullw" ng-controller="MyCtrl">
-<div class="row">
-    <div class="col-md-12">
-        <h5 class="over-title margin-bottom-15">Table <span class="text-bold">with filters</span></h5>
-        /// controller:  'ngTableCtrl3' -  localtion: assets/js/controllers/ngTableCtrl.js ///
-        <div >
-            <strong>Filter:</strong> {{tableParams.filter()|json}}
-            <table ng-table="tableParams" show-filter="true" class="table table-striped">
-                <tr ng-repeat="user in $data">
-                    <td data-title="'Name'" filter="{ 'name': 'text' }"> {{user.name}} </td>
-                    <td data-title="'Alias'">{{user.alias}}</td>
-                    <td data-title="'Publisher'">{{user.publisher}}</td>
-                    <td data-title="'Gender'">{{user.gender}}</td>
-                </tr>
-            </table>
-            
-        </div>
-        <button ng-click="tester()" >Tester</button>
-    </div>
-</div>
-</div> -->
-<!-- end: TABLE WITH FILTERS

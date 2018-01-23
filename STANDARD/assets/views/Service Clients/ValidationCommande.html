@@ -22,6 +22,7 @@
                 Please try to re-size your browser window in order to see the tables in responsive mode.
             </div>
             <div ng-init="getClient()" class="table-responsive">
+              <label>Search: <input ng-model="searchText"></label>
                 <table class="table table-bordered table-hover" id="sample-table-1">
                     <thead>
                         <tr>
@@ -37,7 +38,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="y in historique track by $index">
+                        <tr ng-repeat="y in historique | filter:searchText ">
 
                             <td>{{y.ID_COMMANDE}}</td>
                             <td>{{y.NBR_ARTICLES}}</td>

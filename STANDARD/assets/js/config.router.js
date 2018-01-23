@@ -97,9 +97,25 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 ncyBreadcrumb: {
                     label: 'Recu Client'
                 }
-            }).state('app.CEC', {
+            }).state('app.HistoriqueCmd', {
+                url: "/HitoriqueCmd",
+                templateUrl: "assets/views/client/HistoriqueCmd.html",
+                resolve: loadSequence('jquery-sparkline', 'ngTable', 'ngTableCtrl', 'dynamicTableCtrl'),
+                title: 'Historique des commandes ',
+                ncyBreadcrumb: {
+                    label: 'Historique des commandes '
+                }
+            }).state('app.Reservation', {
+                url: "/Reservation",
+                templateUrl: "assets/views/client/reservation.html",
+                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl'),
+                title: 'Nouvelle reservation ',
+                ncyBreadcrumb: {
+                    label: 'Nouvelle reservation'
+                }
+            }).state('app.CmdEnCours', {
                 url: "/CommandesEnCours",
-                templateUrl: "assets/views/Commandes_EnCours.html",
+                templateUrl: "assets/views/client/CmdEnCours.html",
                 resolve: loadSequence('jquery-sparkline', 'ngTable', 'ngTableCtrl', 'dynamicTableCtrl'),
                 title: 'Commandes En Cours ',
                 ncyBreadcrumb: {
@@ -121,14 +137,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 ncyBreadcrumb: {
                     label: 'date'
                 }
-            }).state('app.Reservation', {
-                url: "/Reservation",
-                templateUrl: "assets/views/client/reservation.html",
-                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl'),
-                title: 'Reservation ',
-                ncyBreadcrumb: {
-                    label: 'Reservation'
-                }
             }).state('app.mescommandes', {
                 url: "/mescommandes",
                 templateUrl: "assets/views/client/mescommandes.html",
@@ -148,7 +156,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             }).state('app.Panier', {
                 url: "/Panier",
                 templateUrl: "assets/views/Livreur /panier.html",
-                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl'),
+                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl','vAccordionCtrl'),
                 title: 'Panier ',
                 ncyBreadcrumb: {
                     label: 'Panier'
@@ -156,7 +164,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             }).state('app.BdClients', {
                 url: "/BdClients",
                 templateUrl: "assets/views/Service Clients/tableauSC_clients.html",
-                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl'),
+                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl','ngTableCtrl','ngTable'),
                 title: ' Liste des Clients ',
                 ncyBreadcrumb: {
                     label: 'Espace Service Clients'
@@ -209,7 +217,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 resolve: loadSequence('moment', 'dynamicTableCtrl', 'mwl.calendar', 'calendarCtrl'),
                 title: 'Liste des commandes a preparer',
                 ncyBreadcrumb: {
-                    label: 'Liste des commandes a preparer'
+                    label: 'Liste des commandes à preparer'
                 }
             }).state('app.cmdl', {
                 url: "/cmdl",
@@ -217,7 +225,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 resolve: loadSequence('moment', 'dynamicTableCtrl', 'mwl.calendar', 'calendarCtrl'),
                 title: 'Liste des commandes a livré',
                 ncyBreadcrumb: {
-                    label: 'Liste des commandes a livré'
+                    label: 'Liste des commandes à livrer'
                 }
             }).state('app.ToCollecte', {
                 url: "/ToCollecte",

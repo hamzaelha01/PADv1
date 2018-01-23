@@ -1,5 +1,5 @@
 <!-- start: SEARCH FORM -->
-<div class="search-form">
+<!-- <div ng-if="userR === 'Admin'" class="search-form">
     <a class="s-open" href="#">
         <i class="ti-search"></i>
     </a>
@@ -14,13 +14,14 @@
 			</button>
         </div>
     </form>
-</div>
+</div> -->
 <!-- end: SEARCH FORM -->
 <!-- start: MAIN NAVIGATION MENU -->
 <!-- <div class="navbar-title">
     <span translate="sidebar.heading.NAVIGATION">Main Navigation</span>
 </div> -->
-<ul class="main-navigation-menu" ng-controller="SparklineCtrl">
+
+<ul  class="main-navigation-menu" ng-controller="SparklineCtrl">
     <li ui-sref-active="active">
         <a ui-sref="app.dashboard">
             <div ng-if="userR === 'Admin'" class="item-content">
@@ -34,7 +35,7 @@
         </a>
     </li>
     <!-- Client -->
-    <li ui-sref-active="active">
+  <!--   <li ui-sref-active="active">
         <a ui-sref="app.Client">
             <div ng-if="userR === 'Client'" class="item-content">
                 <div class="item-media">
@@ -45,8 +46,11 @@
                 </div>
             </div>
         </a>
-    </li>
+    </li> -->
     <!-- Fin : Client -->
+    <!--  Debut : Reservation  -->
+ 
+    <!--  Fin : Reservation -->
     <!-- Panier -->
     <li ui-sref-active="active">
         <a ui-sref="app.Panier">
@@ -74,7 +78,21 @@
             </div>
         </a>
     </li>
+
     <!-- Reserver pour un client   -->
+
+       <li ui-sref-active="active">
+        <a ui-sref="app.Reservation">
+            <div ng-if="userR === 'Client'" class="item-content">
+                <div class="item-media">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                </div>
+                <div class="item-inner">
+                    <span class="title"> Reservation </span>
+                </div>
+            </div>
+        </a>
+    </li>
     <!-- Liste des Clients -->
   <!--   <li ui-sref-active="active">
         <a ui-sref="app.MonRecu">
@@ -260,9 +278,9 @@
         </a>
     </li> -->
     <!-- Commandes En Cours -->
-    <!-- <li ui-sref-active="active">
-        <a ui-sref="app.CEC">
-            <div class="item-content">
+    <li ui-sref-active="active">
+        <a ui-sref="app.CmdEnCours">
+            <div ng-if="userR === 'Client'" class="item-content">
                 <div class="item-media">
                     <i class="ti-home"></i>
                 </div>
@@ -271,8 +289,22 @@
                 </div>
             </div>
         </a>
-    </li> -->
+    </li>
     <!-- Fin Commandes En Cours -->
+     <!-- Historique Client -->
+    <li ui-sref-active="active">
+        <a ui-sref="app.HistoriqueCmd">
+            <div ng-if="userR === 'Client'" class="item-content">
+                <div class="item-media">
+                    <i class="ti-home"></i>
+                </div>
+                <div class="item-inner">
+                    <span class="title"> Historique des commandes  </span>
+                </div>
+            </div>
+        </a>
+    </li>
+    <!-- Fin Historique Client -->
     <!-- Reserver -->
     <!-- <li ui-sref-active="active">
         <a ui-sref="app.Reserver">
@@ -348,6 +380,7 @@
     <!-- Fin : MesCommandes -->
 
 </ul>
+
 <!-- end: MAIN NAVIGATION MENU -->
 <!-- start: CORE FEATURES -->
 

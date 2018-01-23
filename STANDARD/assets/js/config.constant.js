@@ -60,7 +60,8 @@ app.constant('JS_REQUIRES', {
         //*** Filters
         'htmlToPlaintext': 'assets/js/filters/htmlToPlaintext.js',
         'LoginCtrl': 'assets/js/controller/LoginCtrl.js',
-        'user': 'assets/js/directives/user.js'
+        'user': 'assets/js/directives/user.js',
+        'mys': 'assets/js/directives/mys.js'
     },
     //*** angularJS Modules
     modules: [{

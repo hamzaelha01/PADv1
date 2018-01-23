@@ -92,24 +92,26 @@
                             <tr>
                                 <th> # </th>
                                 <th> Produit </th>
-                                <!-- <th class="hidden-480"> Description </th> -->
                                 <th class="hidden-480"> Quantity </th>
-                                <!-- <th class="hidden-480"> Unit Cost </th> -->
                                 <th> Total </th>
                                 <th> Recu</th>
+                                <th>Modifier</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="p in MyAllBasketsX track by $index">
                                 <td> {{p.ID_PRODUIT}} </td>
                                 <td> {{p.DESIGNATION}} </td>
-                                <!-- <td class="hidden-480"> Drem psum dolor </td> -->
                                 <td class="hidden-480"> {{p.QUANITE}} </td>
-                                <!-- <td class="hidden-480">  </td> -->
                                 <td> {{p.MONTANT}} DH</td>
                                 <td>
                                     <button class="btn btn-success" ng-click="imprimer('lg',p);">
                                         Imprimer
+                                    </button>
+                                </td>
+                                <td>
+                                    <button ng-if=" p.MONTANT ==  '0'" class="btn btn-success" ng-click="EditPrice('left',p)" >
+                                        Modifier
                                     </button>
                                 </td>
                             </tr>
@@ -203,6 +205,28 @@
                 </div>
             
     </script>
+
+
+    <script type="text/ng-template" id="asideContent.html" ng-controller="MyCtrl">
+                    <div class="modal-header">
+                    <h3 class="modal-title">Modification du prix</h3>
+                    </div>
+                    <div class="panel-body">
+                            <p class="margin-bottom-30">
+                                Use the <code>
+                                    data-prefix</code>
+                                attribute to add a prefix.
+                            </p>
+                            <div class="form-group">
+                                <label> With prefix </label>
+                                <input id="demo1" type="text"  ng-model="mon" name="demo1" touchspin data-min="-1000000000" data-max="1000000000" data-stepinterval="50" data-maxboostedstep="10000000" data-prefix="MAD">
+                            </div>
+                        </div>
+                    <div class="modal-footer">
+                    <button class="btn btn-primary" ng-click="ok($event)">OK</button>
+                    <button class="btn btn-primary" ng-click="cancel($event)">Cancel</button>
+                    </div>
+                </script>
     </div>
 <!-- </div>
 </div> -->

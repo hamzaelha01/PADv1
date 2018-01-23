@@ -13,7 +13,7 @@ app.controller('CalendarCtrl', ["$scope", "$aside", "moment", "SweetAlert", "$ht
     $scope.tester = function() {
         // Get All Commandes Are Not Ready 
         // Path : E:\STANDARD 2\STANDARD\assets\php\Service Clients\allcmdevents.php
-        $http.get("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Clients/allcmdevents.php")
+        $http.get("assets/php/Service Clients/allcmdevents.php")
             .success(function(data) {
                 $scope.myevents = data;
                 angular.forEach(data, function(event) {
@@ -25,12 +25,22 @@ app.controller('CalendarCtrl', ["$scope", "$aside", "moment", "SweetAlert", "$ht
                     var myday = event.DD_COMMANDE_D;
                     var myhour = Number(event.DD_COMMANDE_H || 0);
                     var myminutes = Number(event.DD_COMMANDE_I || 0);
-
-                    $scope.events.push({
-                        title: event.ID_COMMANDE,
-                        startsAt: new Date(myyear, mymonth, myday, myhour, myminutes),
-                        type: 'to-do'
-                    });
+                    var typein = event.STATUS;
+                    if(typein === "TO COLLECT"){
+                        $scope.events.push({
+                            title: event.ID_COMMANDE,
+                            startsAt: new Date(myyear, mymonth, myday, myhour, myminutes),
+                            type: 'job'
+                        });
+                    }
+                    else if (typein === "TO DELIVER")
+                    {
+                        $scope.events.push({
+                            title: event.ID_COMMANDE,
+                            startsAt: new Date(myyear, mymonth, myday, myhour, myminutes),
+                            type: 'off-site-work'
+                        });
+                    }
                     // $scope.mydate = event.DD_COMMANDE;
                     // alert('l annee est '+myyear+' le mois est '+ mymonth+' le jour est '+ myday+' l heure est '+ myhour+' les minutes sont'+myminutes);
                 });

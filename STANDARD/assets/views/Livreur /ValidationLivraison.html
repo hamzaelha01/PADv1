@@ -23,6 +23,7 @@
             </div> -->
             <div ng-init="toDeliver()" class="table-responsive">
                 <div class=" table-responsive">
+                     <label>Search: <input ng-model="searchText"></label>
                     <table class="table table-bordered table-hover" id="sample-table-1">
                         <thead>
                             <tr>
@@ -38,7 +39,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="x in toD track by $index">
+                            <tr ng-repeat="x in toD | filter:searchText  ">
 
                                 <td> <a href="#">{{x.ID_COMMANDE}} </a></td>
                                 <td>{{x.NOM_CLIENT}}</td>

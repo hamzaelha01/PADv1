@@ -1,8 +1,6 @@
 var app = angular.module('clipApp', ['clip-two']);
 
 
-
-
 app.run(['$rootScope', '$state', '$stateParams','user',
     function($rootScope, $state, $stateParams,user ) {
 
@@ -44,7 +42,7 @@ app.run(['$rootScope', '$state', '$stateParams','user',
                     isSidebarClosed: false, // true if you want to initialize the template with closed sidebar
                     isFooterFixed: false, // true if you want to initialize the template with fixed footer
                     theme: 'theme-1', // indicate the theme chosen for your project
-                    logo: 'assets/images/logo-light.png', // relative path of the project logo
+                    logo: 'assets/images/logo.png', // relative path of the project logo
                 }
             };
         $rootScope.user = {

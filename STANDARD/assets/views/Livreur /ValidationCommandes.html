@@ -23,6 +23,7 @@
             </div> -->
             <div ng-init="toCollecte()" class="table-responsive">
                 <div class=" table-responsive">
+                     <label>Search: <input ng-model="searchText"></label>
                     <table class="table table-bordered table-hover" id="sample-table-1">
                         <thead>
                             <tr>
@@ -37,13 +38,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="x in toC track by $index">
+                            <tr ng-repeat="x in toC | filter:searchText  ">
 
                                 <td> <a href="#">{{x.ID_COMMANDE}} </a></td>
                                 <td>{{x.NOM_CLIENT}}</td>
                                 <td>{{x.PRENOM_CLIENT}}</td>
                                 <td>{{x.TELEPHONE_CLIENT}}</td>
-                                <td>{{x.Adresse_Complete}}</td>
+                                <td>{{x.Adresse_Complete_Collect}}</td>
                                 <td>{{x.DD_COMMANDE}}</td>
                                 <td>{{x.NBR_ARTICLES}}</td>
                                 <td>

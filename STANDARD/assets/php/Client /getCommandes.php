@@ -16,10 +16,11 @@ $IdUser   = mysqli_real_escape_string($conn, $info->IdUser);
 
 // $output = array();
 // $query  = "SELECT * FROM `COMMANDE`";
-$query  ="SELECT COMMANDE.ID_COMMANDE , COMMANDE.DD_COMMANDE , COMMANDE.STATUS ,COMMANDE.NBR_ARTICLES , COMMANDE.DF_COMMANDE
-FROM COMMANDE 
-WHERE COMMANDE.ID_CLIENT = 1 
-AND COMMANDE.STATUS NOT LIKE '%LIVRE%'";
+$query  ="SELECT COMMANDE.ID_COMMANDE , COMMANDE.DD_COMMANDE , COMMANDE.STATUS ,COMMANDE.NBR_ARTICLES , COMMANDE.DF_COMMANDE,LOCALISATION.Adresse_Complete_Collect
+FROM COMMANDE , LOCALISATION
+WHERE COMMANDE.ID_CLIENT = 1
+AND COMMANDE.ID_LOCALISATION = LOCALISATION.ID_LOCALISATION
+AND COMMANDE.STATUS IN ('EN ATTENTE','CONFIRME','TO COLLECT')  ";
 $result = mysqli_query($conn, $query);
 if (mysqli_num_rows($result) > 0) {
 while ($row = mysqli_fetch_array($result)) {
@@ -31,3 +32,4 @@ $output[] = $row;
 echo json_encode($output);
 ?> 
 
+ 

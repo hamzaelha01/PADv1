@@ -10,7 +10,7 @@ app.controller('LoginCtrl', ["$scope", "$window", "$http", "user", function($sco
         // alert(number);
         // alert(pass);
         $http({
-            url: 'http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Login/login.php',
+            url: 'assets/php/Login/login.php',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -36,8 +36,18 @@ app.controller('LoginCtrl', ["$scope", "$window", "$http", "user", function($sco
                 alert(user.getIdLocalTempclient());
 
                 alert(user.isUserLoggedIn());
-                alert("ok");
-                $window.location.href = '#/app/dashboard';
+                // alert("ok");
+                // alert(user.getRole());
+                // $scope.uR = user.getRole();
+                // if($scope.uR ==="Client")
+                // {
+                //     $window.location.href = '#/app/Client';
+                // }
+                // else
+                // {
+                    $window.location.href = '#/app/dashboard';
+                // }
+                
 
 
 
@@ -56,7 +66,7 @@ app.controller('LoginCtrl', ["$scope", "$window", "$http", "user", function($sco
         // alert(number);
         // alert(pass);
         $http({
-            url: 'http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Login/login.php',
+            url: 'assets/php/Login/login.php',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
@@ -145,6 +155,18 @@ app.controller('LoginCtrl', ["$scope", "$window", "$http", "user", function($sco
         }
 
     }
+
+
+    // $scope.createAccount = function(){
+
+    //     var nom; 
+    //     var prenom; 
+    //     var adresse; 
+    //     var email;
+    //     var password; 
+        
+
+    // }
 
 
 }]);
