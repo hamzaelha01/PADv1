@@ -21,7 +21,7 @@ $result = mysqli_query($conn,"SELECT COMMANDE.ID_COMMANDE , COMMANDE.DD_COMMANDE
 FROM COMMANDE , LOCALISATION
 WHERE COMMANDE.ID_CLIENT = ".$_POST["Iduser"]."
 AND COMMANDE.ID_LOCALISATION = LOCALISATION.ID_LOCALISATION
-AND COMMANDE.STATUS IN ('EN ATTENTE','CONFIRME','TO COLLECT')";
+AND COMMANDE.STATUS IN ('EN ATTENTE','CONFIRME','TO COLLECT')");
     if(mysqli_num_rows($result)>0){
     while($row = $result->fetch_assoc()){
          // $response['status']= "loggedin";   
