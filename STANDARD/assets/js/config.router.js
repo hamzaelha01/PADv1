@@ -163,7 +163,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 }
             }).state('app.BdClients', {
                 url: "/BdClients",
-                templateUrl: "assets/views/ServiceClients/tableauSC_clients.html",
+                templateUrl: "assets/views/ServiceClients/TableauSC_clients.html",
                 resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl','ngTableCtrl','ngTable'),
                 title: ' Liste des Clients ',
                 ncyBreadcrumb: {
@@ -171,7 +171,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 }
             }).state('app.BdCommandes', {
                 url: "/BdCommandes",
-                templateUrl: "assets/views/ServiceClients/tableauSC.html",
+                templateUrl: "assets/views/ServiceClients/TableauSC.html",
                 resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl', 'LivreurCtrl'),
                 title: 'Liste des commandes en attentes ',
                 ncyBreadcrumb: {
@@ -180,7 +180,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             })
             .state('app.BdCommandesDone', {
                 url: "/BdCommandesDone",
-                templateUrl: "assets/views/ServiceClients/tableauSCCmd.html",
+                templateUrl: "assets/views/ServiceClients/TableauSCCmd.html",
                 resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl', 'LivreurCtrl'),
                 title: 'Liste des commandes Done ',
                 ncyBreadcrumb: {
