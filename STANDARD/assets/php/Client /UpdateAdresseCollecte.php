@@ -2,8 +2,8 @@
 
 
 header('Access-Control-Allow-Origin: *');
-$conn = mysqli_connect("phpmyadmin.ctjo7qihl13z.us-east-2.rds.amazonaws.com","phpMyAdmin","phpMyAdmin","pressing")
-// $info = json_decode(file_get_contents("php://input"));
+$conn = mysqli_connect("phpmyadmin.ctjo7qihl13z.us-east-2.rds.amazonaws.com","phpMyAdmin","phpMyAdmin","pressing");
+$info = json_decode(file_get_contents("php://input"));
 if (count($info) > 0) {
 $idLocal    = mysqli_real_escape_string($conn, $info->idLocal);
 $AdresseCompleteCollect = mysqli_real_escape_string($conn, $info->AdresseCompleteCollect);
