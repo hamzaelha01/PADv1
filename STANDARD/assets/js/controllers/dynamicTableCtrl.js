@@ -291,12 +291,30 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
     // Valable aussi pour le SC 
 
     $scope.getCommandesEncours = function() {
-        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /getCommandes.php", {
+       // $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /getCommandes.php", {
 
-            'IdUser': IDUSER
-        }).success(function(data) {
-            $scope.names = data;
+         //   'IdUser': IDUSER
+       // }).success(function(data) {
+         //   $scope.names = data;
             // alert($scope.historique);
+        // });
+        
+        
+        $http({
+            url: 'http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /getCommandes.php',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: 'Iduser=' + IDUSER
+        }).success(function(response) {
+            // alert(response.status);
+            // alert(response.STATUS);
+            $scope.names=response;
+            
+
+
+            
         });
 
 
