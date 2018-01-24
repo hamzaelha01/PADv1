@@ -13,7 +13,7 @@ app.controller('CalendarCtrl', ["$scope", "$aside", "moment", "SweetAlert", "$ht
     $scope.tester = function() {
         // Get All Commandes Are Not Ready 
         // Path : E:\STANDARD 2\STANDARD\assets\php\Service Clients\allcmdevents.php
-        $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/allcmdevents.php")
+        $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/allcmdevents.php")
             .success(function(data) {
                 $scope.myevents = data;
                 angular.forEach(data, function(event) {

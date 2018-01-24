@@ -241,7 +241,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
     //selection du dernier ID_DATE
 
     $scope.selectdate = function() {
-        $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/getdate.php")
+        $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Getdate.php")
             .success(function(data) {
                 $scope.dates = data;
             })
