@@ -7,6 +7,8 @@
 //   AND CLIENT.Password = 'client1' 
 //   AND CLIENT.TELEPHONE_CLIENT = '622529293' 
 //   AND COMMANDE.STATUS != '%livre%'"
+header('Access-Control-Allow-Origin: *');
+$conn = mysqli_connect("phpmyadmin.ctjo7qihl13z.us-east-2.rds.amazonaws.com","phpMyAdmin","phpMyAdmin","pressing");
 
 $conn = mysqli_connect("localhost", "root", "", "Pressing");
 $info = json_decode(file_get_contents("php://input"));

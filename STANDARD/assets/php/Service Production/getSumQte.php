@@ -1,6 +1,7 @@
 <?php
 
-$conn = mysqli_connect("localhost", "root", "", "Pressing");
+header('Access-Control-Allow-Origin: *');
+$conn = mysqli_connect("phpmyadmin.ctjo7qihl13z.us-east-2.rds.amazonaws.com","phpMyAdmin","phpMyAdmin","pressing");
 $info = json_decode(file_get_contents("php://input"));
 $output = array();
 $IDCMD   = mysqli_real_escape_string($conn, $info->IDCMD);

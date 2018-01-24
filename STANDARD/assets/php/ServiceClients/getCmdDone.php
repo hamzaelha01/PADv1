@@ -1,5 +1,6 @@
 <?php
-$conn   = mysqli_connect("localhost", "root", "", "Pressing");
+header('Access-Control-Allow-Origin: *');
+$conn = mysqli_connect("phpmyadmin.ctjo7qihl13z.us-east-2.rds.amazonaws.com","phpMyAdmin","phpMyAdmin","pressing");
 $output = array();
 // $query  = "SELECT * FROM users";
 // COMMANDE.ID_COMMANDE , COMMANDE.NBR_ARTICLES , COMMANDE.DD_COMMANDE , COMMANDE.DF_COMMANDE

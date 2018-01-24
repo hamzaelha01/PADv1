@@ -1,5 +1,6 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "pressing");
+header('Access-Control-Allow-Origin: *');
+$conn = mysqli_connect("phpmyadmin.ctjo7qihl13z.us-east-2.rds.amazonaws.com","phpMyAdmin","phpMyAdmin","pressing");
 $info = json_decode(file_get_contents("php://input"));
 if (count($info) > 0) {
     $produit = array();

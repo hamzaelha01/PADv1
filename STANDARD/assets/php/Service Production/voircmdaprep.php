@@ -1,5 +1,6 @@
 <?php
-$conn   = mysqli_connect("localhost", "root", "", "pressing");
+header('Access-Control-Allow-Origin: *');
+$conn = mysqli_connect("phpmyadmin.ctjo7qihl13z.us-east-2.rds.amazonaws.com","phpMyAdmin","phpMyAdmin","pressing");
 $output = array();
 $query  = "SELECT  COMMANDE.ID_COMMANDE,COMMANDE.DD_COMMANDE,COMMANDE.NBR_ARTICLES,COMMANDE.LIVREUR_LIVRAISON , SUM(PANIER.QUANITE) as QTE FROM COMMANDE , PANIER WHERE COMMANDE.STATUS ='COLLECTED' AND PANIER.ID_COMMANDE = COMMANDE.ID_COMMANDE GROUP BY COMMANDE.ID_COMMANDE";
 $result = mysqli_query($conn, $query);

@@ -1,5 +1,6 @@
 <?php
-$conn   = mysqli_connect("localhost", "root", "", "pressing");
+header('Access-Control-Allow-Origin: *');
+$conn = mysqli_connect("phpmyadmin.ctjo7qihl13z.us-east-2.rds.amazonaws.com","phpMyAdmin","phpMyAdmin","pressing");
 $output = array();
 $query  = "SELECT DISTINCT c.ID_COMMANDE,c.DD_COMMANDE,c.NBR_ARTICLES,c.LIVREUR_LIVRAISON FROM commande c WHERE c.STATUS ='EN PREPARATION'";
 $result = mysqli_query($conn, $query);
