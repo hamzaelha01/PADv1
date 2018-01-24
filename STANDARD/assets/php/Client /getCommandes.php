@@ -14,7 +14,7 @@ $info = json_decode(file_get_contents("php://input"));
 $output = array();
 $IdUser   = mysqli_real_escape_string($conn, $info->IdUser);
 
-
+$output = [];
 // $output = array();
 // $query  = "SELECT * FROM `COMMANDE`";
 $query  ="SELECT COMMANDE.ID_COMMANDE , COMMANDE.DD_COMMANDE , COMMANDE.STATUS ,COMMANDE.NBR_ARTICLES , COMMANDE.DF_COMMANDE,LOCALISATION.Adresse_Complete_Collect
