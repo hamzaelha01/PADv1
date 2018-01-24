@@ -10,13 +10,13 @@ app.controller("MyCtrl", function($scope, $http, $window, $aside, SweetAlert, $c
     // var cpt;
     // Show All records 
     $scope.show_cmdaprep = function() {
-        $http.get("assets/php/Service Production/voircmdaprep.php")
+        $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Production/voircmdaprep.php")
             .success(function(data) {
                 $scope.names = data;
             });
     }
     $scope.show_cmdalivr = function() {
-        $http.get("assets/php/Service Production/voircmdalivr.php")
+        $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Production/voircmdalivr.php")
             .success(function(data) {
                 $scope.livrs = data;
             });
@@ -32,7 +32,7 @@ app.controller("MyCtrl", function($scope, $http, $window, $aside, SweetAlert, $c
                 //alert(index);
                 //Get Record of this Index
                 $http.get(
-                        "assets/php/Service Production/voircmdalivr.php").success(function(data) {
+                        "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Production/voircmdalivr.php").success(function(data) {
                         $scope.cmds = data;
                         $scope.cmdid = data[index].ID_COMMANDE;
                         // alert($scope.cmdid);
@@ -41,7 +41,7 @@ app.controller("MyCtrl", function($scope, $http, $window, $aside, SweetAlert, $c
                 $scope.ok = function(e) {
 
                     //alert( $scope.arra(index));
-                    $http.post("assets/php/Service Production/confirmeralivr.php", {
+                    $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Production/confirmeralivr.php", {
                             'id': $scope.cmdid
                         })
                         .success(function(data) {
@@ -61,7 +61,7 @@ app.controller("MyCtrl", function($scope, $http, $window, $aside, SweetAlert, $c
     // Show Sweet Modal
     $scope.fini = function(index) {
         $http.get(
-            "assets/php/Service Production/voircmdalivr.php"
+            "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Production/voircmdalivr.php"
         ).success(function(data) {
             $scope.cmds = data;
             $scope.cmdid = data[index].ID_COMMANDE;
@@ -80,7 +80,7 @@ app.controller("MyCtrl", function($scope, $http, $window, $aside, SweetAlert, $c
             closeOnCancel: false
         }, function(isConfirm) {
             if (isConfirm) {
-                $http.post("assets/php/Service Production/confirmeralivr.php", {
+                $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Production/confirmeralivr.php", {
                         'id': $scope.cmdid
                     })
                     .success(function(data) {
@@ -108,7 +108,7 @@ app.controller("MyCtrl", function($scope, $http, $window, $aside, SweetAlert, $c
     // Show Record binded to this index
     // $scope.showme = function(index){
     //     $http.get(
-    //         "assets/views/MyUpdate/php/voircmdaprep.php"
+    //         "http://18.221.242.75:3000/PADv1/STANDARD/assets/views/MyUpdate/php/voircmdaprep.php"
     //     ).success(function(data){
     //         //$scope.cmds = data;
     //         $scope.cmdx = data[index];
@@ -121,7 +121,7 @@ app.controller("MyCtrl", function($scope, $http, $window, $aside, SweetAlert, $c
     // $scope.update = function(index){
     //     {
     //         if (confirm("Voulez vous vraiment de confirmer cette commande ?")) {
-    //         $http.post("assets/views/MyUpdate/php/confirmer.php", {
+    //         $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/views/MyUpdate/php/confirmer.php", {
     //         'id': index
     //         })
     //         .success(function(data) {
@@ -137,7 +137,7 @@ app.controller("MyCtrl", function($scope, $http, $window, $aside, SweetAlert, $c
     $scope.arra = function(index) {
 
         $http.get(
-            "assets/php/Service Production/voircmdaprep.php"
+            "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Production/voircmdaprep.php"
         ).success(function(data) {
             //$scope.cmds = data;
             $scope.cmdx = data[index];
@@ -158,7 +158,7 @@ app.controller("MyCtrl", function($scope, $http, $window, $aside, SweetAlert, $c
                 alert(index);
                 //Get Record of this Index
                 $http.get(
-                        "assets/php/Service Production/voircmdaprep.php"
+                        "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Production/voircmdaprep.php"
                     ).success(function(data) {
                         $scope.cmds = data;
                         $scope.cmdid = data[index].ID_COMMANDE;
@@ -173,7 +173,7 @@ app.controller("MyCtrl", function($scope, $http, $window, $aside, SweetAlert, $c
                     // $rootScope.cpt=0;
                     //alert( $scope.arra(index));
                     user.setRecuProdCpt(0);
-                    $http.post("assets/php/Service Production/confirmer.php", {
+                    $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Production/confirmer.php", {
                             'id': $scope.cmdid
                         })
                         .success(function(data) {
@@ -215,7 +215,7 @@ app.controller("MyCtrl", function($scope, $http, $window, $aside, SweetAlert, $c
 
         // alert(myvar);
         $http.get(
-            "assets/php/Livreur/getAllProducts.php"
+            "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Livreur/getAllProducts.php"
         ).success(function(data) {
 
             $scope.allproducts = data;
@@ -319,7 +319,7 @@ app.controller("MyCtrl", function($scope, $http, $window, $aside, SweetAlert, $c
                             // 'idClient':user.getClientTempCmd(),
                             'idCmd': user.getCmdTemp()
                         };
-                        $http.post('assets/php/Livreur/ajouterpanier.php', {
+                        $http.post('http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Livreur/ajouterpanier.php', {
                             cart: $scope.formData
                         }).success(function(data) {
 
@@ -354,7 +354,7 @@ app.controller("MyCtrl", function($scope, $http, $window, $aside, SweetAlert, $c
     $scope.MyAllBasketsX = function() {
         alert(IdUser);
         alert(user.getTempRecu());
-        $http.post("assets/php/Client /MyAllBasketsX.php", {
+        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /MyAllBasketsX.php", {
 
             'IdUser': IdUser,
             'IDCMD': user.getTempRecu()
@@ -369,7 +369,7 @@ app.controller("MyCtrl", function($scope, $http, $window, $aside, SweetAlert, $c
 
     // $scope.MyAllBasketsX = function(){
 
-    //     $http.get("assets/php/Client /MyAllBasketsX.php")
+    //     $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /MyAllBasketsX.php")
     //     .success(function(data) {
     //     $scope.MyAllBasketsX = data;
     //     $scope.MyTotal = $scope.MyAllBasketsX[0].MyTotal;
@@ -383,7 +383,7 @@ app.controller("MyCtrl", function($scope, $http, $window, $aside, SweetAlert, $c
     
     $scope.MyAllBasketsY = function() {
 
-        $http.post("assets/php/Client /MyAllBasketsX.php", {
+        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /MyAllBasketsX.php", {
             'IdUser': IdUser,
             'IDCMD': user.getTempRecu()
         }).success(function(data) {
@@ -399,7 +399,7 @@ app.controller("MyCtrl", function($scope, $http, $window, $aside, SweetAlert, $c
         // $rootScope.cpt=+1;
         // alert($rootScope.cpt);
 
-        // $http.post("assets/php/Service Production/getSumQte.php", {
+        // $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Production/getSumQte.php", {
         //     'IDCMD': user.getTempRecu()
         // }).success(function(data) {
         //     $scope.qte = data.Quantite;
@@ -509,7 +509,7 @@ app.controller("MyCtrl", function($scope, $http, $window, $aside, SweetAlert, $c
 
 $scope.EditPrice = function(position,p)
     {
-        // $http.post("assets/php/Service Production/PanierProductCmd.php", {
+        // $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Production/PanierProductCmd.php", {
         //     'idCmd': user.getTempRecu()
             
         // }).success(function(data) {
@@ -535,7 +535,7 @@ $scope.EditPrice = function(position,p)
                 $scope.ok = function(e) {
                     // $rootScope.cpt=0;
                     //alert( $scope.arra(index));
-                    $http.post("assets/php/Service Production/UpdatePrice.php", {
+                    $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Production/UpdatePrice.php", {
                         'idCmd': user.getTempRecu(),
                         'idProd': p.ID_PRODUIT,
                         'MontantProd' : $scope.mon

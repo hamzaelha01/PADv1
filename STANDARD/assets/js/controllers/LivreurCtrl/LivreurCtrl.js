@@ -18,7 +18,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
     // $scope.getIndexL = function(index) {
 
     //     $http.get(
-    //         "assets/php/Service Livraison/getIndexL.php").success(function(data) {
+    //         "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Livraison/getIndexL.php").success(function(data) {
     //         $scope.cmdl = data;
     //         $scope.cmdidl = data[index].ID_COMMANDE;
 
@@ -33,7 +33,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
     $scope.getCommandesConfirme = function(index) {
 
         $http.get(
-            "assets/php/Service Livraison/getIndexL.php").success(function(data) {
+            "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Livraison/getIndexL.php").success(function(data) {
             $scope.cmdcf = data;
 
         })
@@ -43,7 +43,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
     $scope.getCommandesConfirmeSP = function(index) {
 
         $http.get(
-            "assets/php/Service Livraison/getIndexLSP.php").success(function(data) {
+            "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Livraison/getIndexLSP.php").success(function(data) {
             $scope.cmdcfSP = data;
 
         })
@@ -52,7 +52,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
 
     $scope.getNomLivreur = function() {
 
-        $http.get("assets/php/Service Livraison/getNomLivreur.php")
+        $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Livraison/getNomLivreur.php")
             .success(function(data) {
                 $scope.livreurs = data;
 
@@ -64,7 +64,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
     // $scope.postLivreurCollecte = function(index) {
 
     //     $http.get(
-    //         "assets/php/Service Livraison/getIndexL.php").success(function(data) {
+    //         "http://18.221.242.75:3000/PADv1/STANDARD/http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Livraison/getIndexL.php").success(function(data) {
     //         $scope.cmdl = data;
     //         $scope.cmdidl = data[index].ID_COMMANDE;
 
@@ -78,7 +78,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
 
     //     // $scope.getIndexL(index);
     //     // alert($scope.cmdidl);
-    //     $http.post("assets/php/Service Livraison/postLivreurCollecte.php", {
+    //     $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Livraison/postLivreurCollecte.php", {
     //             'ID': $scope.cmdidl,
     //             'LIVREUR_COLLECTE': $scope.liv,
 
@@ -95,7 +95,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
 
     $scope.postLivreurCollecte = function(index) {
         $http.get(
-            "assets/php/Service Livraison/getIndexL.php").success(function(data) {
+            "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Livraison/getIndexL.php").success(function(data) {
             $scope.cmds = data;
             $scope.cmdid = data[index].ID_COMMANDE;
             // alert($scope.cmdid);
@@ -113,7 +113,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
             closeOnCancel: false
         }, function(isConfirm) {
             if (isConfirm) {
-                $http.post("assets/php/Service Livraison/postLivreurCollecte.php", {
+                $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Livraison/postLivreurCollecte.php", {
                         'id': $scope.cmdid,
                         'LIVREUR_COLLECTE': $scope.liv,
 
@@ -146,7 +146,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
 
     $scope.postLivreurLivraison = function(index) {
         $http.get(
-            "assets/php/Service Livraison/getIndexLSP.php").success(function(data) {
+            "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Livraison/getIndexLSP.php").success(function(data) {
             $scope.cmds = data;
             $scope.cmdid = data[index].ID_COMMANDE;
             // alert($scope.cmdid);
@@ -164,7 +164,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
             closeOnCancel: false
         }, function(isConfirm) {
             if (isConfirm) {
-                $http.post("assets/php/Service Livraison/postLivreurLivraison.php", {
+                $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Livraison/postLivreurLivraison.php", {
                         'id': $scope.cmdid,
                         'LIVREUR_LIVRAISON': $scope.liv,
 
@@ -198,7 +198,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
 
     // $scope.toCollecte = function(index) {
     //     $http.get(
-    //             "assets/php/Livreur/getCollecte.php")
+    //             "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Livreur/getCollecte.php")
     //         .success(function(data) {
     //             $scope.toC = data;
     //             // $scope.toCmd = data[index].ID_COMMANDE;
@@ -212,7 +212,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
     $scope.toCollecte = function(index) {
         // alert(nomLivreur);
         $http.post(
-                "assets/php/Livreur/getCollecte.php",{
+                "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Livreur/getCollecte.php",{
                 'NOM_LIVREUR' : nomLivreur
         }).success(function(data) {
                 $scope.toC = data;
@@ -228,7 +228,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
 
     $scope.toDeliver = function(index) {
         $http.post(
-                "assets/php/Livreur/getDeliver.php",{
+                "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Livreur/getDeliver.php",{
                 'NOM_LIVREUR' : nomLivreur
         }).success(function(data) {
                 $scope.toD = data;
@@ -247,7 +247,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
                         $cookies.putObject('cart', $scope.cart);
 
         $http.post(
-                "assets/php/Livreur/getCollecte.php",{
+                "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Livreur/getCollecte.php",{
                 'NOM_LIVREUR' : nomLivreur
         }).success(function(data) {
                 $scope.toC = data;
@@ -273,7 +273,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
 
     $scope.ConfirmationD = function(index) {
         // $http.post(
-        //         "assets/php/Livreur/getDeliver.php",{
+        //         "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Livreur/getDeliver.php",{
         //         'NOM_LIVREUR' : nomLivreur
         // }).success(function(data) {
         //         $scope.getD = data;
@@ -285,7 +285,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
         //     })
 
           $http.post(
-                "assets/php/Livreur/getDeliver.php",{
+                "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Livreur/getDeliver.php",{
                 'NOM_LIVREUR' : nomLivreur
         }).success(function(data) {
                 $scope.getD = data;
@@ -314,7 +314,7 @@ app.controller('LivreurCtrl', ["$scope", "$http", "SweetAlert","user","$window",
             closeOnCancel: false
         }, function(isConfirm) {
             if (isConfirm) {
-                $http.post("assets/php/Livreur/UpdateFinal.php", {
+                $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Livreur/UpdateFinal.php", {
                         'id': $scope.IDD
                     })
                     .success(function(data) {
