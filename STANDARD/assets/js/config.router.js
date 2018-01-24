@@ -67,7 +67,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
 
             }).state('app.ReserverSC', {
                 url: "/ReserverSC",
-                templateUrl: "assets/views/ServiceClients/ReserPourClient.html",
+                templateUrl: "assets/views/Service Clients/ReserPourClient.html",
                 resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl'),
                 title: 'Reserver Pour Un Client ',
                 ncyBreadcrumb: {
@@ -163,7 +163,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 }
             }).state('app.BdClients', {
                 url: "/BdClients",
-                templateUrl: "assets/views/ServiceClients/tableauSC_clients.html",
+                templateUrl: "assets/views/Service Clients/tableauSC_clients.html",
                 resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl','ngTableCtrl','ngTable'),
                 title: ' Liste des Clients ',
                 ncyBreadcrumb: {
@@ -171,16 +171,16 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 }
             }).state('app.BdCommandes', {
                 url: "/BdCommandes",
-                templateUrl: "assets/views/ServiceClients/tableauSC.html",
+                templateUrl: "assets/views/Service Clients/tableauSC.html",
                 resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl', 'LivreurCtrl'),
                 title: 'Liste des commandes en attentes ',
                 ncyBreadcrumb: {
-                    label: 'Espace ServiceClients'
+                    label: 'Espace Service Clients'
                 }
             })
             .state('app.BdCommandesDone', {
                 url: "/BdCommandesDone",
-                templateUrl: "assets/views/ServiceClients/tableauSCCmd.html",
+                templateUrl: "assets/views/Service Clients/tableauSCCmd.html",
                 resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl', 'LivreurCtrl'),
                 title: 'Liste des commandes Done ',
                 ncyBreadcrumb: {
@@ -205,7 +205,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
 
             }).state('app.calendrier', {
                 url: "/Calendrier",
-                templateUrl: "assets/views/ServiceClients/Calendrier.html",
+                templateUrl: "assets/views/Service Clients/Calendrier.html",
                 resolve: loadSequence('moment', 'dynamicTableCtrl', 'mwl.calendar', 'calendarCtrl'),
                 title: 'Liste des commandes confirmé',
                 ncyBreadcrumb: {
