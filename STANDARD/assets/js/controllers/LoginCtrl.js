@@ -41,7 +41,7 @@ app.controller('LoginCtrl', ["$scope", "$window", "$http", "user", function($sco
                         if($scope.LocalisationID != null)
                         {
                       
-                               $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /Inscription.php", {
+                               $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client%20/Inscription.php", {
                                'nom': $scope.nom,
                                'prenom':$scope.prenom,
                                'phone':$scope.phone,
