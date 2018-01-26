@@ -14,6 +14,7 @@
 //   AND CLIENT.Password = 'client1' 
 //   AND CLIENT.TELEPHONE_CLIENT = '622529293' 
 //   AND COMMANDE.STATUS != '%livre%'"
+<<<<<<< HEAD
 
 //$conn = mysqli_connect("localhost", "root", "", "Pressing");
 // $info = json_decode(file_get_contents("php://input"));
@@ -98,3 +99,48 @@ echo json_encode($response);
 
 
 
+=======
+ // SELECT COMMANDE.ID_COMMANDE , COMMANDE.DD_COMMANDE , COMMANDE.STATUS ,COMMANDE.NBR_ARTICLES , COMMANDE.DF_COMMANDE,LOCALISATION.Adresse_Complete_Collect
+//FROM COMMANDE , LOCALISATION
+//WHERE COMMANDE.ID_CLIENT = ".$_POST["Iduser"]."
+//AND COMMANDE.ID_LOCALISATION = LOCALISATION.ID_LOCALISATION
+// AND COMMANDE.STATUS IN ('EN ATTENTE','CONFIRME','TO COLLECT')
+
+ 
+
+
+
+
+<?php 
+header('Access-Control-Allow-Origin: *');
+// header('Content-Type:application/json');
+
+echo $_POST["Iduser"];
+
+
+$response= [];
+if(count($_POST)>0) {
+$conn = mysqli_connect("phpmyadmin.ctjo7qihl13z.us-east-2.rds.amazonaws.com","phpMyAdmin","phpMyAdmin","pressing");
+$result = mysqli_query($conn,"SELECT COMMANDE.ID_COMMANDE , COMMANDE.DD_COMMANDE , COMMANDE.STATUS ,COMMANDE.NBR_ARTICLES , COMMANDE.DF_COMMANDE,LOCALISATION.Adresse_Complete_Collect FROM COMMANDE , LOCALISATION WHERE COMMANDE.ID_CLIENT = ".$_POST["Iduser"]." AND COMMANDE.ID_LOCALISATION = LOCALISATION.ID_LOCALISATION AND COMMANDE.STATUS IN ('EN ATTENTE','CONFIRME','TO COLLECT') ");
+    if(mysqli_num_rows($result)>0){
+    while($row = $result->fetch_assoc()){
+         // $response['status']= "loggedin";   
+        $response[] = $row;
+        // $response['status']=$row['STATUS'];	
+
+        //  $_SESSION['']= $row['TELEPHONE_CLIENT'];
+    //      echo "connected";
+    // echo $row['ID_CLIENT'];
+   
+    }
+    
+    }
+    }
+    
+echo json_encode($response);
+?>
+
+
+
+
+>>>>>>> 947fb33ff5b2ca626f7f937e3d8a520c1123b0b7
