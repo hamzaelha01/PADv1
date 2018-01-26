@@ -1,4 +1,6 @@
 <?php
+header('Access-Control-Allow-Origin: *');
+
 $conn = mysqli_connect("localhost", "root", "", "pressing");
 $info = json_decode(file_get_contents("php://input"));
 if (count($info) > 0) {

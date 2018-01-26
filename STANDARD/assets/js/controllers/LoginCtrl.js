@@ -32,7 +32,7 @@ app.controller('LoginCtrl', ["$scope", "$window", "$http", "user", function($sco
                    } else {
                        // SweetAlert.swal("Good job!", "Your form is ready to be submitted!", "success");
                        //your code for submit
-                       $http.post("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Client /insertLocalisation.php",{
+                       $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /insertLocalisation.php",{
                         'adr' : $scope.adresse
                        }).success(function(response){
                         alert(response.ID);
@@ -41,7 +41,7 @@ app.controller('LoginCtrl', ["$scope", "$window", "$http", "user", function($sco
                         if($scope.LocalisationID != null)
                         {
                       
-                               $http.post("http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Client /Inscription.php", {
+                               $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /Inscription.php", {
                                'nom': $scope.nom,
                                'prenom':$scope.prenom,
                                'phone':$scope.phone,
