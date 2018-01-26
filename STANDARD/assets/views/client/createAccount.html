@@ -7,75 +7,119 @@
             <!-- start: LOGIN BOX -->
             <!-- ng-controller="dynamicTableCtrl" -->
             <div ng-controller="LoginCtrl"  class="box-login">
-                <!-- <form class="form-login" action="index.html">
-                    <fieldset>
-                        <legend>
-                            Sign in to your account
-                        </legend>
-                        <p>
-                            Please enter your name and password to log in.
-                        </p>
-                        <div class="form-group">
-                            <span class="input-icon">
-                                <input type="text" class="form-control" name="username" placeholder="Username">
-                                <i class="fa fa-user"></i> </span>
-                        </div>
-                        <div class="form-group form-actions">
-                            <span class="input-icon">
-                                <input type="password" class="form-control password" name="password" placeholder="Password">
-                                <i class="fa fa-lock"></i>
-                                <a class="forgot" ui-sref="login.forgot">
-                                    I forgot my password
-                                </a> </span>
-                        </div>
-                        <div class="form-actions">
-                            <div class="checkbox clip-check check-primary">
-                                <input type="checkbox" id="remember" value="1">
-                                <label for="remember">
-                                    Keep me signed in
-                                </label>
-                            </div>
-                            <button type="submit" class="btn btn-primary pull-right">
-                                Login <i class="fa fa-arrow-circle-right"></i>
-                            </button>
-                        </div>
-                        <div class="new-account">
-                            Don't have an account yet?
-                            <a ui-sref="login.registration">
-                                Create an account
-                            </a>
-                        </div>
-                    </fieldset>
-                </form> -->
-                <fieldset>
+                <form name="Form" id="form1" novalidate ng-submit="form.submit(Form)">
+                <fieldset  >
                         <legend>
                             Client Inscription
                         </legend>
                         <p>
                             Veuillez Remplir Tous Les Champs:
                         </p>
+                        <div class="form-group" ng-class="{'has-error':Form.nom.$dirty && Form.nom.$invalid, 'has-success':Form.nom.$valid}" >
+                            <span class="input-icon">
+                                <input type="text"  class="form-control" name="nom" placeholder="Nom" ng-model="myModel.nom" required>
+                                <i class="ti-user"></i>
+                                <span class="error text-small block" ng-if="Form.nom.$dirty && Form.nom.$invalid">Champ Obligatoire</span>
+                                <!-- <span class="success text-small" ng-if="Form.nom.$valid">Thank You!</span>  -->
+                            </span>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error':Form.prenom.$dirty && Form.prenom.$invalid, 'has-success':Form.prenom.$valid}" >
+                                <span class="input-icon">
+                                    <input type="text"  class="form-control" name="prenom" placeholder="Prenom" ng-model="myModel.prenom" required>
+                                    <i class="ti-user"></i> 
+                                    <span class="error text-small block" ng-if="Form.prenom.$dirty && Form.prenom.$invalid">Champ Obligatoire</span>
+                                    <!-- <span class="success text-small" ng-if="Form.nom.$valid">Thank You!</span>  -->
+                                </span>
+                            </div>
+                        <div class="form-group" ng-class="{'has-error':Form.email.$dirty && Form.email.$invalid, 'has-success':Form.email.$valid}" >
+                            <span class="input-icon">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" ng-model="myModel.email" required>
+                                <i class="fa fa-envelope"></i> 
+                            </span>
+                            <span class="error text-small block" ng-if="Form.email.$dirty && Form.email.$error.required">Email Est Obligatoire.</span>
+                            <span class="error text-small block" ng-if="Form.email.$error.email">SVP, enter a valid email address.</span>
+                            <span class="success text-small" ng-if="Form.email.$valid">It's a valid e-mail!</span>
+
+                        </div>
+                        <div class="form-group" ng-class="{'has-error':Form.phone.$dirty && Form.phone.$invalid, 'has-success':Form.phone.$valid}">
+                            <span class="input-icon">
+                                <input type="number" class="form-control" name="phone"  ng-minlength="10" 
+                                ng-maxlength="10" placeholder="Phone" ng-model="myModel.phone" required>
+                                <i class="fa fa-phone"></i> 
+                             </span>
+                             <span class="error text-small block" ng-if="Form.phone.$dirty && Form.phone.$error.required">phone Est Obligatoire.</span>
+                             <span class="error text-small block" ng-if="Form.phone.$error.number">SVP, enter a valid phone address.</span>
+                             <span class="success text-small" ng-if="Form.phone.$valid">It's a valid phone!</span>
+                        </div>
+                        
                         <div class="form-group">
-                            <input type="text" class="form-control" ng-model="nom" placeholder="Nom">
+                            <span class="input-icon">
+                                <input type="text"  class="form-control" name="address" placeholder="Addresse Complete" ng-model="adresse">
+                                <i class="ti-location-pin"></i> 
+                            </span>
                         </div>
                         <div class="form-group">
-                                <input type="text" class="form-control" ng-model="prenom" placeholder="Prenom">
+                            <label class="block">
+                                Vous Etes:
+                            </label>
+                            <div class="clip-radio radio-primary" ng-init="gender='HOMME'">
+                                <input type="radio" id="rg-male" name="gender" ng-model="gender" value="HOMME" >
+                                <label for="rg-male">
+                                    Homme
+                                </label>
+                                <input type="radio" id="rg-female" name="gender" ng-model="gender" value="FEMMME">
+                                <label for="rg-female">
+                                    Femme
+                                </label>
+                            </div>
                         </div>
-        
-                        <div  class="form-group">
+                        <div class="form-group">
+                            <label class="block">
+                                Type Compte:
+                            </label>
+                            <div class="clip-radio radio-primary" ng-init="compte='particulier'">
+                                <input type="radio" id="rg-particulier" name="compte" ng-model="compte" value="particulier" >
+                                <label for="rg-particulier">
+                                    Particulier
+                                </label>
+                                <input type="radio" id="rg-professionnel" name="compte" ng-model="compte" value="professionnel">
+                                <label for="rg-professionnel">
+                                    Professionnel
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error':Form.password.$dirty && Form.password.$invalid, 'has-success':Form.password.$valid}">
+                                <span class="input-icon" >
+                                    <input type="password" class="form-control"  id="password" name="password" ng-model="myModel.password" placeholder="Mot De Passe">
+                                    <i class="fa fa-lock"></i> 
+                                </span>
+                                <!-- <input type="password" placeholder="Enter a Password" class="form-control" name="password" ng-model="myModel.password" required/> -->
+                                <span class="error text-small block" ng-if="Form.password.$dirty && Form.password.$error.required">Password is required.</span>
+                                <span class="success text-small block" ng-if="Form.password.$valid">Ok!</span>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error':Form.password2.$dirty && Form.password2.$error.compareTo || Form.password2.$dirty && Form.password2.$invalid, 'has-success':Form.password2.$valid}">
+                            <span class="input-icon">
+                                <input type="password" class="form-control" name="password2" ng-model="myModel.password2"  placeholder="Mot De Passe Confirmation" compare-to="myModel.password" required>
+                                <i class="fa fa-lock"></i> 
+                            </span>
+                            <span class="error text-small block" ng-if="Form.password2.$dirty && Form.password2.$error.required">Repeat password is required!</span>
+                            <span class="error text-small block" ng-if="Form.password2.$dirty && Form.password2.$error.compareTo">Passwords do not match!</span>
+                            <span class="success text-small block" ng-if="Form.password2.$valid">Passwords match!</span>
+                        </div>
+                        
+                        <!-- <div class="form-group">
                                 <div class="input-group">
-                                    <input id="google_canvas" type="text" value="{{myadress}}" class="form-control" ng-model="local" placeholder="Localisez Moi">
+                                    <input type="text" class="form-control" name="prenom" placeholder="Localisez Moi">
                         
                                     <span class="input-group-btn">
-                                        <button type="button" class="btn btn-primary" ng-click="getadresse()">
+                                        <button type="button" class="btn btn-primary" ng-click="">
                                             <i class="fa fa-map-marker" ></i>
                                         </button>
                                      </span>
                                 </div>
-                        </div>
+                        </div> -->
         
-                        <div class="form-group">
-                            <input type="text" class="form-control" ng-model="address" placeholder="Addresse Complete">
-                        </div>
+                        
                         <!-- <div class="form-group">
                             <input type="text" class="form-control" name="city" placeholder="City">
                         </div> -->
@@ -94,10 +138,10 @@
                                 </label>
                             </div>
                         </div> -->
-                        <p>
+                        <!-- <p>
                             Renseigner Les details suivants:
-                        </p>
-                        <div class="form-group">
+                        </p> -->
+                        <!-- <div class="form-group">
                             <span class="input-icon">
                                 <input type="email" class="form-control" name="email" placeholder="Email">
                                 <i class="fa fa-envelope"></i> </span>
@@ -119,19 +163,20 @@
                                     Confirmer
                                 </label>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="form-actions">
-                            <p>
+                            <!-- <p>
                                 Avez-Vous Deja Un Compte?
                                 <a ui-sref="login.signin" href="#/login/signin">
                                     Se Connecter
                                 </a>
-                            </p>
-                            <button ng-click="createAccount()" class="btn btn-primary pull-right">
+                            </p> -->
+                            <button  class="btn btn-primary pull-right" type="submit" >
                                 S'inscrire <i class="fa fa-arrow-circle-right"></i>
                             </button>
                         </div>
                 </fieldset>
+                </form>
                 <!-- start: COPYRIGHT -->
                 <div class="copyright">
                     {{app.year}} &copy; {{ app.name }} by {{ app.author }}.

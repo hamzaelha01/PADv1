@@ -1,6 +1,9 @@
 app.controller("ClientCtrl", ['$scope', '$http', '$rootScope', function($scope, $http, $rootScope) {
 
 
+   
+
+
     $scope.demo5 = function(index) {
         // $http.get(
         //     "http://localhost/cliptwo/AngularJs-Admin/STANDARD/assets/php/Service Production/voircmdalivr.php"
