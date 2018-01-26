@@ -241,7 +241,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
     //selection du dernier ID_DATE
 
     $scope.selectdate = function() {
-        $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Getdate.php")
+        $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/GetDate.php")
             .success(function(data) {
                 $scope.dates = data;
             })
@@ -291,7 +291,6 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
     // Valable aussi pour le SC 
 
     $scope.getCommandesEncours = function() {
-<<<<<<< HEAD
         // $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /getCommandes.php", {
 
         //     'IdUser': IDUSER
@@ -317,7 +316,6 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
 
 
-=======
        // $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /getCommandes.php", {
 
          //   'IdUser': IDUSER
@@ -327,22 +325,6 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
         // });
         
         
-        $http({
-            url: 'http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /getCommandes.php',
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            data: 'Iduser=' + IDUSER
-        }).success(function(response) {
-            // alert(response.status);
-            // alert(response.STATUS);
-            $scope.names=response;
-            
-
-
-            
->>>>>>> 947fb33ff5b2ca626f7f937e3d8a520c1123b0b7
         });
 
 
