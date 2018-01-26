@@ -8,12 +8,12 @@
 //     $('#dit2').val = ($(this).val());
 // })
 
-app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope', '$aside', '$log', 'user', '$window','$uibModal', function($scope, SweetAlert, $http, $rootScope, $aside, $log, user,$window,$uibModal) {
+app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope', '$aside', '$log', 'user', '$window', '$uibModal', function($scope, SweetAlert, $http, $rootScope, $aside, $log, user, $window, $uibModal) {
 
 
     // Declaration Vars  
 
-    
+
 
     // var Id_Client = user.getID(); // ID CLIENT
     var prof = user.profil(); // PRENOM
@@ -21,16 +21,16 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
     var IDUSER = user.getID(); // ID USER 
     $scope.full = user.getTempNameCmd() + " " + user.getTempProfileCmd();
     $scope.idclient = user.getClientTemp();
-    
+
 
 
     $scope.reserver = function() {
         // ETAPE 1 : CREATION DE L'ID COMMANDE 
-   $rootScope.idc += 1;
+        $rootScope.idc += 1;
 
 
-            // alert( $scope.adr1 +", "+ user.getLocalisation());
- 
+        // alert( $scope.adr1 +", "+ user.getLocalisation());
+
         $scope.idcommande = IDUSER + $scope.nbrd + prof[0] + nom[0] + $scope.idc;
         // alert($scope.IDClient);
         // alert($scope.idcommande);
@@ -72,96 +72,95 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
             }
         })
 
-            // Modification de l'adresse 
+        // Modification de l'adresse 
 
-      $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /UpdateAdresseCollecte.php", {
-                 'idLocal' : user.getIdLocalTempclient(),
-                 'AdresseCompleteCollect':$scope.adr1 +", "+ user.getLocalisation()
-                }
-                ).success(function(data) {
-                    // alert(data.ID);
-                    alert(data);
-                });
+        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /UpdateAdresseCollecte.php", {
+            'idLocal': user.getIdLocalTempclient(),
+            'AdresseCompleteCollect': $scope.adr1 + ", " + user.getLocalisation()
+        }).success(function(data) {
+            // alert(data.ID);
+            alert(data);
+        });
     };
     // FIN  : RESERVATION PAR CLIENT *CLIENT*
 
 
     // DEBUT : REDIRECTION
-       $scope.Redirect = function(index) {
-        $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/getClients.php")
-            .success(function(data) {
-                $scope.getclc = data;
-                $scope.IDC = data[index].ID_CLIENT;
-                // $scope.NOM = data[index].NOM_CLIENT;
-                // $scope.PRENOM = data[index].PRENOM_CLIENT;
-                // alert($scope.IDC);
-                user.setTempProfileCmd(data[index].PRENOM_CLIENT);
-                user.setTempNameCmd(data[index].NOM_CLIENT);
-                user.clientTemp(data[index].ID_CLIENT);
-                user.setIdLocalTempClient(data[index].ID_LOCALISATION);
-                alert(" USER TEMP " + user.getClientTemp());
-                alert(" NOM TEMP " + user.getTempNameCmd());
-                alert(" PRENOM TEMP " + user.getTempProfileCmd());
-                alert("ID LOCALISATION TMEP " + user.getIdLocalTempclient());
-                
-                // $location.path('/Client');
-                $window.location.href = '#/app/ReserverSC';
-                // alert($window.location.names);
-            })
+    $scope.Redirect = function(index) {
+            $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/getClients.php")
+                .success(function(data) {
+                    $scope.getclc = data;
+                    $scope.IDC = data[index].ID_CLIENT;
+                    // $scope.NOM = data[index].NOM_CLIENT;
+                    // $scope.PRENOM = data[index].PRENOM_CLIENT;
+                    // alert($scope.IDC);
+                    user.setTempProfileCmd(data[index].PRENOM_CLIENT);
+                    user.setTempNameCmd(data[index].NOM_CLIENT);
+                    user.clientTemp(data[index].ID_CLIENT);
+                    user.setIdLocalTempClient(data[index].ID_LOCALISATION);
+                    alert(" USER TEMP " + user.getClientTemp());
+                    alert(" NOM TEMP " + user.getTempNameCmd());
+                    alert(" PRENOM TEMP " + user.getTempProfileCmd());
+                    alert("ID LOCALISATION TMEP " + user.getIdLocalTempclient());
+
+                    // $location.path('/Client');
+                    $window.location.href = '#/app/ReserverSC';
+                    // alert($window.location.names);
+                })
 
 
 
-        // 
-    } 
-    // FIN : REDIRECTION 
+            // 
+        }
+        // FIN : REDIRECTION 
 
-    $scope.Ret = function(){
+    $scope.Ret = function() {
         $window.location.href = '#/app/CommandesEnCours';
     };
 
     //  DEBUT : REDIRECTION VERS RECU 
     // DEBUT : REDIRECTION
-       $scope.RedirectR = function(r) {
-        //  $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /getCommandesRecu.php", {
+    $scope.RedirectR = function(r) {
+            //  $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /getCommandesRecu.php", {
 
-        //     'IdUser': IDUSER
-        // }).success(function(response) {
-        //          $scope.recu = response;
-        //     // alert($scope.historique);
-    
-
-        //         // $scope.IDCMD = data[index].ID_COMMANDE;
-        //         // alert(IDUSER);
-        //         // $scope.NOM = data[index].NOM_CLIENT;
-        //         // $scope.PRENOM = data[index].PRENOM_CLIENT;
-        //         
-                alert(r.ID_COMMANDE);
-                user.setTempRecu(r.ID_COMMANDE);
-                alert(" USER TEMP " + user.getID());
-                alert("CMD TEMP "+ user.getTempRecu());
-                // $location.path('/Client');
-                $window.location.href = '#/app/RecuClient';
-                // alert($window.location.names);
-        //     })
-        
+            //     'IdUser': IDUSER
+            // }).success(function(response) {
+            //          $scope.recu = response;
+            //     // alert($scope.historique);
 
 
-
-        // 
-    } 
-    // FIN : REDIRECTION 
-    // FIN : REDIRECTION VERS RECU 
+            //         // $scope.IDCMD = data[index].ID_COMMANDE;
+            //         // alert(IDUSER);
+            //         // $scope.NOM = data[index].NOM_CLIENT;
+            //         // $scope.PRENOM = data[index].PRENOM_CLIENT;
+            //         
+            alert(r.ID_COMMANDE);
+            user.setTempRecu(r.ID_COMMANDE);
+            alert(" USER TEMP " + user.getID());
+            alert("CMD TEMP " + user.getTempRecu());
+            // $location.path('/Client');
+            $window.location.href = '#/app/RecuClient';
+            // alert($window.location.names);
+            //     })
 
 
 
-     //  DEBUT : RESERVATION CLIENT APRES REDIRECTION *SERVICE CLIENT*
-        // pro = user.getTempProfileCmd();
-        // na = user.getTempNameCmd();
+
+            // 
+        }
+        // FIN : REDIRECTION 
+        // FIN : REDIRECTION VERS RECU 
+
+
+
+    //  DEBUT : RESERVATION CLIENT APRES REDIRECTION *SERVICE CLIENT*
+    // pro = user.getTempProfileCmd();
+    // na = user.getTempNameCmd();
 
 
     $scope.ResPourClient = function() {
 
-         $rootScope.idc += 1;
+        $rootScope.idc += 1;
         // ETAPE 1 : CREATION
         var idUser = user.getClientTemp();
         var FirstNameUser = user.getTempProfileCmd();
@@ -200,7 +199,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
                         'nbrd': $scope.nbrd,
                         'IDDATE': $scope.dateID,
                         'IDCLIENT': idUser,
-                        'idLocal' : user.getIdLocalTempclient()
+                        'idLocal': user.getIdLocalTempclient()
 
                     }
                 ).success(function(data) {
@@ -210,29 +209,28 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
             }
 
-                        // Modification de l'adresse 
+            // Modification de l'adresse 
 
-      $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /UpdateAdresseCollecte.php", {
-                 'idLocal' : user.getIdLocalTempclient(),
-                 'AdresseCompleteCollect':$scope.adrz1 +", "+ user.getLocalisation()
-                }
-                ).success(function(data) {
-                    // alert(data.ID);
-                    alert(data);
-                });
+            $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /UpdateAdresseCollecte.php", {
+                'idLocal': user.getIdLocalTempclient(),
+                'AdresseCompleteCollect': $scope.adrz1 + ", " + user.getLocalisation()
+            }).success(function(data) {
+                // alert(data.ID);
+                alert(data);
+            });
         });
 
-       // Modification de l'adresse 
+        // Modification de l'adresse 
 
-      // $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /InsertCommande.php", {
-      //            'idLocal' : user.getIdLocalTempclient()
-      //           }
-      //           ).success(function(data) {
-      //               // alert(data.ID);
-      //           });
+        // $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /InsertCommande.php", {
+        //            'idLocal' : user.getIdLocalTempclient()
+        //           }
+        //           ).success(function(data) {
+        //               // alert(data.ID);
+        //           });
 
 
-    //     $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /",{}).success(function(resp){}) 
+        //     $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /",{}).success(function(resp){}) 
     };
     //  FIN : RESERVATION CLIENT APRES REDIRECTION *SERVICE CLIENT*
 
@@ -241,14 +239,14 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
     //selection du dernier ID_DATE
 
     $scope.selectdate = function() {
-        $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/GetDate.php")
+        $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/getdate.php")
             .success(function(data) {
                 $scope.dates = data;
             })
     }
 
 
-    
+
     //insertion 
 
     $scope.insert = function() {
@@ -293,13 +291,12 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
     $scope.getCommandesEncours = function() {
         // $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /getCommandes.php", {
 
-        //     'IdUser': IDUSER
+        //     'IdUser': user.getID()
         // }).success(function(data) {
         //     $scope.names = data;
         //     // alert($scope.historique);
         // });
-
-         alert(IDUSER);
+        alert(IDUSER);
 
         $http({
             url: 'http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /getCommandes.php',
@@ -316,20 +313,11 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
 
 
-       // $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /getCommandes.php", {
-
-         //   'IdUser': IDUSER
-       // }).success(function(data) {
-         //   $scope.names = data;
-            // alert($scope.historique);
-        // });
-        
-        
         });
 
 
     };
-     $scope.getCommandesRecu = function() {
+    $scope.getCommandesRecu = function() {
 
 
 
@@ -343,11 +331,11 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
         }).success(function(response) {
             // alert(response.status);
             // alert(response.STATUS);
-            $scope.recu=response;
-            
+            $scope.recu = response;
 
 
-            
+
+
         });
         // $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /getCommandesRecu.php", {
 
@@ -357,33 +345,33 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
         //     // alert(data[IDUSER].STATUS);
         //     alert(response.data);
-            //declare an array for(var i = 0 ; i < data.length; i++)
-            // {
-            //      if(data[i].STATUS== "PRETE")
-            //      {
-            //         $scope.arr = 10;
-            //      }
-            //      else 
-            //      {
-            //         $scope.arr = 20;
-            //      }
+        //declare an array for(var i = 0 ; i < data.length; i++)
+        // {
+        //      if(data[i].STATUS== "PRETE")
+        //      {
+        //         $scope.arr = 10;
+        //      }
+        //      else 
+        //      {
+        //         $scope.arr = 20;
+        //      }
 
-            // }
-            
-            // 
-            
-            // alert(data.STATUS);
-            // alert(data);
-            // alert(data.STATUS);
-            // alert($scope.historique);
-        
+        // }
+
+        // 
+
+        // alert(data.STATUS);
+        // alert(data);
+        // alert(data.STATUS);
+        // alert($scope.historique);
+
 
 
     };
 
 
-     $scope.getCmdWait = function() {
-        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/getCmdWait.php", {
+    $scope.getCmdWait = function() {
+        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/getCmdWait.php", {
 
             'IdUser': IDUSER
         }).success(function(data) {
@@ -394,10 +382,10 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
     };
 
-    //  ServiceClients : Recuperer to les commandes finis 
+    //  Service Clients : Recuperer to les commandes finis 
 
-      $scope.getCmdDone = function() {
-        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/getCmdDone.php", {
+    $scope.getCmdDone = function() {
+        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/getCmdDone.php", {
 
             'IdUser': IDUSER
         }).success(function(data) {
@@ -414,9 +402,9 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
         $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /getHistorique.php", {
 
             'IdUser': IDUSER
-            }).success(function(data) {
-                $scope.historique = data;
-            });
+        }).success(function(data) {
+            $scope.historique = data;
+        });
     };
 
     // $scope.getHistorique = function() {
@@ -438,7 +426,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
     $scope.getClient = function() {
 
-        $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/getClients.php")
+        $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/getClients.php")
             .success(function(data) {
                 $scope.clientsc = data;
             });
@@ -447,7 +435,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
     $scope.UpdateDate = function() {
 
-        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/UpdarteHrCommandes.php", {
+        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/UpdarteHrCommandes.php", {
             'ID': $scope.id_cmd,
             'DD': $scope.dt,
             'HR': $scope.ht
@@ -464,7 +452,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
 
     // $scope.UpdateStatut = function() {
-    //         $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/UpdarteHrCommandes.php", {
+    //         $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/UpdarteHrCommandes.php", {
     //             'ID': $scope.id_cmd,
     //             'STATUS': $scope.status
     //         }).success(function() {
@@ -582,7 +570,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
 
     $scope.demo5 = function(index) {
-        $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/getCmdWait.php")
+        $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/getCmdWait.php")
             .success(function(data) {
                 $scope.getcmdn = data;
                 $scope.IDn = data[index].ID_COMMANDE;
@@ -602,7 +590,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
             closeOnCancel: false
         }, function(isConfirm) {
             if (isConfirm) {
-                $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/UpdateStatut.php", {
+                $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/UpdateStatut.php", {
                         'id': $scope.IDn
                     })
                     .success(function(data) {
@@ -629,51 +617,51 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
 
     // COnfirmation de la commande SC : 
-    $scope.ConfDone = function(position,index) {
-        $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/getCmdDone.php")
+    $scope.ConfDone = function(position, index) {
+        $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/getCmdDone.php")
             .success(function(data) {
                 $scope.getcmdn = data;
                 $scope.IDn = data[index].ID_COMMANDE;
                 alert($scope.IDn);
 
-            
-        SweetAlert.swal({
 
-            title: "Voulez-vous confirmer la commade de  "+data[index].NOM_CLIENT+"?",
-            text: "La commande sera prochainement confirmée!",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Oui",
-            cancelButtonText: "Non!",
-            closeOnConfirm: false,
-            closeOnCancel: false
-        }, function(isConfirm) {
-            if (isConfirm) {
-                $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/UpdateStatutDone.php", {
-                        'id': $scope.IDn
-                    })
-                    .success(function(data) {
-                        //$scope.reload();
-                        //$scope.show_cmdaprep();
-                    });
                 SweetAlert.swal({
-                    title: "Confirmée!",
-                    text: "La commande de "+data[index].NOM_CLIENT+" a été confirmée",
-                    type: "success",
-                    confirmButtonColor: "#007AFF"
 
+                    title: "Voulez-vous confirmer la commade de  " + data[index].NOM_CLIENT + "?",
+                    text: "La commande sera prochainement confirmée!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Oui",
+                    cancelButtonText: "Non!",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                }, function(isConfirm) {
+                    if (isConfirm) {
+                        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/UpdateStatutDone.php", {
+                                'id': $scope.IDn
+                            })
+                            .success(function(data) {
+                                //$scope.reload();
+                                //$scope.show_cmdaprep();
+                            });
+                        SweetAlert.swal({
+                            title: "Confirmée!",
+                            text: "La commande de " + data[index].NOM_CLIENT + " a été confirmée",
+                            type: "success",
+                            confirmButtonColor: "#007AFF"
+
+                        });
+                    } else {
+                        SweetAlert.swal({
+                            title: "Annulée!",
+                            text: "La commande de " + data[index].NOM_CLIENT + " a été annulée",
+                            type: "error",
+                            confirmButtonColor: "#007AFF"
+                        });
+                    }
                 });
-            } else {
-                SweetAlert.swal({
-                    title: "Annulée!",
-                    text: "La commande de "+data[index].NOM_CLIENT+" a été annulée",
-                    type: "error",
-                    confirmButtonColor: "#007AFF"
-                });
-            }
-        });
-    });
+            });
     };
 
 
@@ -707,7 +695,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
     //         closeOnCancel: false
     //     }, function(isConfirm) {
     //         if (isConfirm) {
-    //             $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/UpdateStatut.php", {
+    //             $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/UpdateStatut.php", {
     //                     'id': $scope.IDn
     //                 })
     //                 .success(function(data) {
@@ -742,7 +730,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
     // $scope.addRowAsyncAsNV = function() {
     //     $scope.companies.push({ 'name': $scope.name, 'employees': $scope.employees, 'headoffice': $scope.headoffice });
     //     // Writing it to the server
-    //     //		
+    //     //       
     //     var data = 'name=' + $scope.name + '&employees=' + $scope.employees + '&headoffice=' + $scope.headoffice;
     //     $http.post('/savecompany', data)
     //         .success(function(data, status, headers, config) {
@@ -879,7 +867,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
     };
     // Modification de date collecte 
     $scope.dtclick = function() {
-        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/UpdarteHrCommandes.php", {
+        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/UpdarteHrCommandes.php", {
                 'ID': $scope.cmdid,
                 'DD': $scope.dtt,
                 'HT': $scope.hrr,
@@ -899,10 +887,10 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
     // Modification de date de livraison : 
 
-       $scope.ChangeDateExp = function(e) {
+    $scope.ChangeDateExp = function(e) {
 
-           
-        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/UpdateDtCommande.php", {
+
+        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/UpdateDtCommande.php", {
                 'ID': $scope.cmdid,
                 'DD': $scope.dated,
                 'HT': $scope.houred,
@@ -915,28 +903,24 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
         alert($scope.houred);
         alert($scope.cmdid);
         var d = document.getElementById("radio1");
-            if(d.checked)
-            {
-                $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /UpdateAdresseLivraison.php", {
-                 'idLocal' : $scope.cmdid,
-                 'AdresseCompleteLivraison':$scope.idrliv
-                }
-                ).success(function(data) {
-                    // alert(data.ID);
-                    alert(data);
-                });
-            }
-            else
-                $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /UpdateAdresseLivraison.php", {
-                 'idLocal' : $scope.cmdid,
-                 'AdresseCompleteLivraison':$scope.adrz1 +", "+ user.getLocalisation()
-                }
-                ).success(function(data) {
-                    // alert(data.ID);
-                    alert(data);
-                });
-            
-    
+        if (d.checked) {
+            $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /UpdateAdresseLivraison.php", {
+                'idLocal': $scope.cmdid,
+                'AdresseCompleteLivraison': $scope.idrliv
+            }).success(function(data) {
+                // alert(data.ID);
+                alert(data);
+            });
+        } else
+            $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /UpdateAdresseLivraison.php", {
+                'idLocal': $scope.cmdid,
+                'AdresseCompleteLivraison': $scope.adrz1 + ", " + user.getLocalisation()
+            }).success(function(data) {
+                // alert(data.ID);
+                alert(data);
+            });
+
+
         SweetAlert.swal({
 
             title: "Voulez Vous Vraiment Confirmer La Commande ?",
@@ -950,7 +934,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
             closeOnCancel: false
         }, function(isConfirm) {
             if (isConfirm) {
-                $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/UpdateStatutDone.php", {
+                $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/UpdateStatutDone.php", {
                         'id': $scope.cmdid
                     })
                     .success(function(data) {
@@ -978,10 +962,10 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
 
 
-$scope.ChangeDateClt = function(e) {
+    $scope.ChangeDateClt = function(e) {
 
-           
-        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/UpdateDtCommande.php", {
+
+        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/UpdateDtCommande.php", {
                 'ID': $scope.cmdid,
                 'DD': $scope.dated,
                 'HT': $scope.houred,
@@ -994,65 +978,60 @@ $scope.ChangeDateClt = function(e) {
         alert($scope.houred);
         alert($scope.cmdid);
         var d = document.getElementById("radio1");
-            if(d.checked)
-            {
-                $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /UpdateAdresseLivraison.php", {
-                 'idLocal' : $scope.cmdid,
-                 'AdresseCompleteLivraison':$scope.idrliv
-                }
-                ).success(function(data) {
-                    // alert(data.ID);
-                    alert(data);
-                });
-            }
-            else
-                $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /UpdateAdresseLivraison.php", {
-                 'idLocal' : $scope.cmdid,
-                 'AdresseCompleteLivraison':$scope.adrz1 +", "+ user.getLocalisation()
-                }
-                ).success(function(data) {
-                    // alert(data.ID);
-                    alert(data);
-                });
-            
-    
-       
+        if (d.checked) {
+            $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /UpdateAdresseLivraison.php", {
+                'idLocal': $scope.cmdid,
+                'AdresseCompleteLivraison': $scope.idrliv
+            }).success(function(data) {
+                // alert(data.ID);
+                alert(data);
+            });
+        } else
+            $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /UpdateAdresseLivraison.php", {
+                'idLocal': $scope.cmdid,
+                'AdresseCompleteLivraison': $scope.adrz1 + ", " + user.getLocalisation()
+            }).success(function(data) {
+                // alert(data.ID);
+                alert(data);
+            });
+
+
+
 
     };
 
     // $scope.items = ['item1', 'item2', 'item3'];
 
-    $scope.open = function (size, index) {
+    $scope.open = function(size, index) {
 
         var modalInstance = $uibModal.open({
             templateUrl: 'myModalContent.html',
-            controller: function($scope,$uibModalInstance){
+            controller: function($scope, $uibModalInstance) {
 
-                         $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /getHistorique.php", {
+                $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /getHistorique.php", {
 
-                            'IdUser': IDUSER
-                            }).success(function(data) {
-                                $scope.cmds = data;
-                                    $scope.cmdid = data[index].ID_COMMANDE;
-                                    // alert($scope.cmdid);
-                                    alert($scope.cmdid);
-                            });
+                    'IdUser': IDUSER
+                }).success(function(data) {
+                    $scope.cmds = data;
+                    $scope.cmdid = data[index].ID_COMMANDE;
+                    // alert($scope.cmdid);
+                    alert($scope.cmdid);
+                });
 
-                 $scope.ok = function(e) {
-                    
+                $scope.ok = function(e) {
+
                     $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /Commentaire.php", {
-                         'idLocal' : $scope.cmdid,
-                         'Commentaire_Livreur':$scope.ComLiv,
-                         'Commentaire_Service':$scope.ComSer
-                        }
-                        ).success(function(data) {
-                            // alert(data.ID);
-                            // alert(data);
-                        });
+                        'idLocal': $scope.cmdid,
+                        'Commentaire_Livreur': $scope.ComLiv,
+                        'Commentaire_Service': $scope.ComSer
+                    }).success(function(data) {
+                        // alert(data.ID);
+                        // alert(data);
+                    });
 
                     // alert($scope.ComLiv);
                     // alert($scope.ComSer);
-        
+
 
                     $uibModalInstance.close();
                     e.stopPropagation();
@@ -1065,7 +1044,7 @@ $scope.ChangeDateClt = function(e) {
             size: size
         });
 
-        
+
     };
 
 
@@ -1080,7 +1059,7 @@ $scope.ChangeDateClt = function(e) {
             controller: function($scope, $uibModalInstance) {
                 // recuperation de l'index du tableau au modal Aside
                 $http.get(
-                    "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/getCmdWait.php").success(function(data) {
+                    "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/getCmdWait.php").success(function(data) {
                     $scope.cmds = data;
                     $scope.cmdid = data[index].ID_COMMANDE;
                     // alert($scope.cmdid);
@@ -1103,9 +1082,9 @@ $scope.ChangeDateClt = function(e) {
         });
     };
 
-    // // ServiceClients : Modifier la date pour la livraison 
-     $scope.OpenModif = function(position, r) {
-         
+    // // SERVICE CLIENTS : Modifier la date pour la livraison 
+    $scope.OpenModif = function(position, r) {
+
         $aside.open({
             templateUrl: 'asideContent.html',
             placement: position,
@@ -1114,15 +1093,15 @@ $scope.ChangeDateClt = function(e) {
             controller: function($scope, $uibModalInstance) {
                 // recuperation de l'index du tableau au modal Aside
                 // $http.get(
-                //     "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/getCmdDone.php").success(function(data) {
+                //     "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/getCmdDone.php").success(function(data) {
                 //     $scope.cmds = data;
                 //     $scope.cmdid = data[index].ID_COMMANDE;
                 //     $scope.idrliv = data[index].Adresse_Complete_Collect;
-                    // alert($scope.cmdid);
-                   $scope.cmdid = r.ID_COMMANDE;
-                   $scope.idrliv = r.Adresse_Complete_Collect;
-         //        alert(r.ID_COMMANDE);
-         // alert(r.Adresse_Complete_Collect);
+                // alert($scope.cmdid);
+                $scope.cmdid = r.ID_COMMANDE;
+                $scope.idrliv = r.Adresse_Complete_Collect;
+                //        alert(r.ID_COMMANDE);
+                // alert(r.Adresse_Complete_Collect);
 
                 $scope.ok = function(e) {
                     // alert(index);
@@ -1144,12 +1123,12 @@ $scope.ChangeDateClt = function(e) {
     };
 
 
-        $scope.ReserConfirm = function () {
-            $rootScope.idc += 1;
+    $scope.ReserConfirm = function() {
+        $rootScope.idc += 1;
 
 
-            // alert( $scope.adr1 +", "+ user.getLocalisation());
- 
+        // alert( $scope.adr1 +", "+ user.getLocalisation());
+
         $scope.idcommande = IDUSER + $scope.nbrd + prof[0] + nom[0] + $scope.idc;
         // alert($scope.IDClient);
         // alert($scope.idcommande);
@@ -1173,61 +1152,60 @@ $scope.ChangeDateClt = function(e) {
             cancelButtonText: "No, cancel plx!",
             closeOnConfirm: false,
             closeOnCancel: false
-        }, function (isConfirm) {
+        }, function(isConfirm) {
 
-            
+
             if (isConfirm) {
 
                 $http.post(
-            "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /InsertGetDate.php", {
-
-            }
-        ).success(function(response) {
-            // scope id data 
-            $scope.dateID = response.ID;
-            alert($scope.dateID);
-            if ($scope.dateID != null) {
-                // L'AJOUT DE LA COMMANDE
-                $http.post(
-                    "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /InsertCommande.php", {
-                        'DD': $scope.dt,
-                        'IDCMD': $scope.idcommande,
-                        'HT': $scope.timecmd,
-                        'nbrd': $scope.nbrd,
-                        'IDDATE': $scope.dateID,
-                        'IDCLIENT': IDUSER
+                    "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /InsertGetDate.php", {
 
                     }
-                ).success(function(data) {
-                    // alert(data.ID);
-                });
+                ).success(function(response) {
+                    // scope id data 
+                    $scope.dateID = response.ID;
+                    alert($scope.dateID);
+                    if ($scope.dateID != null) {
+                        // L'AJOUT DE LA COMMANDE
+                        $http.post(
+                            "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /InsertCommande.php", {
+                                'DD': $scope.dt,
+                                'IDCMD': $scope.idcommande,
+                                'HT': $scope.timecmd,
+                                'nbrd': $scope.nbrd,
+                                'IDDATE': $scope.dateID,
+                                'IDCLIENT': IDUSER
+
+                            }
+                        ).success(function(data) {
+                            // alert(data.ID);
+                        });
 
 
-            }
-        })
+                    }
+                })
 
-            // Modification de l'adresse 
+                // Modification de l'adresse 
 
-      $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /UpdateAdresseCollecte.php", {
-                 'idLocal' : user.getIdLocalTempclient(),
-                 'AdresseCompleteCollect':$scope.adr1 +", "+ user.getLocalisation()
-                }
-                ).success(function(data) {
+                $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /UpdateAdresseCollecte.php", {
+                    'idLocal': user.getIdLocalTempclient(),
+                    'AdresseCompleteCollect': $scope.adr1 + ", " + user.getLocalisation()
+                }).success(function(data) {
                     // alert(data.ID);
                     alert(data);
                 });
 
 
                 SweetAlert.swal({
-                    title: "Confirmée!", 
-                    text: "Votre commande est bien passeé", 
+                    title: "Confirmée!",
+                    text: "Votre commande est bien passeé",
                     type: "success",
                     confirmButtonColor: "#007AFF"
                 });
             } else {
                 SweetAlert.swal({
-                    title: "Annulée", 
-                    text: "La commande est annulée!", 
+                    title: "Annulée",
+                    text: "La commande est annulée!",
                     type: "error",
                     confirmButtonColor: "#007AFF"
                 });
