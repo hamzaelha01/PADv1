@@ -18,22 +18,24 @@
 
 header('Access-Control-Allow-Origin: *');
 
-$response = [];
+// $response = [];
 
 if(count($_POST)>0) {
 
-	$conn = mysqli_connect("phpmyadmin.ctjo7qihl13z.us-east-2.rds.amazonaws.com","phpMyAdmin","phpMyAdmin","pressing");
-	
-	$resul = "UPDATE COMMANDE SET COMMANDE.STATUS = 'CONFIRME' WHERE COMMANDE.ID_COMMANDE = ".$_POST["id"]."";
+	echo $_POST["id"];
 
-	if (mysqli_query($conn, $resul)) {
-		$response['status'] =  'La Commande est bien confirmée ...';
-	}
-	else 
-	{
-		$response['status'] = 'erreur';
+	// $conn = mysqli_connect("phpmyadmin.ctjo7qihl13z.us-east-2.rds.amazonaws.com","phpMyAdmin","phpMyAdmin","pressing");
+
+	// $resul = "UPDATE COMMANDE SET COMMANDE.STATUS = 'CONFIRME' WHERE COMMANDE.ID_COMMANDE = ".$_POST["id"]."";
+
+	// if (mysqli_query($conn, $resul)) {
+	// 	$response['status'] =  'La Commande est bien confirmée ...';
+	// }
+	// else 
+	// {
+	// 	$response['status'] = 'erreur';
 	}
 }
-echo json_encode($response);
+// echo json_encode($response);
 
 ?>
