@@ -34,7 +34,7 @@ $v = $_POST["id"];
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 
-	$sql = "UPDATE COMMANDE SET COMMANDE.STATUS = 'CONFIRME' WHERE COMMANDE.ID_COMMANDE = $v ";
+	$sql = "UPDATE COMMANDE SET COMMANDE.STATUS = 'CONFIRME' WHERE COMMANDE.ID_COMMANDE = '$v' ";
 
 	if (mysqli_query($conn, $sql)) {
 		$response['status'] =  'La Commande est bien confirmée ...';
