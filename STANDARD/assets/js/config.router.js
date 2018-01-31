@@ -46,16 +46,24 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                 //         $window.location.href = '#/login/signin';
                 //     }
                 // },
-            }).state('app.dashboard', {
+            })
+            .state('app.dashboard', {
                 url: "/dashboard",
                 templateUrl: "assets/views/dashboard.html",
                 resolve: {
-                    check: function($location, user) {
+                    check: function($window,user) {
                         if (!user.isUserLoggedIn()) {
-                            // $window.location.href = '#/login/signin';
-                            $location.path('/signin');
+                            
+                            // window.location = "http://127.0.0.1:8080/STANDARD/#/login/signin";
+                            // $location.url('/error');
+                            $window.location.href = '#/login/error';
+
+                                // $location.path('/signin');
+                            
+                            
                             // $window.location.href = '#/login/signin';
                         }
+
 
                     },
                     scripts: loadSequence('jquery-sparkline', 'dashboardCtrl', 'user').deps
@@ -65,10 +73,27 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
                     label: 'Dashboard'
                 },
 
-            }).state('app.ReserverSC', {
+            })
+            // .state('app.dashboard', {
+            //     url: "/dashboard",
+            //     templateUrl: "assets/views/dashboard.html",
+            //     resolve: loadSequence('jquery-sparkline', 'dashboardCtrl-plugin', 'dashboard'),
+            //     title: 'Dashboard ',
+            //     ncyBreadcrumb: {
+            //         label: 'Dashboard'
+            //     }
+            // })
+            .state('app.ReserverSC', {
                 url: "/ReserverSC",
                 templateUrl: "assets/views/ServiceClients/ReserPourClient.html",
-                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl'),
+                resolve: {
+                    check: function($window,user) {
+                        if (!user.isUserLoggedIn()) {
+                            $window.location.href = '#/login/error';
+                        }
+                    },
+                    scripts:  loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl','dashboardCtrl').deps
+                },
                 title: 'Reserver Pour Un Client ',
                 ncyBreadcrumb: {
                     label: 'Reserver Pour Un Client'
@@ -76,7 +101,14 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             }).state('app.MonRecu', {
                 url: "/MonRecu",
                 templateUrl: "assets/views/client/monrecu.html",
-                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl'),
+                resolve: {
+                    check: function($window,user) {
+                        if (!user.isUserLoggedIn()) {
+                            $window.location.href = '#/login/error';
+                        }
+                    },
+                    scripts: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl','dashboardCtrl').deps
+                },
                 title: 'Reserver Pour Un Client ',
                 ncyBreadcrumb: {
                     label: 'Reserver Pour Un Client'
@@ -84,7 +116,14 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             }).state('app.RecuClient', {
                 url: "/RecuClient",
                 templateUrl: "assets/views/client/RecuClient.html",
-                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'MyCtrl'),
+                resolve: {
+                    check: function($window,user) {
+                        if (!user.isUserLoggedIn()) {
+                            $window.location.href = '#/login/error';
+                        }
+                    },
+                    scripts :  loadSequence('jquery-sparkline', 'touchspin-plugin', 'MyCtrl','dashboardCtrl').deps
+                },
                 title: 'Recu Client ',
                 ncyBreadcrumb: {
                     label: 'Recu Client'
@@ -92,7 +131,14 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             }).state('app.RecuProd', {
                 url: "/RecuProd",
                 templateUrl: "assets/views/Service Production /RecuProd.html",
-                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'MyCtrl'),
+                resolve: {
+                    check: function($window,user) {
+                        if (!user.isUserLoggedIn()) {
+                            $window.location.href = '#/login/error';
+                        }
+                    },
+                    scripts : loadSequence('jquery-sparkline', 'touchspin-plugin', 'MyCtrl','dashboardCtrl').deps
+                },
                 title: 'Recu Client ',
                 ncyBreadcrumb: {
                     label: 'Recu Client'
@@ -100,7 +146,14 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             }).state('app.HistoriqueCmd', {
                 url: "/HitoriqueCmd",
                 templateUrl: "assets/views/client/HistoriqueCmd.html",
-                resolve: loadSequence('jquery-sparkline', 'ngTable', 'ngTableCtrl', 'dynamicTableCtrl'),
+                resolve: {
+                    check: function($window,user) {
+                        if (!user.isUserLoggedIn()) {
+                            $window.location.href = '#/login/error';
+                        }
+                    },
+                    scripts : loadSequence('jquery-sparkline', 'ngTable', 'ngTableCtrl', 'dynamicTableCtrl','dashboardCtrl').deps
+                },
                 title: 'Historique des commandes ',
                 ncyBreadcrumb: {
                     label: 'Historique des commandes '
@@ -108,7 +161,14 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             }).state('app.Reservation', {
                 url: "/Reservation",
                 templateUrl: "assets/views/client/reservation.html",
-                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl'),
+                resolve: {
+                    check: function($window,user) {
+                        if (!user.isUserLoggedIn()) {
+                            $window.location.href = '#/login/error';
+                        }
+                    },
+                    scripts : loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl','dashboardCtrl').deps
+                },
                 title: 'Nouvelle reservation ',
                 ncyBreadcrumb: {
                     label: 'Nouvelle reservation'
@@ -116,7 +176,14 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             }).state('app.CmdEnCours', {
                 url: "/CommandesEnCours",
                 templateUrl: "assets/views/client/CmdEnCours.html",
-                resolve: loadSequence('jquery-sparkline', 'ngTable', 'ngTableCtrl', 'dynamicTableCtrl'),
+                resolve: {
+                    check: function($window,user) {
+                        if (!user.isUserLoggedIn()) {
+                            $window.location.href = '#/login/error';
+                        }
+                    },
+                    scripts : loadSequence('jquery-sparkline', 'ngTable', 'ngTableCtrl', 'dynamicTableCtrl' ,'dashboardCtrl').deps
+                },
                 title: 'Commandes En Cours ',
                 ncyBreadcrumb: {
                     label: 'Commandes En Cours'
@@ -124,7 +191,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             }).state('app.Reserver', {
                 url: "/Reserver",
                 templateUrl: "assets/views/Livreur/ValidationCommandes.html",
-                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl'),
+                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl','dashboardCtrl'),
                 title: 'Reservation ',
                 ncyBreadcrumb: {
                     label: 'Reservation'
@@ -132,7 +199,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             }).state('app.Date', {
                 url: "/Date",
                 templateUrl: "assets/views/date.html",
-                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl'),
+                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl','dashboardCtrl'),
                 title: 'date ',
                 ncyBreadcrumb: {
                     label: 'date'
@@ -140,7 +207,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             }).state('app.mescommandes', {
                 url: "/mescommandes",
                 templateUrl: "assets/views/client/mescommandes.html",
-                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl'),
+                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl','dashboardCtrl'),
                 title: 'Reservation ',
                 ncyBreadcrumb: {
                     label: 'Reservation'
@@ -148,7 +215,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             }).state('app.Client', {
                 url: "/Client",
                 templateUrl: "assets/views/client/tableauC.html",
-                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl'),
+                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl','dashboardCtrl'),
                 title: 'Espace Client ',
                 ncyBreadcrumb: {
                     label: 'Espace Client'
@@ -156,7 +223,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             }).state('app.Panier', {
                 url: "/Panier",
                 templateUrl: "assets/views/Livreur /panier.html",
-                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl','vAccordionCtrl'),
+                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl','vAccordionCtrl','dashboardCtrl'),
                 title: 'Panier ',
                 ncyBreadcrumb: {
                     label: 'Panier'
@@ -164,7 +231,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             }).state('app.BdClients', {
                 url: "/BdClients",
                 templateUrl: "assets/views/ServiceClients/TableauSC_clients.html",
-                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl','ngTableCtrl','ngTable'),
+                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl','ngTableCtrl','ngTable','dashboardCtrl'),
                 title: ' Liste des Clients ',
                 ncyBreadcrumb: {
                     label: 'Espace Service Clients'
@@ -172,7 +239,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             }).state('app.BdCommandes', {
                 url: "/BdCommandes",
                 templateUrl: "assets/views/ServiceClients/TableauSC.html",
-                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl', 'LivreurCtrl'),
+                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl', 'LivreurCtrl','dashboardCtrl'),
                 title: 'Liste des commandes en attentes ',
                 ncyBreadcrumb: {
                     label: 'Espace Service Clients'
@@ -181,7 +248,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             .state('app.BdCommandesDone', {
                 url: "/BdCommandesDone",
                 templateUrl: "assets/views/ServiceClients/TableauSCCmd.html",
-                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl', 'LivreurCtrl'),
+                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl', 'LivreurCtrl','dashboardCtrl'),
                 title: 'Liste des commandes Done ',
                 ncyBreadcrumb: {
                     label: 'Espace Service Clients'
@@ -189,7 +256,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             }).state('app.BdLSC', {
                 url: "/ModificationCommande",
                 templateUrl: "assets/views/Service Livraison /ModificationCommande.html",
-                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl'),
+                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl','dashboardCtrl'),
                 title: 'Liste des commandes confirmé',
                 ncyBreadcrumb: {
                     label: 'Liste des commandes confirmé'
@@ -197,7 +264,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             }).state('app.SLSP', {
                 url: "/PrepLivraison",
                 templateUrl: "assets/views/Service Livraison /CommandesALivrer.html",
-                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl'),
+                resolve: loadSequence('jquery-sparkline', 'touchspin-plugin', 'dynamicTableCtrl','dashboardCtrl'),
                 title: 'Liste des a livrer ',
                 ncyBreadcrumb: {
                     label: 'Liste des commandes a livr'
@@ -206,7 +273,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             }).state('app.calendrier', {
                 url: "/Calendrier",
                 templateUrl: "assets/views/ServiceClients/Calendrier.html",
-                resolve: loadSequence('moment', 'dynamicTableCtrl', 'mwl.calendar', 'calendarCtrl'),
+                resolve: loadSequence('moment', 'dynamicTableCtrl', 'mwl.calendar', 'calendarCtrl','dashboardCtrl'),
                 title: 'Liste des commandes confirmé',
                 ncyBreadcrumb: {
                     label: 'Liste des commandes confirmé'
@@ -214,7 +281,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             }).state('app.cmdp', {
                 url: "/cmdp",
                 templateUrl: "assets/views/Service Production /cmdaprep.html",
-                resolve: loadSequence('moment', 'dynamicTableCtrl', 'mwl.calendar', 'calendarCtrl'),
+                resolve: loadSequence('moment', 'dynamicTableCtrl', 'mwl.calendar', 'calendarCtrl','dashboardCtrl'),
                 title: 'Liste des commandes a preparer',
                 ncyBreadcrumb: {
                     label: 'Liste des commandes à preparer'
@@ -222,7 +289,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             }).state('app.cmdl', {
                 url: "/cmdl",
                 templateUrl: "assets/views/Service Production /cmdalivr.html",
-                resolve: loadSequence('moment', 'dynamicTableCtrl', 'mwl.calendar', 'calendarCtrl'),
+                resolve: loadSequence('moment', 'dynamicTableCtrl', 'mwl.calendar', 'calendarCtrl','dashboardCtrl'),
                 title: 'Liste des commandes a livré',
                 ncyBreadcrumb: {
                     label: 'Liste des commandes à livrer'
@@ -230,7 +297,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             }).state('app.ToCollecte', {
                 url: "/ToCollecte",
                 templateUrl: "assets/views/Livreur /ValidationCommandes.html",
-                resolve: loadSequence('moment', 'dynamicTableCtrl', 'mwl.calendar', 'LivreurCtrl'),
+                resolve: loadSequence('moment', 'dynamicTableCtrl', 'mwl.calendar', 'LivreurCtrl','dashboardCtrl'),
                 title: 'Liste des commandes a collecter',
                 ncyBreadcrumb: {
                     label: 'Liste des commandes a collecter'
@@ -238,7 +305,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
             }).state('app.ToDeliver', {
                 url: "/ToDeliver",
                 templateUrl: "assets/views/Livreur /ValidationLivraison.html",
-                resolve: loadSequence('moment', 'dynamicTableCtrl', 'mwl.calendar', 'LivreurCtrl'),
+                resolve: loadSequence('moment', 'dynamicTableCtrl', 'mwl.calendar', 'LivreurCtrl','dashboardCtrl'),
                 title: 'Liste des commandes a Livrer',
                 ncyBreadcrumb: {
                     label: 'Liste des commandes a Livrer'
@@ -640,6 +707,9 @@ app.config(['$stateProvider', '$urlRouterProvider', '$controllerProvider', '$com
         }).state('login.lockscreen', {
             url: '/lock',
             templateUrl: "assets/views/login_lock_screen.html"
+        }).state('login.error', {
+                url: "/error",
+                templateUrl: "assets/views/utility_404.html",
         });
 
         // Generates a resolve object previously configured in constant.JS_REQUIRES (config.constant.js)

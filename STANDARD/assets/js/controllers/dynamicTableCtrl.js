@@ -81,13 +81,15 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
             // alert(data.ID);
             alert(data);
         });
+
+        $window.location.reload();
     };
     // FIN  : RESERVATION PAR CLIENT *CLIENT*
 
 
     // DEBUT : REDIRECTION
     $scope.Redirect = function(index) {
-            $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/getClients.php")
+            $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/getClients.php")
                 .success(function(data) {
                     $scope.getclc = data;
                     $scope.IDC = data[index].ID_CLIENT;
@@ -371,7 +373,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
 
     $scope.getCmdWait = function() {
-        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/getCmdWait.php", {
+        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/getCmdWait.php", {
 
             'IdUser': IDUSER
         }).success(function(data) {
@@ -382,10 +384,10 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
     };
 
-    //  Service Clients : Recuperer to les commandes finis 
+    //  ServiceClients : Recuperer to les commandes finis 
 
     $scope.getCmdDone = function() {
-        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/getCmdDone.php", {
+        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/getCmdDone.php", {
 
             'IdUser': IDUSER
         }).success(function(data) {
@@ -426,7 +428,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
     $scope.getClient = function() {
 
-        $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/getClients.php")
+        $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/getClients.php")
             .success(function(data) {
                 $scope.clientsc = data;
             });
@@ -435,7 +437,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
     $scope.UpdateDate = function() {
 
-        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/UpdarteHrCommandes.php", {
+        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/UpdarteHrCommandes.php", {
             'ID': $scope.id_cmd,
             'DD': $scope.dt,
             'HR': $scope.ht
@@ -452,7 +454,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
 
     // $scope.UpdateStatut = function() {
-    //         $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/UpdarteHrCommandes.php", {
+    //         $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/UpdarteHrCommandes.php", {
     //             'ID': $scope.id_cmd,
     //             'STATUS': $scope.status
     //         }).success(function() {
@@ -569,14 +571,16 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
     // Sweet Alert Confirmation 
 
 
-    $scope.demo5 = function(index) {
-        $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/getCmdWait.php")
-            .success(function(data) {
-                $scope.getcmdn = data;
-                $scope.IDn = data[index].ID_COMMANDE;
-                alert($scope.IDn);
 
-            })
+   $scope.demo5 = function(x) {
+        // $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/getCmdWait.php")
+        //     .success(function(data) {
+        //         $scope.getcmdn = data;
+        //         $scope.IDn = data[index].ID_COMMANDE;
+        //         alert($scope.IDn);
+
+        //     })
+        alert(x.ID_COMMANDE);
         SweetAlert.swal({
 
             title: "Voulez-vous confirmer la commande ?",
@@ -590,12 +594,29 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
             closeOnCancel: false
         }, function(isConfirm) {
             if (isConfirm) {
-                $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/UpdateStatut.php", {
-                        'id': $scope.IDn
-                    })
-                    .success(function(data) {
-                        //$scope.reload();
-                        //$scope.show_cmdaprep();
+                // $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/UpdateStatut.php", {
+                //         'id': x.ID_COMMANDE
+                //     })
+                //     .success(function(data) {
+                //         //$scope.reload();
+                //         //$scope.show_cmdaprep();
+                //     });
+
+
+                  $http({
+                        url: 'http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/UpdateStatut.php',
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        data: 'id=' + x.ID_COMMANDE
+                    }).success(function(response) {
+                        // alert(response.status);
+                        // alert(response.STATUS);
+                        alert(response.status);
+
+
+
                     });
                 SweetAlert.swal({
                     title: "Confirmée!",
@@ -618,7 +639,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
 
     // COnfirmation de la commande SC : 
     $scope.ConfDone = function(position, index) {
-        $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/getCmdDone.php")
+        $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/getCmdDone.php")
             .success(function(data) {
                 $scope.getcmdn = data;
                 $scope.IDn = data[index].ID_COMMANDE;
@@ -638,7 +659,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
                     closeOnCancel: false
                 }, function(isConfirm) {
                     if (isConfirm) {
-                        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/UpdateStatutDone.php", {
+                        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/UpdateStatutDone.php", {
                                 'id': $scope.IDn
                             })
                             .success(function(data) {
@@ -695,7 +716,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
     //         closeOnCancel: false
     //     }, function(isConfirm) {
     //         if (isConfirm) {
-    //             $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/UpdateStatut.php", {
+    //             $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/UpdateStatut.php", {
     //                     'id': $scope.IDn
     //                 })
     //                 .success(function(data) {
@@ -867,7 +888,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
     };
     // Modification de date collecte 
     $scope.dtclick = function() {
-        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/UpdarteHrCommandes.php", {
+        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/UpdarteHrCommandes.php", {
                 'ID': $scope.cmdid,
                 'DD': $scope.dtt,
                 'HT': $scope.hrr,
@@ -890,7 +911,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
     $scope.ChangeDateExp = function(e) {
 
 
-        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/UpdateDtCommande.php", {
+        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/UpdateDtCommande.php", {
                 'ID': $scope.cmdid,
                 'DD': $scope.dated,
                 'HT': $scope.houred,
@@ -934,7 +955,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
             closeOnCancel: false
         }, function(isConfirm) {
             if (isConfirm) {
-                $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/UpdateStatutDone.php", {
+                $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/UpdateStatutDone.php", {
                         'id': $scope.cmdid
                     })
                     .success(function(data) {
@@ -965,7 +986,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
     $scope.ChangeDateClt = function(e) {
 
 
-        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/UpdateDtCommande.php", {
+        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/UpdateDtCommande.php", {
                 'ID': $scope.cmdid,
                 'DD': $scope.dated,
                 'HT': $scope.houred,
@@ -1059,7 +1080,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
             controller: function($scope, $uibModalInstance) {
                 // recuperation de l'index du tableau au modal Aside
                 $http.get(
-                    "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/getCmdWait.php").success(function(data) {
+                    "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/getCmdWait.php").success(function(data) {
                     $scope.cmds = data;
                     $scope.cmdid = data[index].ID_COMMANDE;
                     // alert($scope.cmdid);
@@ -1082,7 +1103,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
         });
     };
 
-    // // SERVICE CLIENTS : Modifier la date pour la livraison 
+    // // ServiceClients : Modifier la date pour la livraison 
     $scope.OpenModif = function(position, r) {
 
         $aside.open({
@@ -1093,7 +1114,7 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
             controller: function($scope, $uibModalInstance) {
                 // recuperation de l'index du tableau au modal Aside
                 // $http.get(
-                //     "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Clients/getCmdDone.php").success(function(data) {
+                //     "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/getCmdDone.php").success(function(data) {
                 //     $scope.cmds = data;
                 //     $scope.cmdid = data[index].ID_COMMANDE;
                 //     $scope.idrliv = data[index].Adresse_Complete_Collect;
@@ -1212,5 +1233,8 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
             }
         });
     };
+
+    // LOGIN PARMS 
+    
 
 }]);

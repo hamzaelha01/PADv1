@@ -39,6 +39,9 @@
         var RecuProdCpt; // Compteur du recu production
         var QteCmd; // Qte d'une commande  a ne pas depasser lors de l'impression
 
+        
+            
+
         // this.setName = function(name) {
         //     username = name;
         // };
@@ -76,7 +79,9 @@
                 profil = data.profil;
                 id = data.id;
                 role = data.role;
-                IdLocalTempclient = data.IdLocalTempclient;            }
+                nom = data.nom;
+                IdLocalTempclient = data.IdLocalTempclient; 
+               }
             return loggedin;
         };
         this.userLoggedIn = function() {
@@ -198,5 +203,7 @@
         {
             QteCmd = QC;
         }
+
+
 
     });

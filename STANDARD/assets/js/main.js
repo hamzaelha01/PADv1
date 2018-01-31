@@ -13,6 +13,7 @@ app.run(['$rootScope', '$state', '$stateParams','user',
         $rootScope.idc=0;
         // $rootScope.cpt=0;
 
+        // $rootScope.storage = localStorage.getItem("login");
 
         $rootScope.steds =
             /* $rootScope.$on('$routeChangeStart', function(event, next, current) {

@@ -107,8 +107,34 @@ app.controller('LoginCtrl', ["$scope", "$window", "$http", "user", function($sco
 
                 alert(user.getName());
                 alert(user.getIdLocalTempclient());
+                alert(user.getRole());
 
                 alert(user.isUserLoggedIn());
+
+                if(user.getRole() ==="Client")
+                {
+                  $window.location.href='#/app/CommandesEnCours';
+                }
+                else if(user.getRole() === "Service Clients")
+                {
+                  $window.location.href='#/app/BdClients';
+                }
+                else if ( user.getRole()==="Service Livraison")
+               {
+                $window.location.href='#/app/Calendrier';
+               }
+               else if (user.getRole()==="Service Production")
+               {
+                $window.location.href='#/app/cmdp';
+               } 
+               else if (user.getRole()==="livreur")
+                {
+                  $window.location.href='#/app/ToCollecte';
+                }
+                else if (user.getRole()==="admin")
+                {
+                  $window.location.href='#/app/dashboard';
+                }
                 // alert("ok");
                 // alert(user.getRole());
                 // $scope.uR = user.getRole();
@@ -118,10 +144,9 @@ app.controller('LoginCtrl', ["$scope", "$window", "$http", "user", function($sco
                 // }
                 // else
                 // {
-                    $window.location.href = '#/app/dashboard';
+                    // $window.location.href = '#/app/dashboard';
                 // }
                 
-
 
 
             }
