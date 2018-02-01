@@ -4,7 +4,7 @@ $conn = mysqli_connect("phpmyadmin.ctjo7qihl13z.us-east-2.rds.amazonaws.com","ph
 $info = json_decode(file_get_contents("php://input"));
 if (count($info) > 0) {
     $id    = $info->id;
-    $query = "UPDATE COMMANDE SET COMMANDE.STATUS = 'PRETE' WHERE COMMANDE.ID_COMMANDE = '$id'";
+    $query = "UPDATE COMMANDE SET STATUS = 'PRETE' WHERE ID_COMMANDE = '$id'";
     if (mysqli_query($conn, $query)) {
     echo 'La Commande est bien confirmée ...';
         
