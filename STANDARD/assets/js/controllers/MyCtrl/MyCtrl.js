@@ -374,17 +374,31 @@ app.controller("MyCtrl", function($scope, $http, $window, $aside, SweetAlert, $c
     $scope.MyAllBasketsX = function() {
         alert(IdUser);
         alert(user.getTempRecu());
-        $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /MyAllBasketsX.php", {
 
-            'IdUser': IdUser,
-            'IDCMD': user.getTempRecu()
-        }).success(function(data) {
-            $scope.MyAllBasketsX = data;
-            $scope.MyTotal = $scope.MyAllBasketsX[0].MyTotal;
-            $scope.Myname = $scope.MyAllBasketsX[0].Myname;
-            $scope.MyNbArticles = $scope.MyAllBasketsX[0].NbProduits;
-            // alert($scope.MyAllBasketsX[0].MyTotal);
-        });
+         $http({
+            url: 'http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /MyAllBasketsX.php',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: 'IdUser=' + x.ID_COMMANDE + 'IDCMD'+ user.getTempRecu()
+            }).success(function(response) {
+                $scope.MyAllBasketsX = response;
+                $scope.MyTotal = $scope.MyAllBasketsX[0].MyTotal;
+                $scope.Myname = $scope.MyAllBasketsX[0].Myname;
+                $scope.MyNbArticles = $scope.MyAllBasketsX[0].NbProduits;
+            });
+        // $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /MyAllBasketsX.php", {
+
+        //     'IdUser': IdUser,
+        //     'IDCMD': user.getTempRecu()
+        // }).success(function(data) {
+        //     $scope.MyAllBasketsX = data;
+        //     $scope.MyTotal = $scope.MyAllBasketsX[0].MyTotal;
+        //     $scope.Myname = $scope.MyAllBasketsX[0].Myname;
+        //     $scope.MyNbArticles = $scope.MyAllBasketsX[0].NbProduits;
+        //     // alert($scope.MyAllBasketsX[0].MyTotal);
+        // });
     };
 
     // $scope.MyAllBasketsX = function(){

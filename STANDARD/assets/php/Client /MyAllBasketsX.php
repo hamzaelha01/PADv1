@@ -1,9 +1,33 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-$conn = mysqli_connect("phpmyadmin.ctjo7qihl13z.us-east-2.rds.amazonaws.com","phpMyAdmin","phpMyAdmin","pressing");$output = array();
-$info = json_decode(file_get_contents("php://input"));
-$IdUser = mysqli_real_escape_string($conn, $info->IdUser);
-$IDCMD = mysqli_real_escape_string($conn, $info->IDCMD);
+
+eader('Access-Control-Allow-Origin: *');
+
+
+$response = [];
+
+if(count($_POST)>0) {
+
+  echo $_POST["id"];
+
+$servername = "phpmyadmin.ctjo7qihl13z.us-east-2.rds.amazonaws.com";
+$username = "phpMyAdmin";
+$password = "phpMyAdmin";
+$dbname = "pressing";
+
+$IdUser = $_POST["IdUser"];
+$IDCMD = $_POST["IDCMD"];
+
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+
+
+
+
+// header('Access-Control-Allow-Origin: *');
+// $conn = mysqli_connect("phpmyadmin.ctjo7qihl13z.us-east-2.rds.amazonaws.com","phpMyAdmin","phpMyAdmin","pressing");$output = array();
+// $info = json_decode(file_get_contents("php://input"));
+// $IdUser = mysqli_real_escape_string($conn, $info->IdUser);
+// $IDCMD = mysqli_real_escape_string($conn, $info->IDCMD);
    // Get All  Baksets Informations For this Client And This Order
    $query  = "SELECT
    *,
@@ -40,9 +64,9 @@ GROUP BY
 $result = mysqli_query($conn, $query);
 if (mysqli_num_rows($result) > 0) {
 while ($row = mysqli_fetch_array($result)) {
-$output[] = $row;
+$response[] = $row;
 }
-echo json_encode($output);
+echo json_encode($response);
 }else{echo "Empty Rows!!";}
 
 ?> 
