@@ -15,19 +15,19 @@ $IDCMD = mysqli_real_escape_string($conn, $info->IDCMD);
    SELECT
        COUNT(*)
    FROM
-       panier r,
-       commande c,
+       PANIER r,
+       COMMANDE c,
        CLIENT l,
-       produit p
+       PRODUIT p
    WHERE
        c.ID_COMMANDE = r.ID_COMMANDE AND c.ID_CLIENT = l.ID_CLIENT AND r.ID_PRODUIT = p.ID_PRODUIT AND c.ID_COMMANDE = '$IDCMD' AND l.ID_CLIENT = '$IdUser'
 ) AS NbProduits
 FROM
-   panier r,
-   commande c,
+   PANIER r,
+   COMMANDE c,
    CLIENT l,
-   produit p,
-   categorie e
+   PRODUIT p,
+   CATEGORIE e
 WHERE
    c.ID_COMMANDE = r.ID_COMMANDE AND c.ID_CLIENT = l.ID_CLIENT AND r.ID_PRODUIT = p.ID_PRODUIT AND c.ID_COMMANDE = '$IDCMD' AND l.ID_CLIENT = '$IdUser'
    AND e.ID_CATEGORIE=p.ID_CATEGORIE
