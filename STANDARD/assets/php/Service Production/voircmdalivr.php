@@ -2,7 +2,7 @@
 header('Access-Control-Allow-Origin: *');
 $conn = mysqli_connect("phpmyadmin.ctjo7qihl13z.us-east-2.rds.amazonaws.com","phpMyAdmin","phpMyAdmin","pressing");
 $output = array();
-$query  = "SELECT  COMMANDE.ID_COMMANDE,COMMANDE.DD_COMMANDE,COMMANDE.NBR_ARTICLES,COMMANDE.LIVREUR_LIVRAISON , COMMANDE.ID_CLIENT , SUM(PANIER.QUANITE) as QTE FROM COMMANDE , PANIER WHERE COMMANDE.STATUS ='EN PREPARATION' AND PANIER.ID_COMMANDE = COMMANDE.ID_COMMANDE GROUP BY COMMANDE.ID_COMMANDE'";
+$query  = "SELECT DISTINCT c.ID_COMMANDE,c.DD_COMMANDE,c.NBR_ARTICLES,c.LIVREUR_LIVRAISON FROM COMMANDE c WHERE c.STATUS ='EN PREPARATION'";
 $result = mysqli_query($conn, $query);
 if (mysqli_num_rows($result) > 0) {
 while ($row = mysqli_fetch_array($result)) {
