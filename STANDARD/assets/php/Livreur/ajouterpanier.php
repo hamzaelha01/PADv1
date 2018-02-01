@@ -27,7 +27,7 @@ if (count($info) > 0) {
     // mysql_query('INSERT INTO table (field) VALUES '.implode(',', $sql));
 
 
-   $query1 = "UPDATE commande SET STATUS = 'COLLECTED' WHERE ID_COMMANDE = '$idCmd'";
+   $query1 = "UPDATE COMMANDE SET STATUS = 'COLLECTED' WHERE ID_COMMANDE = '$idCmd'";
     if (mysqli_query($conn, $query1)) {
     echo 'La Commande est bien confirmée ...';
         

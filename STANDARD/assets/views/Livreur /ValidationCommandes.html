@@ -1,11 +1,11 @@
 <!-- start: PAGE TITLE -->
-<section id="page-title">
+<section id="page-title" class="page-title-center">
     <div class="row">
-        <div class="col-sm-8">
-            <h1 class="mainTitle">Commandes a collecter </h1>
-            <!-- <span class="mainDescription">Use this page to start from scratch and put your custom content</span> -->
+        <div class="col-sm-8 col-sm-offset-2">
+            <h1 class="mainTitle">Commandes a collecter</h1>
+            <input ng-model="searchText" class="form-control text-center margin-top-15" type="text" placeholder="Rechercher une commande">
+            <div ncy-breadcrumb></div>
         </div>
-        <div ncy-breadcrumb></div>
     </div>
 </section>
 <!-- end: PAGE TITLE -->
@@ -23,8 +23,8 @@
             </div> -->
             <div ng-init="toCollecte()" class="table-responsive">
                 <div class=" table-responsive">
-                     <label>Search: <input ng-model="searchText"></label>
-                    <table class="table table-bordered table-hover" id="sample-table-1">
+                     <!-- <label>Search: <input ng-model="searchText"></label> -->
+                    <table class="table table-stripped table-hover" id="sample-table-2">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -40,7 +40,7 @@
                         <tbody>
                             <tr ng-repeat="x in toC | filter:searchText  ">
 
-                                <td> <a href="#">{{x.ID_COMMANDE}} </a></td>
+                                <td>{{x.ID_COMMANDE}}</td>
                                 <td>{{x.NOM_CLIENT}}</td>
                                 <td>{{x.PRENOM_CLIENT}}</td>
                                 <td>{{x.TELEPHONE_CLIENT}}</td>
