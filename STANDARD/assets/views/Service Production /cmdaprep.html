@@ -21,6 +21,7 @@
                                 <th>#</th>
                                 <th>Date Commande</th>
                                 <th>Nombre Articles</th>
+                                <th class="hidden"> ID CLIENT</th>
                                 <th>Confirmation</th>
                             </tr>
                         </thead>
@@ -29,6 +30,7 @@
                                 <td>{{x.ID_COMMANDE}}</td>
                                 <td>{{x.DD_COMMANDE}}</td>
                                 <td>{{x.QTE}}</td>
+                                <td class="hidden">{{x.ID_CLIENT}}</td>
                                 <td>
                                     <button type="button" class="btn btn-primary btn-block btn-scroll btn-scroll-top ti-arrow-right" ng-click="preparation('right',x)">
                                         <span>Confirmer</span>

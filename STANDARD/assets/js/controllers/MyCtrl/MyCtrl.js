@@ -167,6 +167,7 @@ app.controller("MyCtrl", function($scope, $http, $window, $aside, SweetAlert, $c
                         user.setQteCmd(x.QTE);
                         // alert($scope.cmdid);
                         user.setTempRecu(x.ID_COMMANDE);
+                        user.setIdLocalTempClient(x.ID_CLIENT);
                     // })
                     // Update Statut of commande
                 $scope.ok = function(e) {
@@ -374,6 +375,7 @@ app.controller("MyCtrl", function($scope, $http, $window, $aside, SweetAlert, $c
     $scope.MyAllBasketsX = function() {
         alert(IdUser);
         alert(user.getTempRecu());
+        alert(user.getIdLocalTempClient());
 
          // $http({
          //    url: 'http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /MyAllBasketsX.php',
@@ -390,7 +392,7 @@ app.controller("MyCtrl", function($scope, $http, $window, $aside, SweetAlert, $c
          //    });
         $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /MyAllBasketsX.php", {
 
-            'IdUser': IdUser,
+            'IdUser': user.getIdLocalTempClient(),
             'IDCMD': user.getTempRecu()
         }).success(function(data) {
             $scope.MyAllBasketsX = data;
