@@ -45,15 +45,16 @@
         // this.setName = function(name) {
         //     username = name;
         // };
+        this.setIdLocalTempClient = function(idlc)
+        {
+            IdLocalTempclient = idlc;
+        }
         this.getIdLocalTempclient = function()
         {
             return  IdLocalTempclient;
         }
 
-        this.setIdLocalTempClient = function(idlc)
-        {
-            IdLocalTempclient = idlc;
-        }
+        
 
         this.getName = function() {
             return nom;

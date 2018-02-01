@@ -167,7 +167,8 @@ app.controller("MyCtrl", function($scope, $http, $window, $aside, SweetAlert, $c
                         user.setQteCmd(x.QTE);
                         // alert($scope.cmdid);
                         user.setTempRecu(x.ID_COMMANDE);
-                        user.setIdLocalTempClient(x.ID_CLIENT);
+                        user.ClientTempCmd(x.ID_CLIENT);
+                        alert(user.getClientTempCmd());
                     // })
                     // Update Statut of commande
                 $scope.ok = function(e) {
@@ -373,9 +374,9 @@ app.controller("MyCtrl", function($scope, $http, $window, $aside, SweetAlert, $c
 
     //  Impression Items : 
     $scope.MyAllBasketsX = function() {
-        alert(IdUser);
-        alert(user.getTempRecu());
-        alert(user.getIdLocalTempClient());
+        // alert(IdUser);
+        alert(" ID COMMANDE" +  user.getTempRecu());
+        alert(" ID CLIENT " + user.getClientTempCmd() );
 
          // $http({
          //    url: 'http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /MyAllBasketsX.php',
@@ -392,7 +393,7 @@ app.controller("MyCtrl", function($scope, $http, $window, $aside, SweetAlert, $c
          //    });
         $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Client /MyAllBasketsX.php", {
 
-            'IdUser': user.getIdLocalTempClient(),
+            'IdUser': user.getClientTempCmd(),
             'IDCMD': user.getTempRecu()
         }).success(function(data) {
             $scope.MyAllBasketsX = data;
