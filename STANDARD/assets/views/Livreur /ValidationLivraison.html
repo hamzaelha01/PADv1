@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-sm-8">
             <h1 class="mainTitle">Commandes a livrer </h1>
-            <!-- <span class="mainDescription">Use this page to start from scratch and put your custom content</span> -->
+            <input ng-model="searchText" class="form-control text-center margin-top-15" type="text" placeholder="Rechercher une commande">
         </div>
         <div ncy-breadcrumb></div>
     </div>
@@ -23,8 +23,8 @@
             </div> -->
             <div ng-init="toDeliver()" class="table-responsive">
                 <div class=" table-responsive">
-                     <label>Search: <input ng-model="searchText"></label>
-                    <table class="table table-bordered table-hover" id="sample-table-1">
+                     <!-- <label>Search: <input ng-model="searchText"></label> -->
+                    <table class="table table-stripped table-hover" id="sample-table-2">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -45,9 +45,9 @@
                                 <td>{{x.NOM_CLIENT}}</td>
                                 <td>{{x.PRENOM_CLIENT}}</td>
                                 <td>{{x.TELEPHONE_CLIENT}}</td>
-                                <td>{{x.Adresse_Complete}}</td>
+                                <td>{{x.Adresse_Complete_Livraison}}</td>
                                 <td>{{x.DF_COMMANDE}}</td>
-                                <td>{{x.QUANITE}}</td>
+                                <td>{{x.QTE}}</td>
                                 <td>{{x.MONTANT}}</td>
                                 <td>
                                     <div class="center">
