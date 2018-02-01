@@ -148,50 +148,62 @@ app.controller("MyCtrl", function($scope, $http, $window, $aside, SweetAlert, $c
         return x;
 
     }
-    $scope.preparation = function(position, index) {
+    $scope.preparation = function(position, x) {
         $aside.open({
             templateUrl: 'asideContent.html',
             placement: position,
             size: 'sm',
             backdrop: true,
             controller: function($scope, $uibModalInstance) {
-                alert(index);
+                // alert(index);
                 //Get Record of this Index
-                $http.get(
-                        "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Production/voircmdaprep.php"
-                    ).success(function(data) {
-                        $scope.cmds = data;
-                        $scope.cmdid = data[index].ID_COMMANDE;
+                // $http.get(
+                //         "http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Production/voircmdaprep.php"
+                //     ).success(function(data) {
+                        // $scope.cmds = data;
+                        // $scope.cmdid = data[index].ID_COMMANDE;
                         // $scope.qte = data[index].QTE;
                         // Qauntité des produit panier par rapport a une commande 
-                        user.setQteCmd(data[index].QTE);
+                        user.setQteCmd(x.QTE);
                         // alert($scope.cmdid);
-                        user.setTempRecu(data[index].ID_COMMANDE);
-                    })
+                        user.setTempRecu(x.ID_COMMANDE);
+                    // })
                     // Update Statut of commande
                 $scope.ok = function(e) {
                     // $rootScope.cpt=0;
                     //alert( $scope.arra(index));
                     user.setRecuProdCpt(0);
-                    $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Production/confirmer.php", {
-                            'id': $scope.cmdid
-                        })
-                        .success(function(data) {
-                            alert(data);
+
+                     $http({
+                        url: 'http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Production/confirmer.php',
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        data: 'id=' + x.ID_COMMANDE
+                    }).success(function(response) {
+                            alert(response);
                             alert(user.getTempRecu());
                             alert(user.getID());
                             alert(IdUser);
+                             $window.location.href = '#/app/RecuProd';
+                    });
+                    // $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Service Production/confirmer.php", {
+                    //         'id': x.ID_COMMANDE
+                    //     })
+                    //     .success(function(data) {
+                            
 
-                            //$scope.show_cmdaprep();
-                            // $scope.IDCMD = user.getTempRecu();
-                            // alert($scope.IDCMD);
+                    //         //$scope.show_cmdaprep();
+                    //         // $scope.IDCMD = user.getTempRecu();
+                    //         // alert($scope.IDCMD);
 
-                            $window.location.href = '#/app/RecuProd';
-                            // Preparation du reçu 
-                            // user.setTempRecu(data[index].ID_COMMANDE);
-                            // alert(" USER TEMP " + user.getID());
-                            // alert("CMD TEMP " + user.getTempRecu());
-                        });
+                           
+                    //         // Preparation du reçu 
+                    //         // user.setTempRecu(data[index].ID_COMMANDE);
+                    //         // alert(" USER TEMP " + user.getID());
+                    //         // alert("CMD TEMP " + user.getTempRecu());
+                    //     });
                     $uibModalInstance.close();
                     e.stopPropagation();
                 };
@@ -330,6 +342,14 @@ app.controller("MyCtrl", function($scope, $http, $window, $aside, SweetAlert, $c
 
                         
                     }
+                        $http.post('http://18.221.242.75:3000/PADv1/STANDARD/assets/php/Livreur/UpdateStatusP.php', {
+                                'id':user.getCmdTemp()
+                        }).success(function(data) {
+
+                            alert(data);
+
+
+                        }).error(function(data) { alert(data); })
 
                     // $scope.cart=[];
 

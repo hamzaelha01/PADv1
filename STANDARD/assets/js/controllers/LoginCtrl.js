@@ -105,11 +105,11 @@ app.controller('LoginCtrl', ["$scope", "$window", "$http", "user", function($sco
                 //     $window.location.href = '#/app/BdClients';
                 // }
 
-                alert(user.getName());
-                alert(user.getIdLocalTempclient());
-                alert(user.getRole());
+                // alert(user.getName());
+                // alert(user.getIdLocalTempclient());
+                // alert(user.getRole());
 
-                alert(user.isUserLoggedIn());
+                // alert(user.isUserLoggedIn());
 
                 if(user.getRole() ==="Client")
                 {

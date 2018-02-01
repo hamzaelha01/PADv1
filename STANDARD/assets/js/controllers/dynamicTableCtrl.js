@@ -611,20 +611,17 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
                         },
                         data: 'id=' + x.ID_COMMANDE
                     }).success(function(response) {
-                        // alert(response.status);
-                        // alert(response.STATUS);
-                        alert(response.status);
-
-
 
                     });
-                SweetAlert.swal({
-                    title: "Confirmée!",
-                    text: "Votre Commande a été confirmée.",
-                    type: "success",
-                    confirmButtonColor: "#007AFF"
+               
+ 
+                setTimeout(function(){
 
-                });
+                    window.location.reload();
+
+                }, 500);
+
+                
             } else {
                 SweetAlert.swal({
                     title: "Annulée!",
@@ -634,21 +631,23 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
                 });
             }
         });
+
+
     };
 
 
     // COnfirmation de la commande SC : 
-    $scope.ConfDone = function(position, index) {
-        $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/getCmdDone.php")
-            .success(function(data) {
-                $scope.getcmdn = data;
-                $scope.IDn = data[index].ID_COMMANDE;
-                alert($scope.IDn);
+    $scope.ConfDone = function(position,x) {
+        // $http.get("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/getCmdDone.php")
+        //     .success(function(data) {
+        //         $scope.getcmdn = data;
+        //         $scope.IDn = data[index].ID_COMMANDE;
+        //         alert($scope.IDn);
 
 
                 SweetAlert.swal({
-
-                    title: "Voulez-vous confirmer la commade de  " + data[index].NOM_CLIENT + "?",
+// data[index].NOM_CLIENT
+                    title: "Voulez-vous confirmer la commade de  " + x.NOM_CLIENT  + "?",
                     text: "La commande sera prochainement confirmée!",
                     type: "warning",
                     showCancelButton: true,
@@ -660,29 +659,35 @@ app.controller("dynamicTableCtrl", ['$scope', 'SweetAlert', '$http', '$rootScope
                 }, function(isConfirm) {
                     if (isConfirm) {
                         $http.post("http://18.221.242.75:3000/PADv1/STANDARD/assets/php/ServiceClients/UpdateStatutDone.php", {
-                                'id': $scope.IDn
+                                'id': x.ID_COMMANDE
                             })
                             .success(function(data) {
                                 //$scope.reload();
                                 //$scope.show_cmdaprep();
                             });
-                        SweetAlert.swal({
-                            title: "Confirmée!",
-                            text: "La commande de " + data[index].NOM_CLIENT + " a été confirmée",
-                            type: "success",
-                            confirmButtonColor: "#007AFF"
+                        // SweetAlert.swal({
+                        //     title: "Confirmée!",
+                        //     text: "La commande de " + x.NOM_CLIENT + " a été confirmée",
+                        //     type: "success",
+                        //     confirmButtonColor: "#007AFF"
 
-                        });
+                        // });
+
+                        setTimeout(function(){
+
+                            window.location.reload();
+
+                        }, 500);
                     } else {
                         SweetAlert.swal({
                             title: "Annulée!",
-                            text: "La commande de " + data[index].NOM_CLIENT + " a été annulée",
+                            text: "La commande de " + x.NOM_CLIENT + " a été annulée",
                             type: "error",
                             confirmButtonColor: "#007AFF"
                         });
                     }
                 });
-            });
+            
     };
 
 

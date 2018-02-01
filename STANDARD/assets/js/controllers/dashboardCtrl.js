@@ -10,7 +10,7 @@ app.controller('SparklineCtrl', ["$scope", "user","$window", function($scope, us
     // $scope.userC = user.setName;
     if (!!localStorage.getItem('login')) {
     var store =  JSON.parse( localStorage.getItem("login"));
-    alert(store.nom);
+    // alert(store.nom);
     $scope.userC = store.nom;
     $scope.userR = store.role;
 
